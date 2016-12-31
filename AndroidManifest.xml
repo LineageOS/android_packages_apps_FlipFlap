@@ -33,6 +33,7 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:theme="@style/FlipFlapTheme"
             android:windowAnimationStyle="@null">
 
             <intent-filter>
@@ -47,6 +48,7 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:theme="@style/DotcaseTheme"
             android:windowAnimationStyle="@null">
 
             <intent-filter>
