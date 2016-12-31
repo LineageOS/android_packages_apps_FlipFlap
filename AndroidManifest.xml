@@ -29,7 +29,7 @@
             android:permission="FlipFlapService">
         </service>
 
-        <activity android:name=".FlipFlap"
+        <activity android:name=".FlipFlapActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
@@ -43,21 +43,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Dotcase"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:theme="@style/DotcaseTheme"
-            android:windowAnimationStyle="@null">
-
-            <intent-filter>
-                <action android:name="org.lineageos.flipflap.COVER_CLOSED" />
-                <action android:name="org.lineageos.flipflap.KILL_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
-
 </manifest>
