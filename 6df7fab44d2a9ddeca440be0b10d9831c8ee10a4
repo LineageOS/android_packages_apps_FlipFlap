@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a1d315d_a85143da",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2016-12-31T21:47:59Z",
+      "side": 1,
+      "message": "I don\u0027t need this on the Circle View, it messes up background.",
+      "revId": "6df7fab44d2a9ddeca440be0b10d9831c8ee10a4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
