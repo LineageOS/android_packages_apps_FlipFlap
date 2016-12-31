@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2014 The CyanogenMod Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,32 @@
 
 package org.lineageos.flipflap;
 
+import org.lineageos.flipflap.DotcaseConstants.Notification;
+
+import android.app.INotificationManager;
+import android.content.Context;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.service.notification.StatusBarNotification;
+import android.util.Log;
+
+import java.util.List;
+import java.util.Vector;
+
 public class FlipFlapStatus {
-    private static final String TAG = "FlipFlap";
+    private static final String TAG = "FlipFlapStatus";
 
     private boolean mRunning = true;
     private boolean mPocketed = false;
     private boolean mResetTimer = false;
-
     private boolean mStayOnTop = false;
+    private boolean mRinging = false;
+    private boolean mAlarmClock = false;
+    private int mRingCounter = 0;
+    private String mCallerNumber = "";
+    private String mCallerName = "";
+    private int mCallerTicker = 0;
+    private List<Notification> mNotifications = new Vector<Notification>();
 
     synchronized boolean isRunning() {
         return mRunning;
@@ -65,5 +83,120 @@ public class FlipFlapStatus {
 
     synchronized void setOnTop(boolean val) {
         mStayOnTop = val;
+    }
+
+    synchronized int ringCounter() {
+        return mRingCounter;
+    }
+
+    synchronized void resetRingCounter() {
+        mRingCounter = 0;
+    }
+
+    synchronized void incrementRingCounter() {
+        mRingCounter++;
+    }
+
+    synchronized void startRinging(String number, String name) {
+        mCallerName = name;
+        startRinging(number);
+    }
+
+    synchronized void startRinging(String number) {
+        mRinging = true;
+        mResetTimer = true;
+        mRingCounter = 0;
+        mCallerNumber = number;
+        mCallerTicker = -6;
+    }
+
+    synchronized void stopRinging() {
+        mRinging = false;
+        mCallerNumber = "";
+        mCallerName = "";
+    }
+
+    synchronized int callerTicker() {
+        if (mCallerTicker <= 0) {
+            return 0;
+        } else {
+            return mCallerTicker;
+        }
+    }
+
+    synchronized void incrementCallerTicker() {
+        mCallerTicker++;
+        if (mCallerTicker >= mCallerName.length()) {
+            mCallerTicker = -3;
+        }
+    }
+
+    synchronized void startAlarm() {
+        mAlarmClock = true;
+        mRingCounter = 0;
+        mResetTimer = true;
+    }
+
+    synchronized void stopAlarm() {
+        mAlarmClock = false;
+    }
+
+    synchronized boolean isRinging() {
+        return mRinging;
+    }
+
+    synchronized boolean isAlarm() {
+        return mAlarmClock;
+    }
+
+    synchronized boolean hasNotifications() {
+        return mNotifications.isEmpty();
+    }
+
+    synchronized String getCallerName() {
+        return mCallerName;
+    }
+
+    synchronized String getCallerNumber() {
+        return mCallerNumber;
+    }
+
+    synchronized List<Notification> getNotifications() {
+        return mNotifications;
+    }
+
+    synchronized void checkNotifications(Context context) {
+        StatusBarNotification[] statusNotes = null;
+        mNotifications.clear();
+
+        try {
+            INotificationManager notificationManager = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            statusNotes = notificationManager.getActiveNotifications(context.getPackageName());
+            for (StatusBarNotification statusNote : statusNotes) {
+                Notification notification = DotcaseConstants.notificationMap.get(
+                        statusNote.getPackageName());
+                if (notification != null && !mNotifications.contains(notification)) {
+                    mNotifications.add(notification);
+                }
+            }
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Error retrieving notifications", e);
+            mNotifications.clear();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error retrieving notifications", e);
+            mNotifications.clear();
+        }
+
+        try {
+            if (mNotifications.size() > 6) {
+                mNotifications.subList(5, mNotifications.size()).clear();
+                mNotifications.add(Notification.DOTS);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // This should never happen...
+            Log.e(TAG, "Error sublisting notifications, clearing to be safe", e);
+            mNotifications.clear();
+        }
     }
 }
