@@ -20,24 +20,24 @@
 
 package org.lineageos.flipflap;
 
-import android.content.res.Resources;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
 
-public class FlipFlapUtils {
-
-    static Resources res;
-
-    static final String ACTION_KILL_ACTIVITY = "org.lineageos.flipflap.KILL_ACTIVITY";
-    static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
-
-    static final String ACTION_ALARM_DISMISS = "com.android.deskclock.ALARM_DISMISS";
-    static final String ACTION_ALARM_SNOOZE = "com.android.deskclock.ALARM_SNOOZE";
-
-    public static int getScreenWidth() {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
+public abstract class FlipFlapView extends View {
+    public FlipFlapView(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    public FlipFlapView(Context context) {
+        super(context);
     }
 
+    abstract float getScreenBrightness();
+
+    abstract boolean supportsAlarmActions();
+
+    abstract boolean supportsCallActions();
+
+    abstract void onInvalidate();
 }

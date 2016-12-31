@@ -29,53 +29,47 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.os.BatteryManager;
 import android.util.AttributeSet;
-import android.view.View;
 
-import android.util.Log;
-
-public class CircleView extends View {
-    private static final String TAG = "FlipFlap";
+public class CircleView extends FlipFlapView {
+    private static final String TAG = "CircleView";
 
     private final Context mContext;
-    private final Resources res;
+    private final Resources mResources;
     private final IntentFilter mFilter = new IntentFilter();
     private Paint mPaint;
     private int mCenter_x;
     private int mCenter_y;
     private int mRadius;
-    int mOffset_x;
-    int mOffset_y;
-    int mOffset_rad;
-
-    Intent batteryStatus;
+    private int mOffset_x;
+    private int mOffset_y;
+    private int mOffset_rad;
 
     public CircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         mContext = context;
+
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        res = mContext.getResources();
+        mResources = mContext.getResources();
 
-        mOffset_x = res.getInteger(R.integer.x_offset);
-        mOffset_y = res.getInteger(R.integer.y_offset);
-        mOffset_rad = res.getInteger(R.integer.radius_offset);
+        mOffset_x = mResources.getInteger(R.integer.x_offset);
+        mOffset_y = mResources.getInteger(R.integer.y_offset);
+        mOffset_rad = mResources.getInteger(R.integer.radius_offset);
 
         mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
         mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
         mRadius = FlipFlapUtils.getScreenWidth() * 4 / 9 + mOffset_rad;
-
-        mFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        batteryStatus = mContext.registerReceiver(null, mFilter);
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-
         drawBackground(canvas);
     }
 
     private void drawBackground(Canvas canvas) {
-
+        Intent batteryStatus = mContext.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
@@ -85,15 +79,33 @@ public class CircleView extends View {
         mPaint.setStyle(Style.FILL);
 
         if (isCharging) {
-            mPaint.setColor(res.getColor(R.color.charge_bat_bg));
+            mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
         } else if (level >= 15) {
-            mPaint.setColor(res.getColor(R.color.full_bat_bg));
+            mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
         } else {
-            mPaint.setColor(res.getColor(R.color.low_bat_bg));
+            mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
         }
-        Log.e(TAG, "Drawing background" );
         canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
-        Log.e(TAG, "Done drawing background" );
+    }
+
+    @Override
+    public boolean supportsAlarmActions() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsCallActions() {
+        return false;
+    }
+
+    @Override
+    public float getScreenBrightness() {
+        return 0.5f;
+    }
+
+    @Override
+    public void onInvalidate() {
+        postInvalidate();
     }
 
 }
