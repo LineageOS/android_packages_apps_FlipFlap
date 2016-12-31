@@ -90,9 +90,8 @@ public class DotcaseConstants {
         0xfff86901, // Tapatalk Orange
     };
 
-    static Paint getPaintFromNumber(Paint paint, final int color) {
-        paint.setColor(paintColors[color + 1]);
-        return paint;
+    static int getColorFromNumber(final int color) {
+        return paintColors[color + 1];
     }
 
     /**
