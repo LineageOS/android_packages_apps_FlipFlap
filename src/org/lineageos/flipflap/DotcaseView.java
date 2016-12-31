@@ -268,11 +268,11 @@ public class DotcaseView extends View {
         int color;
 
         if (level >= .50) {
-            color = 3;
+            color = Color.GREEN;
         } else if (level >= .25) {
-            color = 5;
+            color = mContext.getResources().getColor(R.color.dotcase_color_orange);
         } else {
-            color = 2;
+            color = Color.RED;
         }
 
         for (int i = 0; i < fillDots; i++) {
@@ -329,7 +329,8 @@ public class DotcaseView extends View {
                                  int bottom, int color, Canvas canvas) {
         for (int x=left; x < right; x++) {
             for (int y=top; y < bottom; y++) {
-                dotcaseDrawPixel(x, y, DotcaseConstants.getPaintFromNumber(mPaint, color), canvas);
+                mPaint.setColor(color);
+                dotcaseDrawPixel(x, y, mPaint, canvas);
             }
         }
     }
@@ -337,8 +338,8 @@ public class DotcaseView extends View {
     private void dotcaseDrawSprite(int[][] sprite, int x, int y, Canvas canvas) {
         for (int i=0; i < sprite.length; i++) {
             for (int j=0; j < sprite[0].length; j++) {
-                dotcaseDrawPixel(x + j, y + i,
-                        DotcaseConstants.getPaintFromNumber(mPaint, sprite[i][j]), canvas);
+                mPaint.setColor(DotcaseConstants.getColorFromNumber(sprite[i][j]));
+                dotcaseDrawPixel(x + j, y + i, mPaint, canvas);
             }
         }
     }
