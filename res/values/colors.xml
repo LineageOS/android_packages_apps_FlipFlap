@@ -31,8 +31,30 @@
     <color name="text_shadow_opaque">#3f000000</color>
     <color name="list_selector_focused">#cc33b5e5</color>
     <color name="list_selector_activated">#4d33b5e5</color>
+
     <!-- Material design app colors -->
     <color name="colorPrimary">#3462b3</color>
     <color name="colorPrimaryDark">#294d8c</color>
     <color name="colorAccent">#3462b3</color>
+
+    <!-- Dotcase colors -->
+    <color name="dotcase_color_orange">#ffffa500</color>
+    <color name="dotcase_color_purple">#ffa020f0</color>
+    <color name="dotcase_color_cyan">#ff33b5e5</color>
+    <color name="dotcase_color_dark_green">#ff008000</color>
+    <color name="dotcase_color_dark_red">#ff800000</color>
+    <color name="dotcase_color_alarm_yellow">#ffffff99</color>
+    <color name="dotcase_color_twitter_blue">#ff55acee</color>
+    <color name="dotcase_color_facebook_blue">#ff3b5998</color>
+    <color name="dotcase_color_couples_pink">#ffff64c8</color>
+    <color name="dotcase_color_groupme_blue">#ff00aff0</color>
+    <color name="dotcase_color_inbox_blue">#ff325ccc</color>
+    <color name="dotcase_color_inbox_teal">#ff22b7fb</color>
+    <color name="dotcase_color_inbox_seafoam">#ff80d3fd</color>
+    <color name="dotcase_color_lmms_green">#ff11a9f9</color>
+    <color name="dotcase_color_lmms_gray">#ffe4e2e6</color>
+    <color name="dotcase_color_instagram_cream">#ffebe3d8</color>
+    <color name="dotcase_color_instagram_brown">#ff935b48</color>
+    <color name="dotcase_color_whatsapp_green">#ff35b024</color>
+    <color name="dotcase_color_tapatalk_orange">#fff86901</color>
 </resources>
