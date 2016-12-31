@@ -47,6 +47,7 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:theme="@style/DotcaseTheme"
             android:windowAnimationStyle="@null">
 
             <intent-filter>
