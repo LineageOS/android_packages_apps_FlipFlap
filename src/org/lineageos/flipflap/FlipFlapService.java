@@ -35,41 +35,68 @@ public class FlipFlapService extends Service {
 
     private static final String TAG = "FlipFlap";
 
-    private Context mContext;
-    private Resources res;
     private static final int COVER_STATE_CHANGED = 0;
-
-    private static String COVER_UEVENT_MATCH;
 
     private final Object mLock = new Object();
 
+    private Context mContext;
     int mCoverStyle;
-
-    private final UEventObserver mFlipFlapObserver = new UEventObserver() {
-        @Override
-        public void onUEvent(UEventObserver.UEvent event) {
-            onCoverEvent(Integer.parseInt(event.get("SWITCH_STATE")));
-        }
-    };
 
     @Override
     public void onCreate() {
-
         super.onCreate();
         Log.d(TAG, "Creating service");
         mContext = this;
-        res = mContext.getResources();
+        Resources res = mContext.getResources();
 
-        COVER_UEVENT_MATCH = res.getString(R.string.cover_uevent_match);
+        String ueventMatch = res.getString(R.string.cover_uevent_match);
 
-        Log.e(TAG,"Cover uevent path :" + COVER_UEVENT_MATCH);
-        mFlipFlapObserver.startObserving(COVER_UEVENT_MATCH);
+        Log.e(TAG,"Cover uevent path :" + ueventMatch);
+        mFlipFlapObserver.startObserving(ueventMatch);
 
         mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
         Log.e(TAG, "cover style detected:" + mCoverStyle);
     }
 
+    private void handleCoverChange(int state) {
+        synchronized (mLock) {
+            if (state == 1) {
+                Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
+                Intent intent = new Intent();
+                switch (mCoverStyle) {
+                    case 1:
+                    case 2:
+                        Log.i(TAG, "1 cover style detected:" + mCoverStyle);
+                        intent.setClass(this, FlipFlapActivity.class);
+                        intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
+                        break;
+                    case 0:
+                        Log.w(TAG, "Invalid Lid Style, closing lid activity");
+                        intent.setAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
+                        break;
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            } else {
+                Log.i(TAG, "Cover Opened, Killing FlipFlap Activity");
+                Intent intent = new Intent(FlipFlapUtils.ACTION_KILL_ACTIVITY);
+                mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.USER_SYSTEM));
+            }
+        }
+    }
 
+    private void onCoverEvent(int state) {
+        Message message = new Message();
+        message.what = COVER_STATE_CHANGED;
+        message.arg1 = state;
+
+        mHandler.sendMessage(message);
+    }
+
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
     private final Handler mHandler = new Handler(true /*async*/) {
         @Override
@@ -82,51 +109,10 @@ public class FlipFlapService extends Service {
         }
     };
 
-    private void handleCoverChange(int state) {
-        synchronized (mLock) {
-
-            if(state == 1) {
-                Log.e(TAG, "Cover Closed, Creating FlipFlap Activity");
-                Intent intent = new Intent();
-                switch (mCoverStyle) {
-                    case 1:
-                        Log.e(TAG, "1 cover style detected:" + mCoverStyle);
-                        intent.setClass(this, Dotcase.class);
-                        intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
-                        break;
-                    case 2:
-                        Log.e(TAG, "2 cover style detected:" + mCoverStyle);
-                        intent.setClass(this, FlipFlap.class);
-                        intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
-                        break;
-                    case 0:
-                        Log.e(TAG, "0 style detected:" + mCoverStyle);
-                        Log.e(TAG, "Invalid Lid Style, closing lid activity");
-                        intent.setAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
-                        break;
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-
-            } else {
-                Log.e(TAG, "Cover Opened, Killing FlipFlap Activity");
-                Intent intent = new Intent(FlipFlapUtils.ACTION_KILL_ACTIVITY);
-                mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.USER_SYSTEM));
-            }
+    private final UEventObserver mFlipFlapObserver = new UEventObserver() {
+        @Override
+        public void onUEvent(UEventObserver.UEvent event) {
+            onCoverEvent(Integer.parseInt(event.get("SWITCH_STATE")));
         }
-    }
-
-    private void onCoverEvent(int state) {
-
-        Message message = new Message();
-        message.what = COVER_STATE_CHANGED;
-        message.arg1 = state;
-
-        mHandler.sendMessage(message);
-    }
-
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+    };
 }
