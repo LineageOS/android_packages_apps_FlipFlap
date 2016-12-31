@@ -22,7 +22,7 @@
     <color name="circle_background">#002B24</color>
     <color name="full_bat_bg">#01487f</color> <!-- blue-->
     <color name="low_bat_bg">#841515</color> <!-- red-->
-    <color name="charge_bat_bg">#b3b300</color> <!-- yellow-->
+    <color name="charge_bat_bg">#ffc107</color> <!-- yellow-->
     <color name="clock_text_color">@android:color/white</color>
 
     <color name="clock_white">#ffffff</color>
