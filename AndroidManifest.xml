@@ -37,8 +37,8 @@
             android:theme="@style/FlipFlapTheme">
 
             <intent-filter>
-                <action android:name="org.lineageos.quickcover.COVER_CLOSED" />
-                <action android:name="org.lineageos.quickcover.KILL_ACTIVITY" />
+                <action android:name="org.lineageos.flipflap.COVER_CLOSED" />
+                <action android:name="org.lineageos.flipflap.KILL_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -52,8 +52,8 @@
             android:windowAnimationStyle="@null">
 
             <intent-filter>
-                <action android:name="org.lineageos.quickcover.COVER_CLOSED" />
-                <action android:name="org.lineageos.quickcover.KILL_ACTIVITY" />
+                <action android:name="org.lineageos.flipflap.COVER_CLOSED" />
+                <action android:name="org.lineageos.flipflap.KILL_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
