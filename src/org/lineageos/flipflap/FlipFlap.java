@@ -198,7 +198,7 @@ public class FlipFlap extends Activity {
         String nextAlarm = getNextAlarm();
         if (!TextUtils.isEmpty(nextAlarm)) {
             // An alarm is set, deal with displaying it
-            int color = getColor(R.color.clock_gray);
+            int color = getColor(R.color.clock_white);
 
             // Overlay the selected color on the alarm icon and set the imageview
             mAlarmIcon.setColorFilter(color);
