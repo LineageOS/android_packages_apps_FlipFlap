@@ -33,7 +33,8 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:windowAnimationStyle="@null">
+            android:windowAnimationStyle="@null"
+            android:theme="@style/FlipFlapTheme">
 
             <intent-filter>
                 <action android:name="org.lineageos.quickcover.COVER_CLOSED" />
