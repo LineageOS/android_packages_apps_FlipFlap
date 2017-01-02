@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -37,25 +38,37 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class DotcaseView extends View {
-    // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
-    private final Context mContext;
-    private final IntentFilter mFilter = new IntentFilter();
-    private int mHeartbeat = 0;
-    private Paint mPaint;
+public class DotcaseView extends FlipFlapView {
+    private static final String TAG = "DotcaseView";
 
-    public DotcaseView(Context context) {
+    private final Context mContext;
+    private final FlipFlapStatus mStatus;
+    private final Paint mPaint;
+    private int mHeartbeat = 0;
+
+    // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
+
+    private class timeObject {
+        String timeString;
+        int hour;
+        int min;
+        boolean is24Hour;
+        boolean am;
+    }
+
+    public DotcaseView(Context context, FlipFlapStatus status) {
         super(context);
         mContext = context;
+        mStatus = status;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        if (Dotcase.sStatus.isAlarm()) {
+        if (mStatus.isAlarm()) {
             drawAlarm(canvas);
-        } else if (Dotcase.sStatus.isRinging()) {
+        } else if (mStatus.isRinging()) {
             drawName(canvas);
             drawNumber(canvas);
             drawRinger(canvas);
@@ -64,10 +77,10 @@ public class DotcaseView extends View {
 
             // Check notifications each cycle before displaying them
             if (mHeartbeat == 0) {
-                Dotcase.sStatus.checkNotifications(mContext);
+                mStatus.checkNotifications(mContext);
             }
 
-            if (!Dotcase.sStatus.hasNotifications()) {
+            if (!mStatus.hasNotifications()) {
                 if (mHeartbeat < 3) {
                     drawNotifications(canvas);
                 } else {
@@ -85,8 +98,29 @@ public class DotcaseView extends View {
             }
         }
 
-        mFilter.addAction(DotcaseConstants.ACTION_REDRAW);
-        mContext.getApplicationContext().registerReceiver(receiver, mFilter);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(DotcaseConstants.ACTION_REDRAW);
+        mContext.getApplicationContext().registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public boolean supportsAlarmActions() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsCallActions() {
+        return true;
+    }
+
+    @Override
+    public float getScreenBrightness() {
+        return 1.0f;
+    }
+
+    @Override
+    public void onInvalidate() {
+        postInvalidate();
     }
 
     private timeObject getTimeObject() {
@@ -131,7 +165,7 @@ public class DotcaseView extends View {
         int[][] mClockSprite = new int[clockHeight][clockWidth];
         int[][] mRingerSprite = new int[ringerHeight][ringerWidth];
 
-        int ringCounter = Dotcase.sStatus.ringCounter();
+        int ringCounter = mStatus.ringCounter();
 
         for (int i = 0; i < ringerHeight; i++) {
             for (int j = 0; j < ringerWidth; j++) {
@@ -178,9 +212,9 @@ public class DotcaseView extends View {
         dotcaseDrawSprite(mRingerSprite, 7, 28, canvas);
 
         if (ringCounter > 10) {
-            Dotcase.sStatus.resetRingCounter();
+            mStatus.resetRingCounter();
         } else {
-            Dotcase.sStatus.incrementRingCounter();
+            mStatus.incrementRingCounter();
         }
     }
 
@@ -189,7 +223,7 @@ public class DotcaseView extends View {
         int x = 1;
         int y = 30;
 
-        List<Notification> notifications = Dotcase.sStatus.getNotifications();
+        List<Notification> notifications = mStatus.getNotifications();
         for (Notification notification : notifications) {
             int[][] sprite = DotcaseConstants.getNotificationSprite(notification);
             if (sprite != null) {
@@ -209,7 +243,7 @@ public class DotcaseView extends View {
         int[][] mHandsetSprite = new int[handsetHeight][handsetWidth];
         int[][] mRingerSprite = new int[ringerHeight][ringerWidth];
 
-        int ringCounter = Dotcase.sStatus.ringCounter();
+        int ringCounter = mStatus.ringCounter();
 
         if (ringCounter / 3 > 0) {
             light = 2;
@@ -244,9 +278,9 @@ public class DotcaseView extends View {
         dotcaseDrawSprite(mRingerSprite, 7, 28, canvas);
 
         if (ringCounter > 4) {
-            Dotcase.sStatus.resetRingCounter();
+            mStatus.resetRingCounter();
         } else {
-            Dotcase.sStatus.incrementRingCounter();
+            mStatus.incrementRingCounter();
         }
     }
 
@@ -336,30 +370,21 @@ public class DotcaseView extends View {
     }
 
     private void dotcaseDrawSprite(int[][] sprite, int x, int y, Canvas canvas) {
-        for (int i=0; i < sprite.length; i++) {
-            for (int j=0; j < sprite[0].length; j++) {
+        for (int i = 0; i < sprite.length; i++) {
+            for (int j = 0; j < sprite[0].length; j++) {
                 mPaint.setColor(DotcaseConstants.getColorFromNumber(sprite[i][j]));
                 dotcaseDrawPixel(x + j, y + i, mPaint, canvas);
             }
         }
     }
 
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(DotcaseConstants.ACTION_REDRAW)) {
-                postInvalidate();
-            }
-        }
-    };
-
     private void drawName(Canvas canvas) {
         int[][] sprite;
         int x = 0, y = 2;
-        if (Dotcase.sStatus.isRinging()) {
-            int nameOffset = Dotcase.sStatus.callerTicker();
+        if (mStatus.isRinging()) {
+            int nameOffset = mStatus.callerTicker();
 
-            String name = Dotcase.sStatus.getCallerName();
+            String name = mStatus.getCallerName();
             String correctedName = "";
 
             // We can fit 7 characters, and the last two are spaces
@@ -380,15 +405,15 @@ public class DotcaseView extends View {
                 dotcaseDrawSprite(sprite, x + i * 4, y, canvas);
             }
 
-            Dotcase.sStatus.incrementCallerTicker();
+            mStatus.incrementCallerTicker();
         }
     }
 
     private void drawNumber(Canvas canvas) {
         int[][] sprite;
         int x = 0, y = 8;
-        if (Dotcase.sStatus.isRinging()) {
-            String number = Dotcase.sStatus.getCallerNumber();
+        if (mStatus.isRinging()) {
+            String number = mStatus.getCallerNumber();
             for (int i = 3; i < number.length() && i < 10; i++) {
                 sprite = DotcaseConstants.getSmallCharSprite(number.charAt(i));
                 dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
@@ -396,11 +421,12 @@ public class DotcaseView extends View {
         }
     }
 
-    private class timeObject {
-        String timeString;
-        int hour;
-        int min;
-        boolean is24Hour;
-        boolean am;
-    }
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(DotcaseConstants.ACTION_REDRAW)) {
+                postInvalidate();
+            }
+        }
+    };
 }

@@ -54,7 +54,6 @@ public class FlipFlapService extends Service {
 
     @Override
     public void onCreate() {
-
         super.onCreate();
         Log.d(TAG, "Creating service");
         mContext = this;
@@ -90,13 +89,9 @@ public class FlipFlapService extends Service {
                 Intent intent = new Intent();
                 switch (mCoverStyle) {
                     case 1:
-                        Log.e(TAG, "1 cover style detected:" + mCoverStyle);
-                        intent.setClass(this, Dotcase.class);
-                        intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
-                        break;
                     case 2:
-                        Log.e(TAG, "2 cover style detected:" + mCoverStyle);
-                        intent.setClass(this, FlipFlap.class);
+                        Log.e(TAG, "1 cover style detected:" + mCoverStyle);
+                        intent.setClass(this, FlipFlapActivity.class);
                         intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
                         break;
                     case 0:
@@ -118,7 +113,6 @@ public class FlipFlapService extends Service {
     }
 
     private void onCoverEvent(int state) {
-
         Message message = new Message();
         message.what = COVER_STATE_CHANGED;
         message.arg1 = state;
