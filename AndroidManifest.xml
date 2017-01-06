@@ -7,6 +7,10 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
 
     <protected-broadcast android:name="org.lineageos.flipflap.KILL_ACTIVITY" />
 
@@ -40,7 +44,8 @@
             <intent-filter>
                 <action android:name="org.lineageos.flipflap.COVER_CLOSED" />
                 <action android:name="org.lineageos.flipflap.KILL_ACTIVITY" />
-
+                <action android:name="TelephonyManager.ACTION_PHONE_STATE_CHANGED" />
+                <action android:name="com.android.deskclock.ALARM_ALERT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
