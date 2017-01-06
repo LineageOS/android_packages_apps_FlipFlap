@@ -94,7 +94,7 @@
             android:src="@drawable/ic_alarm_small"
             android:visibility="gone" />
 
-        <TextView android:id="@+id/nextAlarm_regular"
+        <TextView android:id="@+id/next_alarm_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/clock_gray"
@@ -102,7 +102,5 @@
             android:layout_marginLeft="4dip"
             android:gravity="center"
             android:visibility="gone" />
-
     </LinearLayout>
-
 </LinearLayout>

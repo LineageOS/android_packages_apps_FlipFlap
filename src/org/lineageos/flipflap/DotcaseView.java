@@ -31,13 +31,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.format.DateFormat;
+import android.view.View;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class DotcaseView extends FlipFlapView {
+public class DotcaseView extends View implements FlipFlapView {
     private static final String TAG = "DotcaseView";
 
     private final Context mContext;
@@ -96,10 +97,6 @@ public class DotcaseView extends FlipFlapView {
                 mHeartbeat = 0;
             }
         }
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(DotcaseConstants.ACTION_REDRAW);
-        mContext.getApplicationContext().registerReceiver(receiver, filter);
     }
 
     @Override
@@ -115,11 +112,6 @@ public class DotcaseView extends FlipFlapView {
     @Override
     public float getScreenBrightness() {
         return 1.0f;
-    }
-
-    @Override
-    public void onInvalidate() {
-        postInvalidate();
     }
 
     private timeObject getTimeObject() {
@@ -419,13 +411,4 @@ public class DotcaseView extends FlipFlapView {
             }
         }
     }
-
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(DotcaseConstants.ACTION_REDRAW)) {
-                postInvalidate();
-            }
-        }
-    };
 }

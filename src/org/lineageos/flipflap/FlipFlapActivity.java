@@ -22,7 +22,6 @@ package org.lineageos.flipflap;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,33 +33,29 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.lang.Math;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.Normalizer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class FlipFlapActivity extends Activity {
     private static final String TAG = "FlipFlapActivity";
+
+    private static final int INVALIDATE_VIEW = 1337;
 
     private Context mContext;
 
@@ -68,13 +63,9 @@ public class FlipFlapActivity extends Activity {
     private FlipFlapView mView;
     private String mCoverNode;
     private GestureDetector mDetector;
-    private AlarmManager mAlarmManager;
     private PowerManager mPowerManager;
     private SensorManager mSensorManager;
     private TelecomManager mTelecomManager;
-
-    // TODO(intervigil): Remove this when CircleView becomes a custom view
-    int mCoverStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,20 +89,19 @@ public class FlipFlapActivity extends Activity {
                     View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         mDetector = new GestureDetector(mContext, mGestureListener);
-        mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
 
-        mCoverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
-        switch (mCoverStyle) {
+        int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
+        switch (coverStyle) {
             case 1:
                 mView = new DotcaseView(mContext, mStatus);
-                setContentView(mView);
+                setContentView((View) mView);
                 break;
             case 2:
-                setContentView(R.layout.circle_layout);
-                mView = (CircleView) findViewById(R.id.circle_view);
+                mView = new CircleView(mContext);
+                setContentView((View) mView);
                 break;
         }
 
@@ -149,12 +139,7 @@ public class FlipFlapActivity extends Activity {
             mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Closed");
         }
 
-        mView.onInvalidate();
-        if (mCoverStyle > 1) {
-            // TODO(intervigil): Remove this when CircleView becomes a custom view
-            refreshClock();
-            refreshAlarmStatus();
-        }
+        ((View) mView).postInvalidate();
     }
 
     @Override
@@ -189,75 +174,6 @@ public class FlipFlapActivity extends Activity {
             // Say that we handled this event so nobody else does
             return true;
         }
-    }
-
-    private void refreshClock() {
-        LinearLayout clockPanel = (LinearLayout) findViewById(R.id.clock_panel);
-        clockPanel.bringToFront();
-
-        Locale locale = Locale.getDefault();
-        Date now = new Date();
-        String dateFormat = mContext.getString(R.string.abbrev_wday_month_day_no_year);
-        CharSequence date = DateFormat.format(dateFormat, now);
-        String hours = new SimpleDateFormat(getHourFormat(), locale).format(now);
-        String minutes = new SimpleDateFormat(mContext.getString(R.string.widget_12_hours_format_no_ampm_m),
-                locale).format(now);
-        String amPm = new SimpleDateFormat(
-                mContext.getString(R.string.widget_12_hours_format_ampm), locale).format(now);
-
-        TextView hoursView = (TextView) findViewById(R.id.clock1);
-        TextView minsView = (TextView) findViewById(R.id.clock2);
-        TextView amPmView = (TextView) findViewById(R.id.clock_ampm);
-        TextView dateView = (TextView) findViewById(R.id.date_regular);
-
-        hoursView.setText(hours);
-        minsView.setText(minutes);
-        amPmView.setText(amPm);
-        dateView.setText(date);
-    }
-
-    private void refreshAlarmStatus() {
-        ImageView alarmIcon = (ImageView) findViewById(R.id.alarm_icon);
-        TextView alarmText = (TextView) findViewById(R.id.nextAlarm_regular);
-
-        String nextAlarm = getNextAlarm();
-        if (!TextUtils.isEmpty(nextAlarm)) {
-            // An alarm is set, deal with displaying it
-            int color = mContext.getColor(R.color.clock_white);
-
-            // Overlay the selected color on the alarm icon and set the imageview
-            alarmIcon.setColorFilter(color);
-            alarmIcon.setVisibility(View.VISIBLE);
-
-            alarmText.setText(nextAlarm);
-            alarmText.setVisibility(View.VISIBLE);
-            alarmText.setTextColor(color);
-        } else {
-            // No alarm set or Alarm display is hidden, hide the views
-            alarmIcon.setVisibility(View.GONE);
-            alarmText.setVisibility(View.GONE);
-        }
-    }
-
-    private String getHourFormat() {
-        return DateFormat.is24HourFormat(mContext) ?
-                mContext.getString(R.string.widget_24_hours_format_h_api_16) :
-                mContext.getString(R.string.widget_12_hours_format_h);
-    }
-
-    private String getNextAlarm() {
-        AlarmManager.AlarmClockInfo nextAlarmClock = mAlarmManager.getNextAlarmClock();
-        if (nextAlarmClock != null) {
-            return getNextAlarmFormattedTime(nextAlarmClock.getTriggerTime());
-        }
-
-        return null;
-    }
-
-    private String getNextAlarmFormattedTime(long time) {
-        String skeleton = DateFormat.is24HourFormat(mContext) ? "EHm" : "Ehma";
-        String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), skeleton);
-        return (String) DateFormat.format(pattern, time);
     }
 
     private final SensorEventListener mSensorEventListener = new SensorEventListener() {
@@ -342,7 +258,8 @@ public class FlipFlapActivity extends Activity {
                         Log.i(TAG, "Sleep interrupted", e);
                     }
 
-                    mView.onInvalidate();
+                    Message msg = mHandler.obtainMessage(INVALIDATE_VIEW);
+                    mHandler.sendMessage(msg);
                 }
                 mPowerManager.goToSleep(SystemClock.uptimeMillis());
             }
@@ -420,6 +337,17 @@ public class FlipFlapActivity extends Activity {
                 } catch (InterruptedException e) {
                     Log.i(TAG, "Sleep interrupted", e);
                 }
+            }
+        }
+    };
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case INVALIDATE_VIEW:
+                    ((View) mView).postInvalidate();
+                    break;
             }
         }
     };
