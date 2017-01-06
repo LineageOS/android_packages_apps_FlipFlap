@@ -20,72 +20,68 @@
 
 package org.lineageos.flipflap;
 
+import android.app.AlarmManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.os.BatteryManager;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class CircleView extends FlipFlapView {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class CircleView extends FrameLayout implements FlipFlapView {
     private static final String TAG = "CircleView";
 
     private final Context mContext;
-    private final Resources mResources;
-    private final IntentFilter mFilter = new IntentFilter();
-    private Paint mPaint;
-    private int mCenter_x;
-    private int mCenter_y;
-    private int mRadius;
-    private int mOffset_x;
-    private int mOffset_y;
-    private int mOffset_rad;
+
+    private AlarmManager mAlarmManager;
+
+    private CircleBatteryView mBatteryView;
+    private LinearLayout mClockPanel;
+    private TextView mHoursView;
+    private TextView mMinsView;
+    private TextView mAmPmView;
+    private TextView mDateView;
+
+    private ImageView mAlarmIcon;
+    private TextView mAlarmText;
+
+    public CircleView(Context context) {
+        this(context, null);
+    }
 
     public CircleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public CircleView(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public CircleView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
 
         mContext = context;
 
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mResources = mContext.getResources();
+        mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
-        mOffset_x = mResources.getInteger(R.integer.x_offset);
-        mOffset_y = mResources.getInteger(R.integer.y_offset);
-        mOffset_rad = mResources.getInteger(R.integer.radius_offset);
+        inflate(mContext, R.layout.circle_view, this);
+        mBatteryView = (CircleBatteryView) findViewById(R.id.circle_battery);
+        mClockPanel = (LinearLayout) findViewById(R.id.clock_panel);
+        mHoursView = (TextView) findViewById(R.id.clock1);
+        mMinsView = (TextView) findViewById(R.id.clock2);
+        mAmPmView = (TextView) findViewById(R.id.clock_ampm);
+        mDateView = (TextView) findViewById(R.id.date_regular);
 
-        mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
-        mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
-        mRadius = FlipFlapUtils.getScreenWidth() * 4 / 9 + mOffset_rad;
-    }
-
-    @Override
-    public void onDraw(Canvas canvas) {
-        drawBackground(canvas);
-    }
-
-    private void drawBackground(Canvas canvas) {
-        Intent batteryStatus = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL;
-
-        canvas.drawRGB(0, 0, 0);
-        mPaint.setStyle(Style.FILL);
-
-        if (isCharging) {
-            mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
-        } else if (level >= 15) {
-            mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
-        } else {
-            mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
-        }
-        canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        mAlarmIcon = (ImageView) findViewById(R.id.alarm_icon);
+        mAlarmText = (TextView) findViewById(R.id.next_alarm_regular);
     }
 
     @Override
@@ -104,8 +100,69 @@ public class CircleView extends FlipFlapView {
     }
 
     @Override
-    public void onInvalidate() {
-        postInvalidate();
+    public void postInvalidate() {
+        mBatteryView.postInvalidate();
+        refreshClock();
+        refreshAlarmStatus();
+        mClockPanel.bringToFront();
+        super.postInvalidate();
     }
 
+    private void refreshClock() {
+        Locale locale = Locale.getDefault();
+        Date now = new Date();
+        String dateFormat = mContext.getString(R.string.abbrev_wday_month_day_no_year);
+        CharSequence date = DateFormat.format(dateFormat, now);
+        String hours = new SimpleDateFormat(getHourFormat(), locale).format(now);
+        String minutes = new SimpleDateFormat(mContext.getString(R.string.widget_12_hours_format_no_ampm_m),
+                locale).format(now);
+        String amPm = new SimpleDateFormat(
+                mContext.getString(R.string.widget_12_hours_format_ampm), locale).format(now);
+
+        mHoursView.setText(hours);
+        mMinsView.setText(minutes);
+        mAmPmView.setText(amPm);
+        mDateView.setText(date);
+    }
+
+    private void refreshAlarmStatus() {
+        String nextAlarm = getNextAlarm();
+        if (!TextUtils.isEmpty(nextAlarm)) {
+            // An alarm is set, deal with displaying it
+            int color = mContext.getColor(R.color.clock_white);
+
+            // Overlay the selected color on the alarm icon and set the imageview
+            mAlarmIcon.setColorFilter(color);
+            mAlarmIcon.setVisibility(View.VISIBLE);
+
+            mAlarmText.setText(nextAlarm);
+            mAlarmText.setVisibility(View.VISIBLE);
+            mAlarmText.setTextColor(color);
+        } else {
+            // No alarm set or Alarm display is hidden, hide the views
+            mAlarmIcon.setVisibility(View.GONE);
+            mAlarmText.setVisibility(View.GONE);
+        }
+    }
+
+    private String getHourFormat() {
+        return DateFormat.is24HourFormat(mContext) ?
+                mContext.getString(R.string.widget_24_hours_format_h_api_16) :
+                mContext.getString(R.string.widget_12_hours_format_h);
+    }
+
+    private String getNextAlarm() {
+        AlarmManager.AlarmClockInfo nextAlarmClock = mAlarmManager.getNextAlarmClock();
+        if (nextAlarmClock != null) {
+            return getNextAlarmFormattedTime(nextAlarmClock.getTriggerTime());
+        }
+
+        return null;
+    }
+
+    private String getNextAlarmFormattedTime(long time) {
+        String skeleton = DateFormat.is24HourFormat(mContext) ? "EHm" : "Ehma";
+        String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), skeleton);
+        return (String) DateFormat.format(pattern, time);
+    }
 }
