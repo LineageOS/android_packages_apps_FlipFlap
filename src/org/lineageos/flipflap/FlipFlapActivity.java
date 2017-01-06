@@ -21,19 +21,24 @@
 package org.lineageos.flipflap;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -49,6 +54,7 @@ import java.lang.Math;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -116,6 +122,8 @@ public class FlipFlapActivity extends Activity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(FlipFlapUtils.ACTION_COVER_CLOSED);
         filter.addAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
+        filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+        filter.addAction("com.android.deskclock.ALARM_ALERT");
         mContext.getApplicationContext().registerReceiver(mReceiver, filter);
 
         mStatus.stopRunning();
@@ -165,7 +173,9 @@ public class FlipFlapActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        mStatus.stopRinging();
+        mStatus.stopAlarm();
+        mStatus.setOnTop(false);
         mStatus.stopRunning();
     }
 
@@ -268,6 +278,17 @@ public class FlipFlapActivity extends Activity {
             // Do nothing
         }
     };
+
+    private static String normalize(String str) {
+        return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .replaceAll("æ", "ae")
+                .replaceAll("ð", "d")
+                .replaceAll("ø", "o")
+                .replaceAll("þ", "th")
+                .replaceAll("ß", "ss")
+                .replaceAll("œ", "oe");
+    }
 
     private final Runnable mService = new Runnable() {
         @Override
@@ -376,6 +397,32 @@ public class FlipFlapActivity extends Activity {
         }
     };
 
+    private Runnable mEnsureTopActivity = new Runnable() {
+        @Override
+        public void run() {
+            while ((mStatus.isRinging() || mStatus.isAlarm())
+                    && mStatus.isOnTop()) {
+                ActivityManager am =
+                        (ActivityManager) mContext.getSystemService(Activity.ACTIVITY_SERVICE);
+                if (!am.getRunningTasks(1).get(0).topActivity.getPackageName().equals(
+                        "org.lineageos.flipflap")) {
+                    Intent intent = new Intent();
+                    intent.setClassName(FlipFlapActivity.class.getPackage().getName(),
+                            FlipFlapActivity.class.getSimpleName());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                }
+                try {
+                    Thread.sleep(100);
+                } catch (IllegalArgumentException e) {
+                    // This isn't going to happen
+                } catch (InterruptedException e) {
+                    Log.i(TAG, "Sleep interrupted", e);
+                }
+            }
+        }
+    };
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -391,6 +438,43 @@ public class FlipFlapActivity extends Activity {
                 onDestroy();
             } else if (intent.getAction().equals(FlipFlapUtils.ACTION_COVER_CLOSED)) {
                 onResume();
+            } else if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED) &&
+                    mView.supportsCallActions()) {
+                String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+                if (state.equals(TelephonyManager.EXTRA_STATE_RINGING) {
+                    String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                            Uri.encode(number));
+                    Cursor cursor = context.getContentResolver().query(uri,
+                            new String[] {ContactsContract.PhoneLookup.DISPLAY_NAME},
+                            number, null, null);
+                    String name = cursor.moveToFirst() ?
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME)) :
+                        "";
+                    cursor.close();
+
+                    if (number.equalsIgnoreCase("restricted")) {
+                        // If call is restricted, don't show a number
+                        name = number;
+                        number = "";
+                    }
+
+                    name = normalize(name);
+                    name = name + "  "; // Add spaces so the scroll effect looks good
+
+                    mStatus.startRinging(number, name);
+                    mStatus.setOnTop(true);
+                    new Thread(mEnsureTopActivity()).start();
+                } else {
+                    mStatus.setOnTop(false);
+                    mStatus.stopRinging();
+                }
+            } else if (intent.getAction().equals("com.android.deskclock.ALARM_ALERT") &&
+                    mView.supportsAlarmActions()) {
+                // add other alarm apps here
+                mStatus.startAlarm();
+                mStatus.setOnTop(true);
+                new Thread(mEnsureTopActivity()).start();
             }
         }
     };
