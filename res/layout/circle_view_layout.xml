@@ -17,15 +17,14 @@
  Also add information on how to contact you by electronic and paper mail.
 
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/circle_layout"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal|top"
-    android:orientation="vertical">
+    android:layout_gravity="center_horizontal|top">
 
-    <org.lineageos.flipflap.CircleView
-        android:id="@+id/circle_view"
+    <org.lineageos.flipflap.CircleBatteryView
+        android:id="@+id/circle_battery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top" />
@@ -36,5 +35,4 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="50dp" />
-
-</RelativeLayout>
+</merge>
