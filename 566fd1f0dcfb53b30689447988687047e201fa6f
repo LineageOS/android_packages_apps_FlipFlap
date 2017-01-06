@@ -22,6 +22,30 @@
       "revId": "566fd1f0dcfb53b30689447988687047e201fa6f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa3479d7_a0eed820",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-01-06T02:44:45Z",
+      "side": 1,
+      "message": "This line in particular causes a black background to appear behind the text only, on top of my colored background. Removing just this one seems to clean that up and still looks good on Dotcase",
+      "parentUuid": "fa3479d7_807cf473",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 119,
+        "endChar": 67
+      },
+      "revId": "566fd1f0dcfb53b30689447988687047e201fa6f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
