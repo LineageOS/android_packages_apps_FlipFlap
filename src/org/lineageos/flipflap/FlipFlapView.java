@@ -24,20 +24,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-public abstract class FlipFlapView extends View {
-    public FlipFlapView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+public interface FlipFlapView {
+    float getScreenBrightness();
 
-    public FlipFlapView(Context context) {
-        super(context);
-    }
+    boolean supportsAlarmActions();
 
-    abstract float getScreenBrightness();
-
-    abstract boolean supportsAlarmActions();
-
-    abstract boolean supportsCallActions();
-
-    abstract void onInvalidate();
+    boolean supportsCallActions();
 }
