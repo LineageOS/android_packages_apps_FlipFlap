@@ -20,24 +20,10 @@
 
 package org.lineageos.flipflap;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
+public interface FlipFlapView {
+    float getScreenBrightness();
 
-public abstract class FlipFlapView extends View {
-    public FlipFlapView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+    boolean supportsAlarmActions();
 
-    public FlipFlapView(Context context) {
-        super(context);
-    }
-
-    abstract float getScreenBrightness();
-
-    abstract boolean supportsAlarmActions();
-
-    abstract boolean supportsCallActions();
-
-    abstract void onInvalidate();
+    boolean supportsCallActions();
 }
