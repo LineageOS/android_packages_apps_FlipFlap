@@ -25,6 +25,7 @@
     <dimen name="clock_font_size">90sp</dimen>
     <dimen name="widget_big_font_size">76dp</dimen>
     <dimen name="widget_medium_font_size">48dp</dimen>
+    <dimen name="widget_small_font_size">30dp</dimen>
     <dimen name="label_font_size">14sp</dimen>
 
     <dimen name="min_digital_widget_width">180dip</dimen>

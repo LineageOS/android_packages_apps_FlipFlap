@@ -38,7 +38,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -97,7 +96,7 @@ public class FlipFlapActivity extends Activity {
                 setContentView((View) mView);
                 break;
             case 2:
-                mView = new CircleView(mContext);
+                mView = new CircleView(mContext, mStatus);
                 setContentView((View) mView);
                 break;
         }
@@ -111,6 +110,7 @@ public class FlipFlapActivity extends Activity {
         filter.addAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         filter.addAction("com.android.deskclock.ALARM_ALERT");
+        filter.setPriority(1001);
         mContext.getApplicationContext().registerReceiver(mReceiver, filter);
 
         mStatus.stopRunning();
@@ -192,6 +192,30 @@ public class FlipFlapActivity extends Activity {
             // Do nothing
         }
     };
+
+    public void sendSnooze(View view) {
+        // Broadcast alarm snooze event
+        Intent intent = new Intent();
+        intent.setAction(FlipFlapUtils.ACTION_ALARM_SNOOZE);
+        mStatus.setOnTop(false);
+        mContext.sendBroadcast(intent);
+        mStatus.stopAlarm();
+
+        Message msg = mHandler.obtainMessage(INVALIDATE_VIEW);
+        mHandler.sendMessage(msg);
+    }
+
+    public void sendDismiss(View view) {
+        // Broadcast alarm dismiss event
+        Intent intent = new Intent();
+        intent.setAction(FlipFlapUtils.ACTION_ALARM_DISMISS);
+        mStatus.setOnTop(false);
+        mContext.sendBroadcast(intent);
+        mStatus.stopAlarm();
+
+        Message msg = mHandler.obtainMessage(INVALIDATE_VIEW);
+        mHandler.sendMessage(msg);
+    }
 
     private static String normalize(String str) {
         return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
