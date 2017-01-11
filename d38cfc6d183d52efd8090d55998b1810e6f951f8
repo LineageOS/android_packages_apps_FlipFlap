@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa3479d7_ac3126a4",
+        "filename": "src/org/lineageos/flipflap/DotcaseView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-11T05:28:11Z",
+      "side": 1,
+      "message": "indentation is wrong here",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 14
+      },
+      "revId": "d38cfc6d183d52efd8090d55998b1810e6f951f8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
