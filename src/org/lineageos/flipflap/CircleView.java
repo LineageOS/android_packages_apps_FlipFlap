@@ -24,7 +24,6 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,24 +38,28 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     private static final String TAG = "CircleView";
 
     private final Context mContext;
-
+    private final FlipFlapStatus mStatus;
     private AlarmManager mAlarmManager;
 
     private CircleBatteryView mBatteryView;
     private LinearLayout mClockPanel;
+    private LinearLayout mDatePanel;
+    private RelativeLayout mAlarmPanel;
 
     private TextView mHoursView;
     private TextView mMinsView;
     private TextView mAmPmView;
     private TextView mDateView;
 
+    private ImageView mAlarmAlertIcon;
     private ImageView mAlarmIcon;
     private TextView mAlarmText;
 
-    public CircleView(Context context) {
+    public CircleView(Context context, FlipFlapStatus status) {
         super(context);
 
         mContext = context;
+        mStatus = status;
 
         mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
@@ -66,6 +69,7 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
         mAmPmView = (TextView) findViewById(R.id.clock_ampm);
         mDateView = (TextView) findViewById(R.id.date_regular);
 
+        mAlarmAlertIcon = (ImageView) findViewById(R.id.alarm_alert_icon);
         mAlarmIcon = (ImageView) findViewById(R.id.alarm_icon);
         mAlarmText = (TextView) findViewById(R.id.next_alarm_regular);
 
@@ -73,6 +77,8 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
 
         mClockPanel = (LinearLayout) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+        mDatePanel = (LinearLayout) findViewById(R.id.date_panel);
+        mAlarmPanel = (RelativeLayout) findViewById(R.id.alarm_panel);
 
         refreshClock();
         refreshAlarmStatus();
@@ -88,7 +94,7 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
 
     @Override
     public boolean supportsAlarmActions() {
-        return false;
+        return true;
     }
 
     @Override
@@ -119,18 +125,28 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     }
 
     private void refreshAlarmStatus() {
+
+        int color = mContext.getColor(R.color.clock_white);
+
+        mAlarmAlertIcon.setColorFilter(color);
+        mAlarmIcon.setColorFilter(color);
+        mAlarmText.setTextColor(color);
+
+        // Display Alarm Alert buttons if in Alarm Status
+        if (mStatus.isAlarm()) {
+            mDatePanel.setVisibility(View.GONE);
+            mAlarmPanel.setVisibility(View.VISIBLE);
+        } else {
+            mDatePanel.setVisibility(View.VISIBLE);
+            mAlarmPanel.setVisibility(View.GONE);
+        }
+
         String nextAlarm = getNextAlarm();
         if (!TextUtils.isEmpty(nextAlarm)) {
             // An alarm is set, deal with displaying it
-            int color = mContext.getColor(R.color.clock_white);
-
-            // Overlay the selected color on the alarm icon and set the imageview
-            mAlarmIcon.setColorFilter(color);
             mAlarmIcon.setVisibility(View.VISIBLE);
-
             mAlarmText.setText(nextAlarm);
             mAlarmText.setVisibility(View.VISIBLE);
-            mAlarmText.setTextColor(color);
         } else {
             // No alarm set or Alarm display is hidden, hide the views
             mAlarmIcon.setVisibility(View.GONE);
