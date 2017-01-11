@@ -66,7 +66,6 @@ public class FlipFlapView extends FrameLayout {
     private SensorManager mSensorManager;
     private TelecomManager mTelecomManager;
     private boolean mAlarmActive;
-    private boolean mRinging;
     private boolean mProximityNear;
 
     public FlipFlapView(Context context) {
@@ -111,8 +110,29 @@ public class FlipFlapView extends FrameLayout {
         mAlarmActive = active;
     }
 
+    protected void dismissAlarm() {
+        getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
+        updateAlarmState(false);
+    }
+
+    protected void snoozeAlarm() {
+        getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
+        updateAlarmState(false);
+    }
+
+    protected void updateProximityState(boolean isNear) {
+        mProximityNear = isNear;
+    }
+
     protected void updateRingingState(boolean ringing, String name, String number) {
-        mRinging = ringing;
+    }
+
+    protected void acceptRingingCall() {
+        mTelecomManager.acceptRingingCall();
+    }
+
+    protected void endCall() {
+        mTelecomManager.endCall();
     }
 
     @Override
@@ -184,7 +204,7 @@ public class FlipFlapView extends FrameLayout {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-                mProximityNear = event.values[0] < event.sensor.getMaximumRange();
+                updateProximityState(event.values[0] < event.sensor.getMaximumRange());
             }
         }
 
@@ -222,31 +242,6 @@ public class FlipFlapView extends FrameLayout {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if (Math.abs(distanceY) < 60) {
-                // Did not meet the threshold for a scroll
-                return true;
-            }
-
-            if (supportsCallActions() && mRinging) {
-                if (distanceY < 60) {
-                    mTelecomManager.endCall();
-                } else if (distanceY > 60) {
-                    mTelecomManager.acceptRingingCall();
-                }
-            } else if (supportsAlarmActions() && mAlarmActive) {
-                if (distanceY < 60) {
-                    getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
-                    updateAlarmState(false);
-                } else if (distanceY > 60) {
-                    getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
-                    updateAlarmState(false);
-                }
-            }
             return true;
         }
     };
