@@ -21,6 +21,7 @@
 <resources>
     <string name="app_name">FlipFlap</string>
     <string name="loading_indicator">Loading widget\u2026</string>
+    <string name="alarm_label">ALARM</string>
 
     <!-- Formating strings for widget clock -->
     <string name="widget_12_hours_format_h" translatable="false">h</string>
@@ -39,5 +40,6 @@
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <!-- Format for describing the date, for accessibility. -->
     <string name="full_wday_month_day_no_year">EEEE, MMMM d</string>
+
 
 </resources>
