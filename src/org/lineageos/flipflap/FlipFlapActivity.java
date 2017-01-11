@@ -46,7 +46,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import java.lang.Math;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -65,7 +64,6 @@ public class FlipFlapActivity extends Activity {
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
     private SensorManager mSensorManager;
-    private TelecomManager mTelecomManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +89,6 @@ public class FlipFlapActivity extends Activity {
         mDetector = new GestureDetector(mContext, mGestureListener);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-        mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
 
         int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
         switch (coverStyle) {
@@ -280,37 +277,6 @@ public class FlipFlapActivity extends Activity {
         @Override
         public boolean onSingleTapUp (MotionEvent e) {
             mStatus.resetTimer();
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if (Math.abs(distanceY) < 60) {
-                // Did not meet the threshold for a scroll
-                return true;
-            }
-
-            if (mView.supportsCallActions() && mStatus.isRinging()) {
-                mStatus.setOnTop(false);
-                if (distanceY < 60) {
-                    mTelecomManager.endCall();
-                } else if (distanceY > 60) {
-                    mTelecomManager.acceptRingingCall();
-                }
-            } else if (mView.supportsAlarmActions() && mStatus.isAlarm()) {
-                Intent intent = new Intent();
-                if (distanceY < 60) {
-                    intent.setAction(FlipFlapUtils.ACTION_ALARM_DISMISS);
-                    mStatus.setOnTop(false);
-                    mContext.sendBroadcast(intent);
-                    mStatus.stopAlarm();
-                } else if (distanceY > 60) {
-                    intent.setAction(FlipFlapUtils.ACTION_ALARM_SNOOZE);
-                    mStatus.setOnTop(false);
-                    mContext.sendBroadcast(intent);
-                    mStatus.stopAlarm();
-                }
-            }
             return true;
         }
     };

@@ -29,7 +29,10 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.telecom.TelecomManager;
 import android.text.format.DateFormat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.Arrays;
@@ -44,6 +47,9 @@ public class DotcaseView extends View implements FlipFlapView {
     private final FlipFlapStatus mStatus;
     private final Paint mPaint;
     private int mHeartbeat = 0;
+
+    private GestureDetector mDetector;
+    private TelecomManager mTelecomManager;
 
     // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
 
@@ -61,6 +67,8 @@ public class DotcaseView extends View implements FlipFlapView {
         mStatus = status;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mDetector = new GestureDetector(mContext, mGestureListener);
+        mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override
@@ -95,6 +103,17 @@ public class DotcaseView extends View implements FlipFlapView {
                 drawBattery(canvas);
                 mHeartbeat = 0;
             }
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!mStatus.isPocketed()) {
+            mDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            // Say that we handled this event so nobody else does
+            return true;
         }
     }
 
@@ -410,4 +429,39 @@ public class DotcaseView extends View implements FlipFlapView {
             }
         }
     }
+
+    private final GestureDetector.SimpleOnGestureListener mGestureListener =
+            new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                    if (Math.abs(distanceY) < 60) {
+                        // Did not meet the threshold for a scroll
+                        return true;
+                    }
+
+                    if (supportsCallActions() && mStatus.isRinging()) {
+                        mStatus.setOnTop(false);
+                        if (distanceY < 60) {
+                            mTelecomManager.endCall();
+                        } else if (distanceY > 60) {
+                            mTelecomManager.acceptRingingCall();
+                        }
+                    } else if (supportsAlarmActions() && mStatus.isAlarm()) {
+                        Intent intent = new Intent();
+                        if (distanceY < 60) {
+                            intent.setAction(FlipFlapUtils.ACTION_ALARM_DISMISS);
+                            mStatus.setOnTop(false);
+                            mContext.sendBroadcast(intent);
+                            mStatus.stopAlarm();
+                        } else if (distanceY > 60) {
+                            intent.setAction(FlipFlapUtils.ACTION_ALARM_SNOOZE);
+                            mStatus.setOnTop(false);
+                            mContext.sendBroadcast(intent);
+                            mStatus.stopAlarm();
+                        }
+                    }
+                    return true;
+                }
+            };
 }
