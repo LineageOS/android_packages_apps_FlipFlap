@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa3479d7_0c6cb29b",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-11T04:47:59Z",
+      "side": 1,
+      "message": "Don\u0027t need the newline here",
+      "revId": "153ba8355ca59636e84bf9f7d51ea52fba6104a9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa3479d7_2c6f7694",
+        "filename": "src/org/lineageos/flipflap/FlipFlapActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-11T04:47:59Z",
+      "side": 1,
+      "message": "What\u0027s using these? Can\u0027t you just do mView.postInvalidate?",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 5
+      },
+      "revId": "153ba8355ca59636e84bf9f7d51ea52fba6104a9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
