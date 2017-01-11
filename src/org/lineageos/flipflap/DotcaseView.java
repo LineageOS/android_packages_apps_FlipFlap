@@ -30,9 +30,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.service.notification.StatusBarNotification;
+import android.telecom.TelecomManager;
 import android.text.format.DateFormat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -51,6 +53,11 @@ public class DotcaseView extends FlipFlapView {
     private String mCallerNumber;
     private int mNameOffset;
     private int mRingCounter;
+    private boolean mRinging;
+    private boolean mProximityNear;
+
+    private GestureDetector mDetector;
+    private TelecomManager mTelecomManager;
 
     // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
 
@@ -67,6 +74,8 @@ public class DotcaseView extends FlipFlapView {
         mContext = context;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mDetector = new GestureDetector(mContext, mGestureListener);
+        mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override
@@ -100,6 +109,15 @@ public class DotcaseView extends FlipFlapView {
         }
     }
 
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!mProximityNear) {
+            mDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            // Say that we handled this event so nobody else does
+            return true;
+        }
+    }
     @Override
     protected boolean canUseProximitySensor() {
         return true;
@@ -141,8 +159,15 @@ public class DotcaseView extends FlipFlapView {
     }
 
     @Override
+    public void updateProximityState(boolean isNear) {
+        super.updateProximityState(isNear);
+        mProximityNear = isNear;
+    }
+
+    @Override
     public void updateRingingState(boolean ringing, String name, String number) {
         super.updateRingingState(ringing, name, number);
+        mRinging = ringing;
         mCallerName = name + "  "; // make the scroll effect look good
         mCallerNumber = ringing ? number : null;
         mNameOffset = -6;
@@ -435,4 +460,32 @@ public class DotcaseView extends FlipFlapView {
             dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
         }
     }
+
+    private final GestureDetector.SimpleOnGestureListener mGestureListener =
+            new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            if (Math.abs(distanceY) < 60) {
+                // Did not meet the threshold for a scroll
+                return true;
+            }
+
+            if (supportsCallActions() && mRinging) {
+                if (distanceY < 60) {
+                    mTelecomManager.endCall();
+                } else if (distanceY > 60) {
+                    mTelecomManager.acceptRingingCall();
+                }
+            } else if (supportsAlarmActions() && mAlarmActive) {
+                if (distanceY < 60) {
+                    getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
+                    updateAlarmState(false);
+                } else if (distanceY > 60) {
+                    getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
+                    updateAlarmState(false);
+                }
+            }
+            return true;
+        }
+    };
 }
