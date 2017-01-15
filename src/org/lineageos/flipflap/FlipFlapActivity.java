@@ -95,11 +95,11 @@ public class FlipFlapActivity extends Activity {
 
         int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
         switch (coverStyle) {
-            case 1:
+            case FlipFlapUtils.COVER_STYLE_DOTCASE:
                 mView = new DotcaseView(mContext, mStatus);
                 setContentView((View) mView);
                 break;
-            case 2:
+            case FlipFlapUtils.COVER_STYLE_CIRCLE:
                 mView = new CircleView(mContext);
                 setContentView((View) mView);
                 break;

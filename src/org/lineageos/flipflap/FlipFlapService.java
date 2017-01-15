@@ -60,17 +60,17 @@ public class FlipFlapService extends Service {
 
     private void handleCoverChange(int state) {
         synchronized (mLock) {
-            if (state == 1) {
+            if (state == FlipFlapUtils.COVER_STATE_CLOSED) {
                 Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
                 Intent intent = new Intent();
                 switch (mCoverStyle) {
-                    case 1:
-                    case 2:
+                    case FlipFlapUtils.COVER_STYLE_DOTCASE:
+                    case FlipFlapUtils.COVER_STYLE_CIRCLE:
                         Log.i(TAG, "1 cover style detected:" + mCoverStyle);
                         intent.setClass(this, FlipFlapActivity.class);
                         intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
                         break;
-                    case 0:
+                    case FlipFlapUtils.COVER_STYLE_NONE:
                         Log.w(TAG, "Invalid Lid Style, closing lid activity");
                         intent.setAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
                         break;
