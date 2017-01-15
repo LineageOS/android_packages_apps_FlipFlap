@@ -65,9 +65,9 @@ public class CircleBatteryView extends View {
         mOffset_y = mResources.getInteger(R.integer.y_offset);
         mOffset_rad = mResources.getInteger(R.integer.radius_offset);
 
-        mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
-        mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
-        mRadius = FlipFlapUtils.getScreenWidth() * 4 / 9 + mOffset_rad;
+        mCenter_x = FlipFlapUtils.getScreenWidth(mContext) / 2 + mOffset_x;
+        mCenter_y = FlipFlapUtils.getScreenHeight(mContext) * 13 / 48  + mOffset_y;
+        mRadius = FlipFlapUtils.getScreenWidth(mContext) * 4 / 9 + mOffset_rad;
     }
 
     @Override
