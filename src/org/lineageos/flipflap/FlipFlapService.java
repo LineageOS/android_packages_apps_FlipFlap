@@ -31,6 +31,8 @@ import android.os.UserHandle;
 import android.os.UEventObserver;
 import android.util.Log;
 
+import org.cyanogenmod.internal.util.FileUtils;
+
 public class FlipFlapService extends Service {
 
     private static final String TAG = "FlipFlap";
@@ -50,12 +52,15 @@ public class FlipFlapService extends Service {
         Resources res = mContext.getResources();
 
         String ueventMatch = res.getString(R.string.cover_uevent_match);
+        String coverNode = res.getString(R.string.cover_node);
 
         Log.e(TAG,"Cover uevent path :" + ueventMatch);
         mFlipFlapObserver.startObserving(ueventMatch);
 
         mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
         Log.e(TAG, "cover style detected:" + mCoverStyle);
+
+        onCoverEvent(FileUtils.readOneLine(coverNode));
     }
 
     private void handleCoverChange(int state) {
@@ -86,10 +91,10 @@ public class FlipFlapService extends Service {
         }
     }
 
-    private void onCoverEvent(int state) {
+    private void onCoverEvent(String state) {
         Message message = new Message();
         message.what = COVER_STATE_CHANGED;
-        message.arg1 = state;
+        message.arg1 = Integer.parseInt(state);
 
         mHandler.sendMessage(message);
     }
@@ -112,7 +117,7 @@ public class FlipFlapService extends Service {
     private final UEventObserver mFlipFlapObserver = new UEventObserver() {
         @Override
         public void onUEvent(UEventObserver.UEvent event) {
-            onCoverEvent(Integer.parseInt(event.get("SWITCH_STATE")));
+            onCoverEvent(event.get("SWITCH_STATE"));
         }
     };
 }
