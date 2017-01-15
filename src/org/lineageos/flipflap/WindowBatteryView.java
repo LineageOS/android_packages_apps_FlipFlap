@@ -31,8 +31,10 @@ import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CircleBatteryView extends View {
-    private static final String TAG = "CircleBatteryView";
+import java.lang.IllegalArgumentException;
+
+public class WindowBatteryView extends View {
+    private static final String TAG = "WindowBatteryView";
 
     private final Context mContext;
     private final Resources mResources;
@@ -43,16 +45,18 @@ public class CircleBatteryView extends View {
     private int mOffset_x;
     private int mOffset_y;
     private int mOffset_rad;
+    private int mWidth, mHeight;
 
-    public CircleBatteryView(Context context) {
+    int coverstyle;
+    public WindowBatteryView(Context context) {
         this(context, null);
     }
 
-    public CircleBatteryView(Context context, AttributeSet attrs) {
+    public WindowBatteryView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircleBatteryView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WindowBatteryView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
@@ -61,9 +65,12 @@ public class CircleBatteryView extends View {
         mPaint.setAntiAlias(true);
         mResources = mContext.getResources();
 
+        coverstyle = mResources.getInteger(R.integer.config_deviceCoverType);
         mOffset_x = mResources.getInteger(R.integer.x_offset);
         mOffset_y = mResources.getInteger(R.integer.y_offset);
         mOffset_rad = mResources.getInteger(R.integer.radius_offset);
+        mWidth = mResources.getInteger(R.integer.rectangle_width);
+        mHeight = mResources.getInteger(R.integer.rectangle_height);
     }
 
     @Override
@@ -75,9 +82,22 @@ public class CircleBatteryView extends View {
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
 
+        /* Circle window base placement
+         * Centered Horizontally based on screen size
+         * Centered vertically @ srceen height * (13/48) 
+         * Radius based on 4/9ths of screen width
+         */
         mCenter_x = getWidth() / 2 + mOffset_x;
         mCenter_y = getHeight() * 13 / 48  + mOffset_y;
         mRadius = getWidth() * 4 / 9 + mOffset_rad;
+
+        /* Rectangle window base placement
+         * Use defined Width/Height for Bottom/right corner
+         * Use defined x/y offest for top right corner
+         */
+
+        mWidth = mResources.getInteger(R.integer.rectangle_width);
+        mHeight = mResources.getInteger(R.integer.rectangle_height);
 
         canvas.drawRGB(0, 0, 0);
         mPaint.setStyle(Style.FILL);
@@ -89,6 +109,14 @@ public class CircleBatteryView extends View {
         } else {
             mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
         }
-        canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        if (coverstyle == 2) {
+            canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        } else if (coverstyle == 3) {
+            canvas.drawRect((float) mOffset_x, (float) mOffset_y, (float) mWidth, (float) mHeight, mPaint);
+        } else {
+            // We should never get here
+            throw new IllegalArgumentException(
+                    "Invalid Cover Style");
+        }
     }
 }

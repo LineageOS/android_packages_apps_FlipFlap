@@ -35,14 +35,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CircleView extends RelativeLayout implements FlipFlapView {
-    private static final String TAG = "CircleView";
+public class WindowView extends RelativeLayout implements FlipFlapView {
+    private static final String TAG = "WindowView";
 
     private final Context mContext;
 
     private AlarmManager mAlarmManager;
 
-    private CircleBatteryView mBatteryView;
+    private WindowBatteryView mBatteryView;
     private LinearLayout mClockPanel;
 
     private TextView mHoursView;
@@ -53,14 +53,14 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     private ImageView mAlarmIcon;
     private TextView mAlarmText;
 
-    public CircleView(Context context) {
+    public WindowView(Context context) {
         super(context);
 
         mContext = context;
 
         mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
-        inflate(mContext, R.layout.circle_view, this);
+        inflate(mContext, R.layout.window_view, this);
         mHoursView = (TextView) findViewById(R.id.clock1);
         mMinsView = (TextView) findViewById(R.id.clock2);
         mAmPmView = (TextView) findViewById(R.id.clock_ampm);
@@ -69,7 +69,7 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
         mAlarmIcon = (ImageView) findViewById(R.id.alarm_icon);
         mAlarmText = (TextView) findViewById(R.id.next_alarm_regular);
 
-        mBatteryView = (CircleBatteryView) findViewById(R.id.circle_battery);
+        mBatteryView = (WindowBatteryView) findViewById(R.id.window_battery);
 
         mClockPanel = (LinearLayout) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
