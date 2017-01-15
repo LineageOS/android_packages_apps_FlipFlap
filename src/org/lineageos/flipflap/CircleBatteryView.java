@@ -64,10 +64,6 @@ public class CircleBatteryView extends View {
         mOffset_x = mResources.getInteger(R.integer.x_offset);
         mOffset_y = mResources.getInteger(R.integer.y_offset);
         mOffset_rad = mResources.getInteger(R.integer.radius_offset);
-
-        mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
-        mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
-        mRadius = FlipFlapUtils.getScreenWidth() * 4 / 9 + mOffset_rad;
     }
 
     @Override
@@ -78,6 +74,10 @@ public class CircleBatteryView extends View {
         int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
+
+        mCenter_x = getWidth() / 2 + mOffset_x;
+        mCenter_y = getHeight() * 13 / 48  + mOffset_y;
+        mRadius = getWidth() * 4 / 9 + mOffset_rad;
 
         canvas.drawRGB(0, 0, 0);
         mPaint.setStyle(Style.FILL);

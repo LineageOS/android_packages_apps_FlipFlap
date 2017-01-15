@@ -80,6 +80,7 @@ public class FlipFlapActivity extends Activity {
                     WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
         getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
