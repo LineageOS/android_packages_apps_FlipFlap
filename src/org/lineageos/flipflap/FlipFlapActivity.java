@@ -99,8 +99,8 @@ public class FlipFlapActivity extends Activity {
                 mView = new DotcaseView(mContext, mStatus);
                 setContentView((View) mView);
                 break;
-            case 2:
-                mView = new CircleView(mContext);
+            case 2:case 3:
+                mView = new WindowView(mContext);
                 setContentView((View) mView);
                 break;
         }

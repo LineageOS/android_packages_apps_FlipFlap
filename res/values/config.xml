@@ -22,15 +22,24 @@
     <!-- Define Device Lid Style
 
      1 HTC Style Dotcase
-     2 Asus/LG Style Circle Window Cover
+     2 Circle case with a window to view part of the screen
+     3 Rectangular Case with a window to view part of the screen
 
      For example, a device with Asus Circle Cover would set 2 -->
     <integer name="config_deviceCoverType">0</integer>
 
-    <!-- Define main circle parameters -->
+    <!-- Define window parameters
+         This is both x,y offset for Circle center
+         or the starting point offset for Rectangle-->
     <integer name="x_offset" translatable="false">0</integer>
     <integer name="y_offset" translatable="false">0</integer>
+
+    <!-- Circle parameters -->
     <integer name="radius_offset" translatable="false">0</integer>
+
+    <!-- Rectangular parameters -->
+    <integer name="rectangle_width" translatable="false">0</integer>
+    <integer name="rectangle_height" translatable="false">0</integer>
 
     <!-- Define Path to lid switch node. Node should report the following:
         OEPN = 0, Closed =1

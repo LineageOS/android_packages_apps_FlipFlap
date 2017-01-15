@@ -23,8 +23,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal|top">
 
-    <org.lineageos.flipflap.CircleBatteryView
-        android:id="@+id/circle_battery"
+    <org.lineageos.flipflap.WindowBatteryView
+        android:id="@+id/window_battery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top" />
