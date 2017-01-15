@@ -20,11 +20,12 @@
 
 package org.lineageos.flipflap;
 
-import android.content.res.Resources;
+import android.content.Context;
+import android.graphics.Point;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class FlipFlapUtils {
-
-    static Resources res;
 
     static final String ACTION_KILL_ACTIVITY = "org.lineageos.flipflap.KILL_ACTIVITY";
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
@@ -32,12 +33,15 @@ public class FlipFlapUtils {
     static final String ACTION_ALARM_DISMISS = "com.android.deskclock.ALARM_DISMISS";
     static final String ACTION_ALARM_SNOOZE = "com.android.deskclock.ALARM_SNOOZE";
 
-    public static int getScreenWidth() {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
+    public static Point getScreenSize(Context context) {
+        WindowManager windowManager
+                = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
 
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
+        Point size = new Point();
+        display.getRealSize(size);
+
+        return size;
     }
 
 }

@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Point;
 import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -65,9 +66,11 @@ public class CircleBatteryView extends View {
         mOffset_y = mResources.getInteger(R.integer.y_offset);
         mOffset_rad = mResources.getInteger(R.integer.radius_offset);
 
-        mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
-        mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
-        mRadius = FlipFlapUtils.getScreenWidth() * 4 / 9 + mOffset_rad;
+        Point size = FlipFlapUtils.getScreenSize(mContext);
+
+        mCenter_x = size.x / 2 + mOffset_x;
+        mCenter_y = size.y * 13 / 48  + mOffset_y;
+        mRadius = size.x * 4 / 9 + mOffset_rad;
     }
 
     @Override
