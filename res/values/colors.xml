@@ -19,10 +19,12 @@
 -->
 
 <resources>
-    <color name="circle_background">#002B24</color>
-    <color name="full_bat_bg">#01487f</color> <!-- blue-->
-    <color name="low_bat_bg">#841515</color> <!-- red-->
-    <color name="charge_bat_bg">#ffc107</color> <!-- yellow-->
+    <color name="full_bat_bg">#000e19</color> <!-- dark blue-->
+    <color name="low_bat_bg">#1a0404</color> <!-- dark red-->
+    <color name="charge_bat_bg">#332601</color> <!-- dark yellow-->
+    <color name="full_bat_border">#01487f</color> <!-- blue-->
+    <color name="low_bat_border">#841515</color> <!-- red-->
+    <color name="charge_bat_border">#ffc107</color> <!-- yellow-->
     <color name="clock_text_color">@android:color/white</color>
 
     <color name="clock_white">#ffffff</color>

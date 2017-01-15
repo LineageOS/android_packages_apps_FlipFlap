@@ -78,17 +78,27 @@ public class CircleBatteryView extends View {
         int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
+        int colorBackGround;
+        int colorRing;
 
         canvas.drawRGB(0, 0, 0);
-        mPaint.setStyle(Style.FILL);
 
         if (isCharging) {
-            mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
+            colorBackGround = mResources.getColor(R.color.charge_bat_bg);
+            colorRing = mResources.getColor(R.color.charge_bat_border);
         } else if (level >= 15) {
-            mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+            colorBackGround = mResources.getColor(R.color.full_bat_bg);
+            colorRing = mResources.getColor(R.color.full_bat_border);
         } else {
-            mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
+            colorBackGround = mResources.getColor(R.color.low_bat_bg);
+            colorRing = mResources.getColor(R.color.low_bat_border);
         }
+        mPaint.setStyle(Style.FILL);
+        mPaint.setColor(colorBackGround);
         canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        mPaint.setStyle(Style.STROKE);
+        mPaint.setStrokeWidth(20);
+        mPaint.setColor(colorRing);
+        canvas.drawCircle((float) mCenter_x, (float) mCenter_y, ((float) mRadius-10), mPaint);
     }
 }
