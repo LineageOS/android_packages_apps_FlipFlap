@@ -31,8 +31,10 @@ import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CircleBatteryView extends View {
-    private static final String TAG = "CircleBatteryView";
+import java.lang.IllegalArgumentException;
+
+public class WindowBatteryView extends View {
+    private static final String TAG = "WindowBatteryView";
 
     private final Context mContext;
     private final Resources mResources;
@@ -43,16 +45,17 @@ public class CircleBatteryView extends View {
     private int mOffset_x;
     private int mOffset_y;
     private int mOffset_rad;
+    private int mWidth, mHeight;
 
-    public CircleBatteryView(Context context) {
+    public WindowBatteryView(Context context) {
         this(context, null);
     }
 
-    public CircleBatteryView(Context context, AttributeSet attrs) {
+    public WindowBatteryView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircleBatteryView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WindowBatteryView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
@@ -64,6 +67,13 @@ public class CircleBatteryView extends View {
         mOffset_x = mResources.getInteger(R.integer.x_offset);
         mOffset_y = mResources.getInteger(R.integer.y_offset);
         mOffset_rad = mResources.getInteger(R.integer.radius_offset);
+        mWidth = mResources.getInteger(R.integer.rectangle_width);
+        mHeight = mResources.getInteger(R.integer.rectangle_height);
+
+        if (mOffset_rad != 0 && (mWidth != 0 || mHeight != 0)) {
+            throw new IllegalArgumentException(
+                          "Either radius or width/height should be declared, not both");
+        }
 
         mCenter_x = FlipFlapUtils.getScreenWidth() / 2 + mOffset_x;
         mCenter_y = FlipFlapUtils.getScreenHeight() * 13 / 48  + mOffset_y;
@@ -89,6 +99,10 @@ public class CircleBatteryView extends View {
         } else {
             mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
         }
-        canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        if (mWidth == 0 && mHeight == 0) {
+            canvas.drawCircle((float) mCenter_x, (float) mCenter_y, (float) mRadius, mPaint);
+        } else {
+            canvas.drawRect((float) mOffset_x, (float) mOffset_y, (float) mWidth, (float) mHeight, mPaint);
+        }
     }
 }

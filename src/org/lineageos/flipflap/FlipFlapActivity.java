@@ -100,7 +100,7 @@ public class FlipFlapActivity extends Activity {
                 setContentView((View) mView);
                 break;
             case 2:
-                mView = new CircleView(mContext);
+                mView = new WindowView(mContext);
                 setContentView((View) mView);
                 break;
         }
