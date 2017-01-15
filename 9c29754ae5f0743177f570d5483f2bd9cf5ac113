@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_f9f70b8b",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-15T23:25:49Z",
+      "side": 1,
+      "message": "Can you leave a note about these values needing to be in sync with the overlay values?",
+      "revId": "9c29754ae5f0743177f570d5483f2bd9cf5ac113",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
