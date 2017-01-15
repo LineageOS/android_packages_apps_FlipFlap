@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_7037b0b1",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-15T02:42:43Z",
+      "side": 1,
+      "message": "unnecessary newline",
+      "revId": "a1a00403fcdcd842322b1b8e8fc5467589cf8dd7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
