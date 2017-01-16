@@ -79,14 +79,8 @@ public class FlipFlapActivity extends Activity {
         getWindow().addFlags(
                     WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                    View.SYSTEM_UI_FLAG_FULLSCREEN |
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON|
+                    WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY);
 
         mDetector = new GestureDetector(mContext, mGestureListener);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
