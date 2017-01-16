@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_5f2b9782",
+        "filename": "src/org/lineageos/flipflap/DeviceCover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T11:41:06Z",
+      "side": 1,
+      "message": "theres a constant for that",
+      "range": {
+        "startLine": 52,
+        "startChar": 72,
+        "endLine": 52,
+        "endChar": 73
+      },
+      "revId": "1e1d2bc175fc18bdc63c545769e3688d3df2d349",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
