@@ -28,9 +28,21 @@ public class FlipFlapUtils {
 
     static final String ACTION_KILL_ACTIVITY = "org.lineageos.flipflap.KILL_ACTIVITY";
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
+    static final String ACTION_ALARM_ALERT = "com.android.deskclock.ALARM_ALERT";
 
     static final String ACTION_ALARM_DISMISS = "com.android.deskclock.ALARM_DISMISS";
     static final String ACTION_ALARM_SNOOZE = "com.android.deskclock.ALARM_SNOOZE";
+
+    static final int COVER_STATE_OPENED = 0;
+    static final int COVER_STATE_CLOSED = 1;
+
+    // These have to match with "config_deviceCoverType" from res/values/config.xml
+    static final int COVER_STYLE_NONE = 0;
+    static final int COVER_STYLE_DOTCASE = 1;
+    static final int COVER_STYLE_CIRCLE = 2;
+
+    static final int TIMEOUT_UNPLUGGED = 20;
+    static final int TIMEOUT_PLUGGGED = 40;
 
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;

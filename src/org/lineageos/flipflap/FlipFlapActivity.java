@@ -95,11 +95,11 @@ public class FlipFlapActivity extends Activity {
 
         int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
         switch (coverStyle) {
-            case 1:
+            case FlipFlapUtils.COVER_STYLE_DOTCASE:
                 mView = new DotcaseView(mContext, mStatus);
                 setContentView((View) mView);
                 break;
-            case 2:
+            case FlipFlapUtils.COVER_STYLE_CIRCLE:
                 mView = new CircleView(mContext);
                 setContentView((View) mView);
                 break;
@@ -113,7 +113,7 @@ public class FlipFlapActivity extends Activity {
         filter.addAction(FlipFlapUtils.ACTION_COVER_CLOSED);
         filter.addAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-        filter.addAction("com.android.deskclock.ALARM_ALERT");
+        filter.addAction(FlipFlapUtils.ACTION_ALARM_ALERT);
         mContext.getApplicationContext().registerReceiver(mReceiver, filter);
 
         mStatus.stopRunning();
@@ -221,9 +221,9 @@ public class FlipFlapActivity extends Activity {
                 Intent batteryIntent = mContext.getApplicationContext().registerReceiver(null,
                         new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                 if (batteryIntent.getIntExtra("plugged", -1) > 0) {
-                    timeout = 40;
+                    timeout = FlipFlapUtils.TIMEOUT_PLUGGED;
                 } else {
-                    timeout = 20;
+                    timeout = FlipFlapUtils.TIMEOUT_UNPLUGGED;
                 }
 
                 for (int i = 0; i <= timeout; i++) {
@@ -241,7 +241,7 @@ public class FlipFlapActivity extends Activity {
                         String value = br.readLine();
                         br.close();
 
-                        if (value.equals("0")) {
+                        if (value.equals(String.valueOf(FlipFlapUtils.COVER_STATE_OPENED))) {
                             mStatus.stopRunning();
                             finish();
                             overridePendingTransition(0, 0);
@@ -398,7 +398,7 @@ public class FlipFlapActivity extends Activity {
                     mStatus.setOnTop(false);
                     mStatus.stopRinging();
                 }
-            } else if (intent.getAction().equals("com.android.deskclock.ALARM_ALERT") &&
+            } else if (intent.getAction().equals(FlipFlapUtils.ACTION_ALARM_ALERT) &&
                     mView.supportsAlarmActions()) {
                 // add other alarm apps here
                 mStatus.startAlarm();
