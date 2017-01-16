@@ -55,6 +55,7 @@ public class DeviceCover {
                 switch (mCoverStyle) {
                     case 1:
                     case 2:
+                    case 3:
                         Log.i(TAG, "valid cover style detected:" + mCoverStyle);
                         intent.setClass(mContext, FlipFlapActivity.class);
                         intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
@@ -100,6 +101,7 @@ public class DeviceCover {
         switch (coverStyle) {
             case 1: return new DotcaseView(context, status);
             case 2: return new CircleView(context);
+            case 3: return new RectangularView(context);
         }
         // Not possible because of the check, above, matching on the valid covers
         return null;
