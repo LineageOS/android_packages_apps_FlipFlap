@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ba3e81b7_8a4adf81",
+        "filename": "src/org/lineageos/flipflap/FlipFlapActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T20:50:43Z",
+      "side": 1,
+      "message": "line length",
+      "revId": "64c01315ecdebb828bc370229f304d80783755f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3e81b7_2acf73b2",
         "filename": "src/org/lineageos/flipflap/FlipFlapActivity.java",
         "patchSetId": 5
