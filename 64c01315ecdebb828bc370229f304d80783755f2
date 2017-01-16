@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_2acf73b2",
+        "filename": "src/org/lineageos/flipflap/FlipFlapActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-16T18:55:27Z",
+      "side": 1,
+      "message": "You already have action \u003d intent.getAction() defined on line 358",
+      "range": {
+        "startLine": 391,
+        "startChar": 23,
+        "endLine": 391,
+        "endChar": 41
+      },
+      "revId": "64c01315ecdebb828bc370229f304d80783755f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
