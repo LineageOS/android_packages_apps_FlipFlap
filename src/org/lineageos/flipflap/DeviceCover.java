@@ -96,6 +96,7 @@ public class DeviceCover {
             case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(mContext);
             case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(mContext);
             case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(mContext);
+            case FlipFlapUtils.COVER_STYLE_ICEVIEW: return new IceviewView(mContext);
         }
 
         // Not possible because of the check, above, matching on the valid covers
