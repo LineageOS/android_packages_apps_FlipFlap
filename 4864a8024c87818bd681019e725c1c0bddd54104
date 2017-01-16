@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_64e252d7",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "mCoverStyle",
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_44e74ee5",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "mCoverStyle",
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_04d146fb",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "See my commit with addded constants (once its merged)",
+      "range": {
+        "startLine": 109,
+        "startChar": 26,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_e4cd225f",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "mCoverStyle",
+      "range": {
+        "startLine": 109,
+        "startChar": 13,
+        "endLine": 109,
+        "endChar": 22
+      },
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_c4da1e17",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "mCoverStyle",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 29
+      },
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_24ec4ac7",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "line length",
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_a4d71aed",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-16T07:40:12Z",
+      "side": 1,
+      "message": "I guess this is better a Log.wtf()?",
+      "range": {
+        "startLine": 115,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 43
+      },
+      "revId": "4864a8024c87818bd681019e725c1c0bddd54104",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
