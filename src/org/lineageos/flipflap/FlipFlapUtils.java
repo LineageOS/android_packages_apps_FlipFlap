@@ -32,6 +32,14 @@ public class FlipFlapUtils {
     static final String ACTION_ALARM_DISMISS = "com.android.deskclock.ALARM_DISMISS";
     static final String ACTION_ALARM_SNOOZE = "com.android.deskclock.ALARM_SNOOZE";
 
+    static final int COVER_STATE_OPENED = 0;
+    static final int COVER_STATE_CLOSED = 1;
+
+    // These have to match with "config_deviceCoverType" from res/values/config.xml
+    static final int COVER_STYLE_NONE = 0;
+    static final int COVER_STYLE_DOTCASE = 1;
+    static final int COVER_STYLE_CIRCLE = 2;
+
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }
