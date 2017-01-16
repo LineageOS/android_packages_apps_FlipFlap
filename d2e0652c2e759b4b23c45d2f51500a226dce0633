@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_39123363",
+        "filename": "res/layout/window_view.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-16T00:59:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be in this commit...",
+      "revId": "d2e0652c2e759b4b23c45d2f51500a226dce0633",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
