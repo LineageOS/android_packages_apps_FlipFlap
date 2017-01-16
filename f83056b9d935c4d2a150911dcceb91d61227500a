@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_19176f53",
+        "filename": "src/org/lineageos/flipflap/WindowBatteryView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-01-16T00:59:36Z",
+      "side": 1,
+      "message": "This logic won\u0027t work consistently, most of the circle devices are not overlaying anything as the default positioning seems to work for all of them so far.",
+      "revId": "f83056b9d935c4d2a150911dcceb91d61227500a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
