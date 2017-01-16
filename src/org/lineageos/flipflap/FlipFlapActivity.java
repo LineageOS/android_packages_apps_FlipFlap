@@ -89,18 +89,7 @@ public class FlipFlapActivity extends Activity {
         mTelecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
         mBroadcastManager = LocalBroadcastManager.getInstance(this);
 
-        switch (getResources().getInteger(R.integer.config_deviceCoverType)) {
-            case FlipFlapUtils.COVER_STYLE_DOTCASE:
-                mView = new DotcaseView(this, mStatus);
-                break;
-            case FlipFlapUtils.COVER_STYLE_CIRCLE:
-                mView = new CircleView(this);
-                break;
-            default:
-                finish();
-                return;
-        }
-
+        mView = DeviceCover.createFlipFlapView(this, mStatus);
         setContentView((View) mView);
 
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -230,7 +219,12 @@ public class FlipFlapActivity extends Activity {
 
             mStatus.startRunning();
             while (mStatus.isRunning()) {
-                int timeout = mIsPlugged ? FlipFlapUtils.TIMEOUT_PLUGGED : FlipFlapUtils.TIMEOUT_UNPLUGGED;
+                int timeout;
+                if (mIsPlugged) {
+                    timeout = FlipFlapUtils.TIMEOUT_PLUGGED;
+                } else {
+                    timeout = FlipFlapUtils.TIMEOUT_UNPLUGGED;
+                }
                 for (int i = 0; i <= timeout; i++) {
                     if (mStatus.isResetTimer() || mStatus.isRinging() || mStatus.isAlarm()) {
                         i = 0;

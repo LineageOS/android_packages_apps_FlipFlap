@@ -24,11 +24,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.UEventObserver;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import org.cyanogenmod.internal.util.FileUtils;
@@ -37,9 +34,7 @@ public class FlipFlapService extends Service {
 
     private static final String TAG = "FlipFlap";
 
-    private static final int COVER_STATE_CHANGED = 0;
-
-    private int mCoverStyle;
+    private DeviceCover mDeviceCover;
 
     @Override
     public void onCreate() {
@@ -53,50 +48,18 @@ public class FlipFlapService extends Service {
         Log.e(TAG,"Cover uevent path :" + ueventMatch);
         mFlipFlapObserver.startObserving(ueventMatch);
 
-        mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
-        Log.e(TAG, "cover style detected:" + mCoverStyle);
-
-        onCoverEvent(FileUtils.readOneLine(coverNode));
-    }
-
-    private void handleCoverChange(int state) {
-        if (state == FlipFlapUtils.COVER_STATE_CLOSED && mCoverStyle != 0) {
-            Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
-            startActivity(new Intent(this, FlipFlapActivity.class));
-        } else {
-            Log.i(TAG, "Cover Opened, Killing FlipFlap Activity");
-            LocalBroadcastManager.getInstance(this).sendBroadcast(
-                    new Intent(FlipFlapUtils.ACTION_KILL_ACTIVITY));
-        }
-    }
-
-    private void onCoverEvent(String state) {
-        Message message = new Message();
-        message.what = COVER_STATE_CHANGED;
-        message.arg1 = Integer.parseInt(state);
-
-        mHandler.sendMessage(message);
+        mDeviceCover = new DeviceCover(this);
+        mDeviceCover.onCoverEvent(FileUtils.readOneLine(coverNode));
     }
 
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    private final Handler mHandler = new Handler(true /*async*/) {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case COVER_STATE_CHANGED:
-                    handleCoverChange(msg.arg1);
-                    break;
-            }
-        }
-    };
-
     private final UEventObserver mFlipFlapObserver = new UEventObserver() {
         @Override
         public void onUEvent(UEventObserver.UEvent event) {
-            onCoverEvent(event.get("SWITCH_STATE"));
+            mDeviceCover.onCoverEvent(event.get("SWITCH_STATE"));
         }
     };
 }
