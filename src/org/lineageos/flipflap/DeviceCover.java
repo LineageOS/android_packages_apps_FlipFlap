@@ -85,6 +85,7 @@ public class DeviceCover {
             case 1: return new DotcaseView(context, status);
             case 2: return new CircleView(context);
             case 3: return new RectangularView(context);
+            case 4: return new IceviewView(context);
         }
         // Not possible because of the check, above, matching on the valid covers
         return null;
