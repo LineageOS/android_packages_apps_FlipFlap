@@ -88,17 +88,8 @@ public class FlipFlapActivity extends Activity {
         mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
 
         int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
-        switch (coverStyle) {
-            case 1:
-                mView = new DotcaseView(mContext, mStatus);
-                setContentView((View) mView);
-                break;
-            case 2:
-                mView = new CircleView(mContext);
-                setContentView((View) mView);
-                break;
-        }
-
+        mView = DeviceCover.createFlipFlapView(mContext, mStatus);
+        setContentView((View) mView);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.screenBrightness = mView.getScreenBrightness();
         getWindow().setAttributes(lp);

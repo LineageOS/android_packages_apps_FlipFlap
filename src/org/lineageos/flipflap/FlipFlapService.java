@@ -24,10 +24,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.UserHandle;
 import android.os.UEventObserver;
 import android.util.Log;
 
@@ -42,7 +39,7 @@ public class FlipFlapService extends Service {
     private final Object mLock = new Object();
 
     private Context mContext;
-    int mCoverStyle;
+    private DeviceCover mDeviceCover;
 
     @Override
     public void onCreate() {
@@ -57,67 +54,18 @@ public class FlipFlapService extends Service {
         Log.e(TAG,"Cover uevent path :" + ueventMatch);
         mFlipFlapObserver.startObserving(ueventMatch);
 
-        mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
-        Log.e(TAG, "cover style detected:" + mCoverStyle);
-
-        onCoverEvent(FileUtils.readOneLine(coverNode));
-    }
-
-    private void handleCoverChange(int state) {
-        synchronized (mLock) {
-            if (state == 1) {
-                Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
-                Intent intent = new Intent();
-                switch (mCoverStyle) {
-                    case 1:
-                    case 2:
-                        Log.i(TAG, "1 cover style detected:" + mCoverStyle);
-                        intent.setClass(this, FlipFlapActivity.class);
-                        intent.setAction(FlipFlapUtils.ACTION_COVER_CLOSED);
-                        break;
-                    case 0:
-                        Log.w(TAG, "Invalid Lid Style, closing lid activity");
-                        intent.setAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
-                        break;
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-            } else {
-                Log.i(TAG, "Cover Opened, Killing FlipFlap Activity");
-                Intent intent = new Intent(FlipFlapUtils.ACTION_KILL_ACTIVITY);
-                mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.USER_SYSTEM));
-            }
-        }
-    }
-
-    private void onCoverEvent(String state) {
-        Message message = new Message();
-        message.what = COVER_STATE_CHANGED;
-        message.arg1 = Integer.parseInt(state);
-
-        mHandler.sendMessage(message);
+        mDeviceCover = new DeviceCover(mContext);
+        mDeviceCover.onCoverEvent(FileUtils.readOneLine(coverNode));
     }
 
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    private final Handler mHandler = new Handler(true /*async*/) {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case COVER_STATE_CHANGED:
-                    handleCoverChange(msg.arg1);
-                    break;
-            }
-        }
-    };
-
     private final UEventObserver mFlipFlapObserver = new UEventObserver() {
         @Override
         public void onUEvent(UEventObserver.UEvent event) {
-            onCoverEvent(event.get("SWITCH_STATE"));
+            mDeviceCover.onCoverEvent(event.get("SWITCH_STATE"));
         }
     };
 }
