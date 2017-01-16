@@ -24,6 +24,7 @@
      1 HTC Style Dotcase
      2 Asus/LG Style Circle Window Cover
      3 Rectangular window Cover
+     4 Iceview style case where the entire screen is visible
 
      For example, a device with Asus Circle Cover would set 2 -->
     <integer name="config_deviceCoverType">0</integer>
