@@ -84,6 +84,7 @@ public class DeviceCover {
         switch (coverStyle) {
             case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(context, status);
             case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(context);
+            case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(context);
         }
         // Not possible because of the check, above, matching on the valid covers
         return null;
