@@ -36,58 +36,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class IceviewView extends RelativeLayout implements FlipFlapView {
+public class IceviewView extends FlipFlapView {
     private static final String TAG = "IceviewView";
-
-    private final Context mContext;
 
     private ClockPanel mClockPanel;
 
     public IceviewView(Context context) {
         super(context);
 
-        mContext = context;
-
         inflate(mContext, R.layout.iceview_view, this);
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
-    }
-
-    @Override
-    public boolean canUseProximitySensor() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsAlarmActions() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsCallActions() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsNotifications() {
-        return false;
-    }
-
-    @Override
-    public float getScreenBrightness() {
-        return 0.5f;
-    }
-
-    @Override
-    public void updateNotifications(List<String> packages) {
-    }
-
-    @Override
-    public void updateRingingState(boolean ringing, String name, String number) {
-    }
-
-    @Override
-    public void updateAlarmState(boolean active) {
     }
 }
