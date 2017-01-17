@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_c548d8ce",
+        "filename": "src/org/lineageos/flipflap/FlipFlapActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-01-17T00:48:15Z",
+      "side": 1,
+      "message": "I have to make this redraw here, is there a better way?",
+      "revId": "8033ef3eeacbfa2f30d79729c42fbdd53718af3b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
