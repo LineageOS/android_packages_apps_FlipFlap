@@ -43,6 +43,11 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
+    public boolean canUseProximitySensor() {
+        return false;
+    }
+
+    @Override
     public boolean supportsAlarmActions() {
         return false;
     }

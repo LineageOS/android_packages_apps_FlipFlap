@@ -144,10 +144,11 @@ public class FlipFlapActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        mSensorManager.registerListener(mSensorEventListener,
-                mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY),
-                SensorManager.SENSOR_DELAY_NORMAL);
-
+        if (mView.canUseProximitySensor()) {
+            mSensorManager.registerListener(mSensorEventListener,
+                    mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY),
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
         boolean screenOn = mPowerManager.isInteractive();
         if (!screenOn) {
             mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Closed");
@@ -159,10 +160,12 @@ public class FlipFlapActivity extends Activity {
         super.onPause();
 
         mPowerManager.goToSleep(SystemClock.uptimeMillis());
-        try {
-            mSensorManager.unregisterListener(mSensorEventListener);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Failed to unregister listener", e);
+        if (mView.canUseProximitySensor()) {
+            try {
+                mSensorManager.unregisterListener(mSensorEventListener);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Failed to unregister listener", e);
+            }
         }
         mStatus.stopRunning();
     }

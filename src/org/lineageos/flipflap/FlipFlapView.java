@@ -21,6 +21,8 @@
 package org.lineageos.flipflap;
 
 public interface FlipFlapView {
+    boolean canUseProximitySensor();
+
     float getScreenBrightness();
 
     boolean supportsAlarmActions();
