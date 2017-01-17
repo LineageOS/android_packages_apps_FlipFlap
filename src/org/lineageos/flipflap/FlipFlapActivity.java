@@ -310,32 +310,6 @@ public class FlipFlapActivity extends Activity {
         }
     };
 
-    private Runnable mEnsureTopActivity = new Runnable() {
-        @Override
-        public void run() {
-            while ((mStatus.isRinging() || mStatus.isAlarm())
-                    && mStatus.isOnTop()) {
-                ActivityManager am =
-                        (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
-                if (!am.getRunningTasks(1).get(0).topActivity.getPackageName().equals(
-                        "org.lineageos.flipflap")) {
-                    Intent intent = new Intent();
-                    intent.setClassName(FlipFlapActivity.class.getPackage().getName(),
-                            FlipFlapActivity.class.getSimpleName());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-                try {
-                    Thread.sleep(100);
-                } catch (IllegalArgumentException e) {
-                    // This isn't going to happen
-                } catch (InterruptedException e) {
-                    Log.i(TAG, "Sleep interrupted", e);
-                }
-            }
-        }
-    };
-
     private final BroadcastReceiver mLocalReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -377,7 +351,7 @@ public class FlipFlapActivity extends Activity {
 
                     mStatus.startRinging(number, name);
                     mStatus.setOnTop(true);
-                    new Thread(mEnsureTopActivity).start();
+                    ((View) mView).postInvalidate();
                 } else {
                     mStatus.setOnTop(false);
                     mStatus.stopRinging();
@@ -387,7 +361,7 @@ public class FlipFlapActivity extends Activity {
                 // add other alarm apps here
                 mStatus.startAlarm();
                 mStatus.setOnTop(true);
-                new Thread(mEnsureTopActivity).start();
+                ((View) mView).postInvalidate();
             } else if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
                 mIsPlugged = intent.getIntExtra("plugged", -1) > 0;
             }
