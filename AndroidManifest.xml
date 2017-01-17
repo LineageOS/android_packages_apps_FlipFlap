@@ -15,6 +15,10 @@
 
     <supports-screens android:anyDensity="true" />
 
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,5 +40,22 @@
             android:screenOrientation="portrait"
             android:windowAnimationStyle="@null"
             android:theme="@style/FlipFlapTheme" />
+
+        <activity
+            android:name=".FlipFlapSettingsActivity"
+            android:label="@string/settings_name"
+            android:theme="@style/FlipFlapSettingsTheme">
+
+            <intent-filter>
+                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.device" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_settings_flipflap" />
+        </activity>
     </application>
 </manifest>

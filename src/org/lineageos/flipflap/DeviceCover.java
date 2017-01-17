@@ -49,7 +49,7 @@ public class DeviceCover {
     }
 
     private void handleCoverChange(int state) {
-        if (state == FlipFlapUtils.COVER_STATE_CLOSED &&
+        if (FlipFlapUtils.isEnabled(mContext) && state == FlipFlapUtils.COVER_STATE_CLOSED &&
                 mCoverStyle != FlipFlapUtils.COVER_STYLE_NONE) {
             Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
             mContext.startActivity(new Intent(mContext, FlipFlapActivity.class));
