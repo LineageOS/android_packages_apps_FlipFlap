@@ -207,6 +207,24 @@ public class FlipFlapView extends FrameLayout {
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
             new GestureDetector.SimpleOnGestureListener() {
         @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (mPowerManager.isInteractive()) {
+                mPowerManager.goToSleep(SystemClock.uptimeMillis());
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            return true;
+        }
+
+        @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             if (Math.abs(distanceY) < 60) {
                 // Did not meet the threshold for a scroll
