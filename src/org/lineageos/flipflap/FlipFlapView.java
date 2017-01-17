@@ -104,7 +104,7 @@ public class FlipFlapView extends FrameLayout {
         return false;
     }
 
-    protected void updateNotifications(List<String> packages) {
+    protected void updateNotifications(List<StatusBarNotification> notifications) {
     }
 
     protected void updateAlarmState(boolean active) {
@@ -329,14 +329,7 @@ public class FlipFlapView extends FrameLayout {
 
             List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
             Collections.sort(notifications, mRankingComparator);
-
-            ArrayList<String> packageNames = new ArrayList<>();
-            for (StatusBarNotification sbn : notifications) {
-                if (!packageNames.contains(sbn.getPackageName())) {
-                    packageNames.add(sbn.getPackageName());
-                }
-            }
-            updateNotifications(packageNames);
+            updateNotifications(notifications);
         }
     };
 

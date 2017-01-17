@@ -29,6 +29,7 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.service.notification.StatusBarNotification;
 import android.text.format.DateFormat;
 import android.view.View;
 
@@ -125,7 +126,8 @@ public class DotcaseView extends FlipFlapView {
     }
 
     @Override
-    protected void updateNotifications(List<String> packages) {
+    protected void updateNotifications(List<StatusBarNotification> notifications) {
+        List<String> packages = notificationsToPackageNames(notifications);
         mNotifications.clear();
         for (String pkg : packages) {
             Notification notification = DotcaseConstants.notificationMap.get(pkg);
@@ -433,5 +435,15 @@ public class DotcaseView extends FlipFlapView {
             int[][] sprite = DotcaseConstants.getSmallCharSprite(mCallerNumber.charAt(i));
             dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
         }
+    }
+
+    private List<String> notificationsToPackageNames(List<StatusBarNotification> notifications) {
+        ArrayList<String> packageNames = new ArrayList<>();
+        for (StatusBarNotification sbn : notifications) {
+            if (!packageNames.contains(sbn.getPackageName())) {
+                packageNames.add(sbn.getPackageName());
+            }
+        }
+        return packageNames;
     }
 }
