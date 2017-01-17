@@ -20,6 +20,10 @@
 
 package org.lineageos.flipflap;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 public class FlipFlapUtils {
 
     static final String ACTION_KILL_ACTIVITY = "org.lineageos.flipflap.KILL_ACTIVITY";
@@ -40,4 +44,37 @@ public class FlipFlapUtils {
 
     static final int TIMEOUT_UNPLUGGED = 20;
     static final int TIMEOUT_PLUGGED = 40;
+
+    static final String KEY_TIMEOUT_UNPLUGGED = "timeout_unplugged";
+    static final String KEY_TIMEOUT_PLUGGED = "timeout_plugged";
+
+    private static final String KEY_ENABLED = "flipflap_enable";
+
+    public static Boolean isEnabled(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(KEY_ENABLED, false);
+    }
+
+    public static int getPluggedTimeout(Context context) {
+        return Integer.parseInt(getPreferences(context).getString(KEY_TIMEOUT_PLUGGED, "30"));
+    }
+
+    public static int getUnpluggedTimeout(Context context) {
+        return Integer.parseInt(getPreferences(context).getString(KEY_TIMEOUT_PLUGGED, "10"));
+    }
+
+    public static int getTimeout(Context context, String key) {
+        int timeOut;
+        if (KEY_TIMEOUT_PLUGGED.equals(key)) {
+            timeOut = getPluggedTimeout(context);
+        } else {
+            timeOut = getUnpluggedTimeout(context);
+        }
+
+        return timeOut;
+    }
+
+    private static SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
 }

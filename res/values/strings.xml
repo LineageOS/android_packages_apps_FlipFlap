@@ -40,4 +40,19 @@
     <!-- Format for describing the date, for accessibility. -->
     <string name="full_wday_month_day_no_year">EEEE, MMMM d</string>
 
+    <!-- Strings for the Settings -->
+    <string name="switch_on_off_title">Enable FlipFlap</string>
+    <string name="switch_on_off_summary">Enables the FlipFlap functionality on closing your smart cover</string>
+
+    <string name="category_timeouts">Timeouts</string>
+    <string name="timeout_plugged_title">While charging</string>
+    <string name="timeout_unplugged_title">Unplugged</string>
+    <string name="timeout_summary">Display the cover app for %s after closing the lid</string>
+    <string name="timeout_summary_never">After closing the lid, the cover app will always stay on</string>
+
+    <string name="timeout_entry_10s">10s</string>
+    <string name="timeout_entry_30s">30s</string>
+    <string name="timeout_entry_1min">1min</string>
+    <string name="timeout_entry_5min">5min</string>
+    <string name="timeout_entry_never">Never</string>
 </resources>
