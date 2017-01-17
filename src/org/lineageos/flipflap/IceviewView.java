@@ -60,12 +60,6 @@ public class IceviewView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
-    public void postInvalidate() {
-        mClockPanel.postInvalidate();
-        super.postInvalidate();
-    }
-
-    @Override
     public boolean supportsAlarmActions() {
         return false;
     }
