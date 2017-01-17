@@ -37,7 +37,4 @@ public class FlipFlapUtils {
     static final int COVER_STYLE_DOTCASE = 1;
     static final int COVER_STYLE_CIRCLE = 2;
     static final int COVER_STYLE_RECTANGULAR = 3;
-
-    static final int TIMEOUT_UNPLUGGED = 20;
-    static final int TIMEOUT_PLUGGED = 40;
 }

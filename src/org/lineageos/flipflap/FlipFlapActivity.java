@@ -21,7 +21,6 @@
 package org.lineageos.flipflap;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -46,9 +45,6 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.lang.Math;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.Normalizer;
 
 public class FlipFlapActivity extends Activity {
@@ -56,13 +52,11 @@ public class FlipFlapActivity extends Activity {
 
     private FlipFlapStatus mStatus;
     private FlipFlapView mView;
-    private String mCoverNode;
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
     private SensorManager mSensorManager;
     private TelecomManager mTelecomManager;
     private LocalBroadcastManager mBroadcastManager;
-    private boolean mIsPlugged;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,10 +64,7 @@ public class FlipFlapActivity extends Activity {
 
         mStatus = new FlipFlapStatus();
 
-        mCoverNode = getResources().getString(R.string.cover_node);
-
         getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         getWindow().getDecorView().setSystemUiVisibility(
@@ -125,19 +116,12 @@ public class FlipFlapActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        mStatusThread.start();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mStatus.stopRunning();
-        mStatusThread.interrupt();
-        try {
-            mStatusThread.join();
-        } catch (InterruptedException e) {
-            // ignore
-        }
     }
 
     @Override
@@ -167,7 +151,6 @@ public class FlipFlapActivity extends Activity {
                 Log.e(TAG, "Failed to unregister listener", e);
             }
         }
-        mStatus.stopRunning();
     }
 
     @Override
@@ -211,59 +194,6 @@ public class FlipFlapActivity extends Activity {
                 .replaceAll("ß", "ss")
                 .replaceAll("œ", "oe");
     }
-
-    private final Thread mStatusThread = new Thread() {
-        @Override
-        public void run() {
-            if (mStatus.isRunning()) {
-                // Already running
-                return;
-            }
-
-            mStatus.startRunning();
-            while (mStatus.isRunning()) {
-                int timeout;
-                if (mIsPlugged) {
-                    timeout = FlipFlapUtils.TIMEOUT_PLUGGED;
-                } else {
-                    timeout = FlipFlapUtils.TIMEOUT_UNPLUGGED;
-                }
-                for (int i = 0; i <= timeout; i++) {
-                    if (mStatus.isResetTimer() || mStatus.isRinging() || mStatus.isAlarm()) {
-                        i = 0;
-                    }
-
-                    if (!mStatus.isRunning()) {
-                        return;
-                    }
-
-                    try {
-                        BufferedReader br = new BufferedReader(
-                                new FileReader(mCoverNode));
-                        String value = br.readLine();
-                        br.close();
-
-                        if (value.equals(String.valueOf(FlipFlapUtils.COVER_STATE_OPENED))) {
-                            mStatus.stopRunning();
-                            finish();
-                            overridePendingTransition(0, 0);
-                        }
-                    } catch (IOException e) {
-                        Log.e(TAG, "Error reading cover device", e);
-                    }
-
-                    try {
-                        Thread.sleep(500);
-                    } catch (IllegalArgumentException e) {
-                        // This isn't going to happen
-                    } catch (InterruptedException e) {
-                        Log.i(TAG, "Sleep interrupted", e);
-                    }
-                }
-                mPowerManager.goToSleep(SystemClock.uptimeMillis());
-            }
-        }
-    };
 
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
         new GestureDetector.SimpleOnGestureListener() {
@@ -365,8 +295,6 @@ public class FlipFlapActivity extends Activity {
                 mStatus.startAlarm();
                 mStatus.setOnTop(true);
                 ((View) mView).postInvalidate();
-            } else if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
-                mIsPlugged = intent.getIntExtra("plugged", -1) > 0;
             }
         }
     };
