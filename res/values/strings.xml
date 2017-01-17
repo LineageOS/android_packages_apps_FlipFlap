@@ -40,4 +40,7 @@
     <!-- Format for describing the date, for accessibility. -->
     <string name="full_wday_month_day_no_year">EEEE, MMMM d</string>
 
+    <!-- Strings for the Settings -->
+    <string name="switch_on_off_title">Enable FlipFlap</string>
+    <string name="switch_on_off_summary">Enables the FlipFlap functionality on closing your smart cover</string>
 </resources>

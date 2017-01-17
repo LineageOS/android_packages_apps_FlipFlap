@@ -23,9 +23,12 @@ package org.lineageos.flipflap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -35,10 +38,13 @@ public class DeviceCover {
 
     private static final int COVER_STATE_CHANGED = 0;
 
+    private static final String KEY_ENABLED = "flipflap_enabled";
+
     private final Object mLock = new Object();
 
     private Context mContext;
     int mCoverStyle;
+    Boolean mIsEnabled = false;
 
     public DeviceCover(Context context) {
         mContext = context;
@@ -46,10 +52,15 @@ public class DeviceCover {
 
         mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
         Log.e(TAG, "cover style detected:" + mCoverStyle);
+
+        mIsEnabled = isEnabled();
+
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mPreferences.registerOnSharedPreferenceChangeListener(mPrefListener);
     }
 
     private void handleCoverChange(int state) {
-        if (state == FlipFlapUtils.COVER_STATE_CLOSED &&
+        if (mIsEnabled && state == FlipFlapUtils.COVER_STATE_CLOSED &&
                 mCoverStyle != FlipFlapUtils.COVER_STYLE_NONE) {
             Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
             mContext.startActivity(new Intent(mContext, FlipFlapActivity.class));
@@ -90,4 +101,22 @@ public class DeviceCover {
         // Not possible because of the check, above, matching on the valid covers
         return null;
     }
+
+
+    public Boolean isEnabled() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mIsEnabled = prefs.getBoolean(KEY_ENABLED, true);
+        Log.d(TAG, "isEnabled() mIsEnabled = " + mIsEnabled);
+        return mIsEnabled;
+    }
+
+    SharedPreferences.OnSharedPreferenceChangeListener mPrefListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (key.equals(KEY_ENABLED)) {
+                mIsEnabled = sharedPreferences.getBoolean(key, true);
+                Log.d(TAG, "changed mIsEnabled = " + mIsEnabled);
+            }
+        }
+    };
 }
