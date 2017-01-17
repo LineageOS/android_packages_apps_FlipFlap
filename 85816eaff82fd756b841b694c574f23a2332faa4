@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_ba1ccec2",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-17T18:22:34Z",
+      "side": 1,
+      "message": "The argument needs to be null.\n\nhttps://developer.android.com/reference/android/os/Handler.html#removeCallbacksAndMessages(java.lang.Object)\n\nI\u0027m surprised this compiles?",
+      "revId": "85816eaff82fd756b841b694c574f23a2332faa4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
