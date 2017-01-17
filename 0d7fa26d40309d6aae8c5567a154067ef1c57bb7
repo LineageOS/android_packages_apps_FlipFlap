@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_7a8d4631",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-17T15:23:02Z",
+      "side": 1,
+      "message": "Should probably due removeCallbacksAndMesages here just to be safe for the future.",
+      "revId": "0d7fa26d40309d6aae8c5567a154067ef1c57bb7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_9a88ea23",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-17T15:23:02Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you reschedule a new message in 5s here?",
+      "revId": "0d7fa26d40309d6aae8c5567a154067ef1c57bb7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
