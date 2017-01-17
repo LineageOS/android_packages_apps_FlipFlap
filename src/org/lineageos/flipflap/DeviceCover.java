@@ -21,13 +21,12 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserHandle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
+import android.view.WindowManager;
 
 public class DeviceCover {
 
@@ -38,12 +37,15 @@ public class DeviceCover {
     private final Object mLock = new Object();
 
     private Context mContext;
+    private FlipFlapView mCoverView;
+    private WindowManager mWm;
     int mCoverStyle;
 
     public DeviceCover(Context context) {
-        mContext = context;
+        mContext = new ContextThemeWrapper(context, R.style.FlipFlapTheme);
         final Resources res = mContext.getResources();
 
+        mWm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mCoverStyle = res.getInteger(R.integer.config_deviceCoverType);
         Log.e(TAG, "cover style detected:" + mCoverStyle);
     }
@@ -51,12 +53,20 @@ public class DeviceCover {
     private void handleCoverChange(int state) {
         if (state == FlipFlapUtils.COVER_STATE_CLOSED &&
                 mCoverStyle != FlipFlapUtils.COVER_STYLE_NONE) {
-            Log.i(TAG, "Cover Closed, Creating FlipFlap Activity");
-            mContext.startActivity(new Intent(mContext, FlipFlapActivity.class));
+            Log.i(TAG, "Cover Closed, Creating FlipFlap view");
+            if (mCoverView == null) {
+                mCoverView = createCoverView();
+                WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                        WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
+                params.screenBrightness = mCoverView.getScreenBrightness();
+                mWm.addView(mCoverView, params);
+            }
         } else {
             Log.i(TAG, "Cover Opened, Killing FlipFlap Activity");
-            LocalBroadcastManager.getInstance(mContext).sendBroadcast(
-                    new Intent(FlipFlapUtils.ACTION_KILL_ACTIVITY));
+            if (mCoverView != null) {
+                mWm.removeView(mCoverView);
+                mCoverView = null;
+            }
         }
     }
 
@@ -79,14 +89,15 @@ public class DeviceCover {
         }
     };
 
-    public static FlipFlapView createFlipFlapView(Context context) {
-        final Resources res = context.getResources();
+    private FlipFlapView createCoverView() {
+        final Resources res = mContext.getResources();
         int coverStyle = res.getInteger(R.integer.config_deviceCoverType);
         switch (coverStyle) {
-            case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(context);
-            case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(context);
-            case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(context);
+            case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(mContext);
+            case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(mContext);
+            case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(mContext);
         }
+
         // Not possible because of the check, above, matching on the valid covers
         return null;
     }
