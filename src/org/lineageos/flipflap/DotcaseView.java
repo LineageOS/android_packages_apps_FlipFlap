@@ -42,10 +42,14 @@ public class DotcaseView extends View implements FlipFlapView {
     private static final String TAG = "DotcaseView";
 
     private final Context mContext;
-    private final FlipFlapStatus mStatus;
     private final Paint mPaint;
     private int mHeartbeat = 0;
     private final List<Notification> mNotifications = new ArrayList<>();
+    private boolean mAlarmActive;
+    private String mCallerName;
+    private String mCallerNumber;
+    private int mNameOffset;
+    private int mRingCounter;
 
     // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
 
@@ -57,19 +61,18 @@ public class DotcaseView extends View implements FlipFlapView {
         boolean am;
     }
 
-    public DotcaseView(Context context, FlipFlapStatus status) {
+    public DotcaseView(Context context) {
         super(context);
         mContext = context;
-        mStatus = status;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        if (mStatus.isAlarm()) {
+        if (mAlarmActive) {
             drawAlarm(canvas);
-        } else if (mStatus.isRinging()) {
+        } else if (mCallerNumber != null) {
             drawName(canvas);
             drawNumber(canvas);
             drawRinger(canvas);
@@ -135,6 +138,22 @@ public class DotcaseView extends View implements FlipFlapView {
         postInvalidate();
     }
 
+    @Override
+    public void updateRingingState(boolean ringing, String name, String number) {
+        mCallerName = name + "  "; // make the scroll effect look good
+        mCallerNumber = ringing ? number : null;
+        mNameOffset = -6;
+        mRingCounter = 0;
+        postInvalidate();
+    }
+
+    @Override
+    public void updateAlarmState(boolean active) {
+        mAlarmActive = active;
+        mRingCounter = 0;
+        postInvalidate();
+    }
+
     private timeObject getTimeObject() {
         timeObject timeObj = new timeObject();
         timeObj.hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -177,13 +196,11 @@ public class DotcaseView extends View implements FlipFlapView {
         int[][] mClockSprite = new int[clockHeight][clockWidth];
         int[][] mRingerSprite = new int[ringerHeight][ringerWidth];
 
-        int ringCounter = mStatus.ringCounter();
-
         for (int i = 0; i < ringerHeight; i++) {
             for (int j = 0; j < ringerWidth; j++) {
                 if (DotcaseConstants.ringerSprite[i][j] > 0) {
                     mRingerSprite[i][j] =
-                            DotcaseConstants.ringerSprite[i][j] == 3 - (ringCounter % 3)
+                            DotcaseConstants.ringerSprite[i][j] == 3 - (mRingCounter % 3)
                                     ? light : dark;
                 }
             }
@@ -214,7 +231,7 @@ public class DotcaseView extends View implements FlipFlapView {
             }
         }
 
-        if (ringCounter / 6 > 0) {
+        if (mRingCounter / 6 > 0) {
             dotcaseDrawSprite(DotcaseConstants.alarmCancelArray, 2, 21, canvas);
             Collections.reverse(Arrays.asList(mRingerSprite));
         } else {
@@ -223,11 +240,7 @@ public class DotcaseView extends View implements FlipFlapView {
 
         dotcaseDrawSprite(mRingerSprite, 7, 28, canvas);
 
-        if (ringCounter > 10) {
-            mStatus.resetRingCounter();
-        } else {
-            mStatus.incrementRingCounter();
-        }
+        mRingCounter = (++mRingCounter % 11);
     }
 
     private void drawNotifications(Canvas canvas) {
@@ -254,9 +267,7 @@ public class DotcaseView extends View implements FlipFlapView {
         int[][] mHandsetSprite = new int[handsetHeight][handsetWidth];
         int[][] mRingerSprite = new int[ringerHeight][ringerWidth];
 
-        int ringCounter = mStatus.ringCounter();
-
-        if (ringCounter / 3 > 0) {
+        if (mRingCounter / 3 > 0) {
             light = 2;
             dark = 11;
         } else {
@@ -268,7 +279,7 @@ public class DotcaseView extends View implements FlipFlapView {
             for (int j = 0; j < ringerWidth; j++) {
                 if (DotcaseConstants.ringerSprite[i][j] > 0) {
                     mRingerSprite[i][j] =
-                            DotcaseConstants.ringerSprite[i][j] == 3 - (ringCounter % 3)
+                            DotcaseConstants.ringerSprite[i][j] == 3 - (mRingCounter % 3)
                                     ? light : dark;
                 }
             }
@@ -280,7 +291,7 @@ public class DotcaseView extends View implements FlipFlapView {
             }
         }
 
-        if (ringCounter / 3 > 0) {
+        if (mRingCounter / 3 > 0) {
             Collections.reverse(Arrays.asList(mRingerSprite));
             Collections.reverse(Arrays.asList(mHandsetSprite));
         }
@@ -288,11 +299,7 @@ public class DotcaseView extends View implements FlipFlapView {
         dotcaseDrawSprite(mHandsetSprite, 6, 21, canvas);
         dotcaseDrawSprite(mRingerSprite, 7, 28, canvas);
 
-        if (ringCounter > 4) {
-            mStatus.resetRingCounter();
-        } else {
-            mStatus.incrementRingCounter();
-        }
+        mRingCounter = ++mRingCounter % 5;
     }
 
     private void drawBattery(Canvas canvas) {
@@ -390,45 +397,38 @@ public class DotcaseView extends View implements FlipFlapView {
     }
 
     private void drawName(Canvas canvas) {
-        int[][] sprite;
         int x = 0, y = 2;
-        if (mStatus.isRinging()) {
-            int nameOffset = mStatus.callerTicker();
+        int nameOffset = mNameOffset < 0 ? 0 : mNameOffset;
+        String correctedName = "";
 
-            String name = mStatus.getCallerName();
-            String correctedName = "";
+        // We can fit 7 characters, and the last two are spaces
+        if (mCallerName.length() <= 9) {
+            // Name is short enough to be drawn completely, cut off spaces at end
+            correctedName = mCallerName.substring(0, mCallerName.length() - 2);
+        } else if ((nameOffset + 7) > mCallerName.length()) {
+            // Looping: end and beginning of the name are visible together
+            int overflow = (nameOffset + 7) % mCallerName.length();
+            correctedName = mCallerName.substring(nameOffset) + mCallerName.substring(0, overflow);
+        } else if ((nameOffset + 7) <= mCallerName.length()) {
+            // Draw a consecutive portion of the name
+            correctedName = mCallerName.substring(nameOffset, nameOffset + 7);
+        }
 
-            // We can fit 7 characters, and the last two are spaces
-            if (name.length() <= 9) {
-                // Name is short enough to be drawn completely, cut off spaces at end
-                correctedName = name.substring(0, name.length() - 2);
-            } else if ((nameOffset + 7) > name.length()) {
-                // Looping: end and beginning of the name are visible together
-                int overflow = (nameOffset + 7) % name.length();
-                correctedName = name.substring(nameOffset) + name.substring(0, overflow);
-            } else if ((nameOffset + 7) <= name.length()) {
-                // Draw a consecutive portion of the name
-                correctedName = name.substring(nameOffset, nameOffset + 7);
-            }
+        for (int i = 0; i < correctedName.length(); i++) {
+            int[][] sprite = DotcaseConstants.getSmallCharSprite(correctedName.charAt(i));
+            dotcaseDrawSprite(sprite, x + i * 4, y, canvas);
+        }
 
-            for (int i = 0; i < correctedName.length(); i++) {
-                sprite = DotcaseConstants.getSmallCharSprite(correctedName.charAt(i));
-                dotcaseDrawSprite(sprite, x + i * 4, y, canvas);
-            }
-
-            mStatus.incrementCallerTicker();
+        if (++mNameOffset >= mCallerName.length()) {
+            mNameOffset = -3;
         }
     }
 
     private void drawNumber(Canvas canvas) {
-        int[][] sprite;
         int x = 0, y = 8;
-        if (mStatus.isRinging()) {
-            String number = mStatus.getCallerNumber();
-            for (int i = 3; i < number.length() && i < 10; i++) {
-                sprite = DotcaseConstants.getSmallCharSprite(number.charAt(i));
-                dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
-            }
+        for (int i = 3; i < mCallerNumber.length() && i < 10; i++) {
+            int[][] sprite = DotcaseConstants.getSmallCharSprite(mCallerNumber.charAt(i));
+            dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
         }
     }
 }

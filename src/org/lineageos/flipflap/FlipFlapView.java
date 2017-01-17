@@ -29,4 +29,6 @@ public interface FlipFlapView {
     boolean supportsCallActions();
     boolean supportsNotifications();
     void updateNotifications(List<String> packages);
+    void updateRingingState(boolean ringing, String name, String number);
+    void updateAlarmState(boolean active);
 }

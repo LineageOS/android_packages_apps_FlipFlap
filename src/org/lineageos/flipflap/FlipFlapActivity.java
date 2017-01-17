@@ -59,19 +59,19 @@ import java.text.Normalizer;
 public class FlipFlapActivity extends Activity {
     private static final String TAG = "FlipFlapActivity";
 
-    private FlipFlapStatus mStatus;
     private FlipFlapView mView;
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
     private SensorManager mSensorManager;
     private TelecomManager mTelecomManager;
     private LocalBroadcastManager mBroadcastManager;
+    private boolean mAlarmActive;
+    private boolean mRinging;
+    private boolean mProximityNear;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mStatus = new FlipFlapStatus();
 
         getWindow().addFlags(
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
@@ -89,7 +89,7 @@ public class FlipFlapActivity extends Activity {
         mTelecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
         mBroadcastManager = LocalBroadcastManager.getInstance(this);
 
-        mView = DeviceCover.createFlipFlapView(this, mStatus);
+        mView = DeviceCover.createFlipFlapView(this);
         setContentView((View) mView);
 
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -131,8 +131,6 @@ public class FlipFlapActivity extends Activity {
             }
         }
 
-        mStatus.stopRinging();
-        mStatus.stopAlarm();
         mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Opened");
     }
 
@@ -167,7 +165,7 @@ public class FlipFlapActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!mStatus.isPocketed()) {
+        if (!mProximityNear) {
             mDetector.onTouchEvent(event);
             return super.onTouchEvent(event);
         } else {
@@ -180,7 +178,7 @@ public class FlipFlapActivity extends Activity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-                mStatus.setPocketed(event.values[0] < event.sensor.getMaximumRange());
+                mProximityNear = event.values[0] < event.sensor.getMaximumRange();
             }
         }
 
@@ -189,6 +187,16 @@ public class FlipFlapActivity extends Activity {
             // Do nothing
         }
     };
+
+    private void updateAlarmState(boolean active) {
+        mAlarmActive = active;
+        mView.updateAlarmState(active);
+    }
+
+    private void updateRingingState(boolean ringing, String name, String number) {
+        mRinging = ringing;
+        mView.updateRingingState(ringing, name, number);
+    }
 
     private static String normalize(String str) {
         return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
@@ -224,19 +232,19 @@ public class FlipFlapActivity extends Activity {
                 return true;
             }
 
-            if (mView.supportsCallActions() && mStatus.isRinging()) {
+            if (mView.supportsCallActions() && mRinging) {
                 if (distanceY < 60) {
                     mTelecomManager.endCall();
                 } else if (distanceY > 60) {
                     mTelecomManager.acceptRingingCall();
                 }
-            } else if (mView.supportsAlarmActions() && mStatus.isAlarm()) {
+            } else if (mView.supportsAlarmActions() && mAlarmActive) {
                 if (distanceY < 60) {
                     sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
-                    mStatus.stopAlarm();
+                    updateAlarmState(false);
                 } else if (distanceY > 60) {
                     sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
-                    mStatus.stopAlarm();
+                    updateAlarmState(false);
                 }
             }
             return true;
@@ -280,19 +288,14 @@ public class FlipFlapActivity extends Activity {
                         number = "";
                     }
 
-                    name = normalize(name);
-                    name = name + "  "; // Add spaces so the scroll effect looks good
-
-                    mStatus.startRinging(number, name);
-                    ((View) mView).postInvalidate();
+                    updateRingingState(true, normalize(name), number);
                 } else {
-                    mStatus.stopRinging();
+                    updateRingingState(false, null, null);
                 }
             } else if (intent.getAction().equals(FlipFlapUtils.ACTION_ALARM_ALERT) &&
                     mView.supportsAlarmActions()) {
                 // add other alarm apps here
-                mStatus.startAlarm();
-                ((View) mView).postInvalidate();
+                updateAlarmState(true);
             }
         }
     };

@@ -72,4 +72,12 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     @Override
     public void updateNotifications(List<String> packages) {
     }
+
+    @Override
+    public void updateRingingState(boolean ringing, String name, String number) {
+    }
+
+    @Override
+    public void updateAlarmState(boolean active) {
+    }
 }

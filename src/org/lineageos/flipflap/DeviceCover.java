@@ -79,11 +79,11 @@ public class DeviceCover {
         }
     };
 
-    public static FlipFlapView createFlipFlapView(Context context, FlipFlapStatus status) {
+    public static FlipFlapView createFlipFlapView(Context context) {
         final Resources res = context.getResources();
         int coverStyle = res.getInteger(R.integer.config_deviceCoverType);
         switch (coverStyle) {
-            case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(context, status);
+            case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(context);
             case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(context);
             case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(context);
         }
