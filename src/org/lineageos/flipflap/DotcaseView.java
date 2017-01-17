@@ -38,7 +38,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class DotcaseView extends View implements FlipFlapView {
+public class DotcaseView extends FlipFlapView {
     private static final String TAG = "DotcaseView";
 
     private final Context mContext;
@@ -70,6 +70,7 @@ public class DotcaseView extends View implements FlipFlapView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         if (mAlarmActive) {
             drawAlarm(canvas);
         } else if (mCallerNumber != null) {
@@ -99,32 +100,32 @@ public class DotcaseView extends View implements FlipFlapView {
     }
 
     @Override
-    public boolean canUseProximitySensor() {
+    protected boolean canUseProximitySensor() {
         return true;
     }
 
     @Override
-    public boolean supportsAlarmActions() {
+    protected boolean supportsAlarmActions() {
         return true;
     }
 
     @Override
-    public boolean supportsCallActions() {
+    protected boolean supportsCallActions() {
         return true;
     }
 
     @Override
-    public boolean supportsNotifications() {
+    protected boolean supportsNotifications() {
         return true;
     }
 
     @Override
-    public float getScreenBrightness() {
+    protected float getScreenBrightness() {
         return 1.0f;
     }
 
     @Override
-    public void updateNotifications(List<String> packages) {
+    protected void updateNotifications(List<String> packages) {
         mNotifications.clear();
         for (String pkg : packages) {
             Notification notification = DotcaseConstants.notificationMap.get(pkg);
@@ -140,6 +141,7 @@ public class DotcaseView extends View implements FlipFlapView {
 
     @Override
     public void updateRingingState(boolean ringing, String name, String number) {
+        super.updateRingingState(ringing, name, number);
         mCallerName = name + "  "; // make the scroll effect look good
         mCallerNumber = ringing ? number : null;
         mNameOffset = -6;
@@ -148,7 +150,8 @@ public class DotcaseView extends View implements FlipFlapView {
     }
 
     @Override
-    public void updateAlarmState(boolean active) {
+    protected void updateAlarmState(boolean active) {
+        super.updateAlarmState(active);
         mAlarmActive = active;
         mRingCounter = 0;
         postInvalidate();

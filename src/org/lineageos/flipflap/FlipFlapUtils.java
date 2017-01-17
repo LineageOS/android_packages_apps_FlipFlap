@@ -22,7 +22,6 @@ package org.lineageos.flipflap;
 
 public class FlipFlapUtils {
 
-    static final String ACTION_KILL_ACTIVITY = "org.lineageos.flipflap.KILL_ACTIVITY";
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
     static final String ACTION_ALARM_ALERT = "com.android.deskclock.ALARM_ALERT";
 
