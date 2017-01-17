@@ -232,12 +232,10 @@ public class FlipFlapActivity extends Activity {
                 }
             } else if (mView.supportsAlarmActions() && mStatus.isAlarm()) {
                 if (distanceY < 60) {
-                    mBroadcastManager.sendBroadcast(
-                            new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
+                    sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
                     mStatus.stopAlarm();
                 } else if (distanceY > 60) {
-                    mBroadcastManager.sendBroadcast(
-                            new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
+                    sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
                     mStatus.stopAlarm();
                 }
             }
