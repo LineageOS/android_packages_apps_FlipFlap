@@ -32,6 +32,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
@@ -56,6 +58,8 @@ import java.util.List;
 
 public class FlipFlapView extends FrameLayout {
     private static final String TAG = "FlipFlapView";
+
+    private static final int COVER_CLOSED_MSG = 0;
 
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
@@ -134,17 +138,15 @@ public class FlipFlapView extends FrameLayout {
                     mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY),
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
-        boolean screenOn = mPowerManager.isInteractive();
-        if (!screenOn) {
-            mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Closed");
-        }
 
+        postScreenOff();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
+        mHandler.removeCallbacksAndMessages(null);
         getContext().unregisterReceiver(mReceiver);
 
         if (supportsNotifications()) {
@@ -168,6 +170,7 @@ public class FlipFlapView extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!mProximityNear) {
+            postScreenOff();
             mDetector.onTouchEvent(event);
             return super.onTouchEvent(event);
         } else {
@@ -316,6 +319,26 @@ public class FlipFlapView extends FrameLayout {
                 }
             }
             updateNotifications(packageNames);
+        }
+    };
+
+    private void postScreenOff() {
+        mHandler.removeCallbacksAndMessages(null);
+        if (mPowerManager.isInteractive()) {
+            Message msg = Message.obtain();
+            msg.what = COVER_CLOSED_MSG;
+            mHandler.sendMessageDelayed(msg, FlipFlapUtils.DELAYED_SCREEN_OFF_MS);
+        }
+    }
+
+    private final Handler mHandler = new Handler(true /*async*/) {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case COVER_CLOSED_MSG:
+                    mPowerManager.goToSleep(SystemClock.uptimeMillis());
+                    break;
+            }
         }
     };
 }
