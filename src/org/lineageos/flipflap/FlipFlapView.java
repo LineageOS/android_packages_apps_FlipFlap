@@ -79,6 +79,7 @@ public class FlipFlapView extends FrameLayout {
                 View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         mDetector = new GestureDetector(context, mGestureListener);
+        mDetector.setOnDoubleTapListener(mDoubleTapListener);
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
@@ -233,6 +234,27 @@ public class FlipFlapView extends FrameLayout {
                     updateAlarmState(false);
                 }
             }
+            return true;
+        }
+    };
+
+    private final GestureDetector.OnDoubleTapListener mDoubleTapListener =
+        new GestureDetector.OnDoubleTapListener() {
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (mPowerManager.isInteractive()) {
+                mPowerManager.goToSleep(SystemClock.uptimeMillis());
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
             return true;
         }
     };
