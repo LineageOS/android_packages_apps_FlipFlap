@@ -49,13 +49,6 @@ public class RectangularView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
-    public void postInvalidate() {
-        mBatteryView.postInvalidate();
-        mClockPanel.postInvalidate();
-        super.postInvalidate();
-    }
-
-    @Override
     public boolean canUseProximitySensor() {
         return false;
     }
