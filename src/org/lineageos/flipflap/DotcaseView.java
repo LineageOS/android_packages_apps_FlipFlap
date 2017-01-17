@@ -99,6 +99,9 @@ public class DotcaseView extends View implements FlipFlapView {
     }
 
     @Override
+    public boolean canUtilizeProxSensor() { return true; }
+
+    @Override
     public boolean supportsAlarmActions() {
         return true;
     }

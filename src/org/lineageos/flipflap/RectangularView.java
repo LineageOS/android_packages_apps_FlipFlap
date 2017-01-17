@@ -54,6 +54,9 @@ public class RectangularView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
+    public boolean canUtilizeProxSensor() { return false; }
+
+    @Override
     public boolean supportsAlarmActions() {
         return false;
     }
