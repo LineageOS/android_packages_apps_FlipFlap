@@ -20,12 +20,13 @@
 
 package org.lineageos.flipflap;
 
+import java.util.List;
+
 public interface FlipFlapView {
     boolean canUseProximitySensor();
-
     float getScreenBrightness();
-
     boolean supportsAlarmActions();
-
     boolean supportsCallActions();
+    boolean supportsNotifications();
+    void updateNotifications(List<String> packages);
 }

@@ -32,6 +32,7 @@ import android.graphics.Paint;
 import android.text.format.DateFormat;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -44,6 +45,7 @@ public class DotcaseView extends View implements FlipFlapView {
     private final FlipFlapStatus mStatus;
     private final Paint mPaint;
     private int mHeartbeat = 0;
+    private final List<Notification> mNotifications = new ArrayList<>();
 
     // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
 
@@ -74,12 +76,7 @@ public class DotcaseView extends View implements FlipFlapView {
         } else {
             drawTime(canvas);
 
-            // Check notifications each cycle before displaying them
-            if (mHeartbeat == 0) {
-                mStatus.checkNotifications(mContext);
-            }
-
-            if (!mStatus.hasNotifications()) {
+            if (!mNotifications.isEmpty()) {
                 if (mHeartbeat < 3) {
                     drawNotifications(canvas);
                 } else {
@@ -114,8 +111,28 @@ public class DotcaseView extends View implements FlipFlapView {
     }
 
     @Override
+    public boolean supportsNotifications() {
+        return true;
+    }
+
+    @Override
     public float getScreenBrightness() {
         return 1.0f;
+    }
+
+    @Override
+    public void updateNotifications(List<String> packages) {
+        mNotifications.clear();
+        for (String pkg : packages) {
+            Notification notification = DotcaseConstants.notificationMap.get(pkg);
+            if (notification != null) {
+                mNotifications.add(notification);
+                if (mNotifications.size() == 5) {
+                    break;
+                }
+            }
+        }
+        postInvalidate();
     }
 
     private timeObject getTimeObject() {
@@ -218,8 +235,7 @@ public class DotcaseView extends View implements FlipFlapView {
         int x = 1;
         int y = 30;
 
-        List<Notification> notifications = mStatus.getNotifications();
-        for (Notification notification : notifications) {
+        for (Notification notification : mNotifications) {
             int[][] sprite = DotcaseConstants.getNotificationSprite(notification);
             if (sprite != null) {
                 dotcaseDrawSprite(sprite, x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);

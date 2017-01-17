@@ -24,6 +24,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import java.util.List;
+
 public class CircleView extends RelativeLayout implements FlipFlapView {
     private static final String TAG = "CircleView";
 
@@ -58,7 +60,16 @@ public class CircleView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
+    public boolean supportsNotifications() {
+        return false;
+    }
+
+    @Override
     public float getScreenBrightness() {
         return 0.5f;
+    }
+
+    @Override
+    public void updateNotifications(List<String> packages) {
     }
 }

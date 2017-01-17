@@ -20,21 +20,7 @@
 
 package org.lineageos.flipflap;
 
-import org.lineageos.flipflap.DotcaseConstants.Notification;
-
-import android.app.INotificationManager;
-import android.content.Context;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.service.notification.StatusBarNotification;
-import android.util.Log;
-
-import java.util.List;
-import java.util.Vector;
-
 public class FlipFlapStatus {
-    private static final String TAG = "FlipFlapStatus";
-
     private boolean mPocketed = false;
     private boolean mRinging = false;
     private boolean mAlarmClock = false;
@@ -42,7 +28,6 @@ public class FlipFlapStatus {
     private String mCallerNumber = "";
     private String mCallerName = "";
     private int mCallerTicker = 0;
-    private List<Notification> mNotifications = new Vector<Notification>();
 
     synchronized boolean isPocketed() {
         return mPocketed;
@@ -114,54 +99,11 @@ public class FlipFlapStatus {
         return mAlarmClock;
     }
 
-    synchronized boolean hasNotifications() {
-        return mNotifications.isEmpty();
-    }
-
     synchronized String getCallerName() {
         return mCallerName;
     }
 
     synchronized String getCallerNumber() {
         return mCallerNumber;
-    }
-
-    synchronized List<Notification> getNotifications() {
-        return mNotifications;
-    }
-
-    synchronized void checkNotifications(Context context) {
-        StatusBarNotification[] statusNotes = null;
-        mNotifications.clear();
-
-        try {
-            INotificationManager notificationManager = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            statusNotes = notificationManager.getActiveNotifications(context.getPackageName());
-            for (StatusBarNotification statusNote : statusNotes) {
-                Notification notification = DotcaseConstants.notificationMap.get(
-                        statusNote.getPackageName());
-                if (notification != null && !mNotifications.contains(notification)) {
-                    mNotifications.add(notification);
-                }
-            }
-        } catch (NullPointerException e) {
-            Log.e(TAG, "Error retrieving notifications", e);
-            mNotifications.clear();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error retrieving notifications", e);
-            mNotifications.clear();
-        }
-
-        try {
-            if (mNotifications.size() > 6) {
-                mNotifications.subList(5, mNotifications.size()).clear();
-                mNotifications.add(Notification.DOTS);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            // This should never happen...
-            Log.e(TAG, "Error sublisting notifications, clearing to be safe", e);
-            mNotifications.clear();
-        }
     }
 }

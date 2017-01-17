@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import java.util.List;
+
 public class RectangularView extends RelativeLayout implements FlipFlapView {
     private static final String TAG = "RectangularView";
 
@@ -69,7 +71,16 @@ public class RectangularView extends RelativeLayout implements FlipFlapView {
     }
 
     @Override
+    public boolean supportsNotifications() {
+        return false;
+    }
+
+    @Override
     public float getScreenBrightness() {
         return 0.5f;
+    }
+
+    @Override
+    public void updateNotifications(List<String> packages) {
     }
 }

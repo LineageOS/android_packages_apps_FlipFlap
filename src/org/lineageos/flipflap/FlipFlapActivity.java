@@ -22,6 +22,7 @@ package org.lineageos.flipflap;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -33,8 +34,12 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.RemoteException;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.provider.ContactsContract;
+import android.service.notification.NotificationListenerService;
+import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
@@ -44,7 +49,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import java.lang.Math;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.text.Normalizer;
 
 public class FlipFlapActivity extends Activity {
@@ -88,14 +97,24 @@ public class FlipFlapActivity extends Activity {
         lp.type = WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
         getWindow().setAttributes(lp);
 
-        mBroadcastManager.registerReceiver(mLocalReceiver,
-                new IntentFilter(FlipFlapUtils.ACTION_KILL_ACTIVITY));
+        IntentFilter localFilter = new IntentFilter();
+        localFilter.addAction(FlipFlapUtils.ACTION_KILL_ACTIVITY);
+        mBroadcastManager.registerReceiver(mLocalReceiver, localFilter);
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         filter.addAction(FlipFlapUtils.ACTION_ALARM_ALERT);
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mReceiver, filter);
+
+        if (mView.supportsNotifications()) {
+            try {
+                mNotificationListener.registerAsSystemService(this,
+                        new ComponentName(this, getClass()), UserHandle.USER_ALL);
+            } catch (RemoteException e) {
+                Log.e(TAG, "Unable to register notification listener", e);
+            }
+        }
     }
 
     @Override
@@ -104,14 +123,17 @@ public class FlipFlapActivity extends Activity {
         mBroadcastManager.unregisterReceiver(mLocalReceiver);
         unregisterReceiver(mReceiver);
 
+        if (mView.supportsNotifications()) {
+            try {
+                mNotificationListener.unregisterAsSystemService();
+            } catch (RemoteException e) {
+                // Ignore.
+            }
+        }
+
         mStatus.stopRinging();
         mStatus.stopAlarm();
         mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Opened");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -226,7 +248,8 @@ public class FlipFlapActivity extends Activity {
     private final BroadcastReceiver mLocalReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (FlipFlapUtils.ACTION_KILL_ACTIVITY.equals(intent.getAction())) {
+            final String action = intent.getAction();
+            if (FlipFlapUtils.ACTION_KILL_ACTIVITY.equals(action)) {
                 finish();
                 overridePendingTransition(0, 0);
             }
@@ -273,6 +296,59 @@ public class FlipFlapActivity extends Activity {
                 mStatus.startAlarm();
                 ((View) mView).postInvalidate();
             }
+        }
+    };
+
+    private final NotificationListenerService mNotificationListener =
+            new NotificationListenerService() {
+        private RankingMap mRankingMap;
+        private final Comparator<StatusBarNotification> mRankingComparator =
+                new Comparator<StatusBarNotification>() {
+
+            private final Ranking mLhsRanking = new Ranking();
+            private final Ranking mRhsRanking = new Ranking();
+
+            @Override
+            public int compare(StatusBarNotification lhs, StatusBarNotification rhs) {
+                mRankingMap.getRanking(lhs.getKey(), mLhsRanking);
+                mRankingMap.getRanking(rhs.getKey(), mRhsRanking);
+                return Integer.compare(mLhsRanking.getRank(), mRhsRanking.getRank());
+            }
+        };
+
+        @Override
+        public void onListenerConnected() {
+            handleNotificationUpdate(getCurrentRanking());
+        }
+
+        @Override
+        public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
+            handleNotificationUpdate(ranking);
+        }
+
+        @Override
+        public void onNotificationRemoved(StatusBarNotification sbn, RankingMap ranking) {
+            handleNotificationUpdate(ranking);
+        }
+
+        @Override
+        public void onNotificationRankingUpdate(RankingMap ranking) {
+            handleNotificationUpdate(ranking);
+        }
+
+        private void handleNotificationUpdate(RankingMap ranking) {
+            mRankingMap = ranking;
+
+            List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
+            Collections.sort(notifications, mRankingComparator);
+
+            ArrayList<String> packageNames = new ArrayList<>();
+            for (StatusBarNotification sbn : notifications) {
+                if (!packageNames.contains(sbn.getPackageName())) {
+                    packageNames.add(sbn.getPackageName());
+                }
+            }
+            mView.updateNotifications(packageNames);
         }
     };
 }
