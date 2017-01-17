@@ -96,8 +96,6 @@ public class FlipFlapActivity extends Activity {
         filter.addAction(FlipFlapUtils.ACTION_ALARM_ALERT);
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mReceiver, filter);
-
-        mStatus.stopRunning();
     }
 
     @Override
@@ -108,20 +106,12 @@ public class FlipFlapActivity extends Activity {
 
         mStatus.stopRinging();
         mStatus.stopAlarm();
-        mStatus.setOnTop(false);
-        mStatus.stopRunning();
         mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Opened");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mStatus.stopRunning();
     }
 
     @Override
@@ -168,13 +158,7 @@ public class FlipFlapActivity extends Activity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-                if (!mStatus.isPocketed()) {
-                    if (event.values[0] < event.sensor.getMaximumRange()) {
-                        mStatus.setPocketed(true);
-                    }
-                } else {
-                    mStatus.setPocketed(false);
-                }
+                mStatus.setPocketed(event.values[0] < event.sensor.getMaximumRange());
             }
         }
 
@@ -208,7 +192,6 @@ public class FlipFlapActivity extends Activity {
 
         @Override
         public boolean onSingleTapUp (MotionEvent e) {
-            mStatus.resetTimer();
             return true;
         }
 
@@ -220,7 +203,6 @@ public class FlipFlapActivity extends Activity {
             }
 
             if (mView.supportsCallActions() && mStatus.isRinging()) {
-                mStatus.setOnTop(false);
                 if (distanceY < 60) {
                     mTelecomManager.endCall();
                 } else if (distanceY > 60) {
@@ -228,12 +210,10 @@ public class FlipFlapActivity extends Activity {
                 }
             } else if (mView.supportsAlarmActions() && mStatus.isAlarm()) {
                 if (distanceY < 60) {
-                    mStatus.setOnTop(false);
                     mBroadcastManager.sendBroadcast(
                             new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
                     mStatus.stopAlarm();
                 } else if (distanceY > 60) {
-                    mStatus.setOnTop(false);
                     mBroadcastManager.sendBroadcast(
                             new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
                     mStatus.stopAlarm();
@@ -283,17 +263,14 @@ public class FlipFlapActivity extends Activity {
                     name = name + "  "; // Add spaces so the scroll effect looks good
 
                     mStatus.startRinging(number, name);
-                    mStatus.setOnTop(true);
                     ((View) mView).postInvalidate();
                 } else {
-                    mStatus.setOnTop(false);
                     mStatus.stopRinging();
                 }
             } else if (intent.getAction().equals(FlipFlapUtils.ACTION_ALARM_ALERT) &&
                     mView.supportsAlarmActions()) {
                 // add other alarm apps here
                 mStatus.startAlarm();
-                mStatus.setOnTop(true);
                 ((View) mView).postInvalidate();
             }
         }

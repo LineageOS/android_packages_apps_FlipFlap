@@ -35,10 +35,7 @@ import java.util.Vector;
 public class FlipFlapStatus {
     private static final String TAG = "FlipFlapStatus";
 
-    private boolean mRunning = true;
     private boolean mPocketed = false;
-    private boolean mResetTimer = false;
-    private boolean mStayOnTop = false;
     private boolean mRinging = false;
     private boolean mAlarmClock = false;
     private int mRingCounter = 0;
@@ -47,42 +44,12 @@ public class FlipFlapStatus {
     private int mCallerTicker = 0;
     private List<Notification> mNotifications = new Vector<Notification>();
 
-    synchronized boolean isRunning() {
-        return mRunning;
-    }
-
-    synchronized void startRunning() {
-        mRunning = true;
-    }
-
-    synchronized void stopRunning() {
-        mRunning = false;
-    }
-
     synchronized boolean isPocketed() {
         return mPocketed;
     }
 
     synchronized void setPocketed(boolean val) {
         mPocketed = val;
-    }
-
-    synchronized void resetTimer() {
-        mResetTimer = true;
-    }
-
-    synchronized boolean isResetTimer() {
-        boolean ret = mResetTimer;
-        mResetTimer = false;
-        return ret;
-    }
-
-    synchronized boolean isOnTop() {
-        return mStayOnTop;
-    }
-
-    synchronized void setOnTop(boolean val) {
-        mStayOnTop = val;
     }
 
     synchronized int ringCounter() {
@@ -104,7 +71,6 @@ public class FlipFlapStatus {
 
     synchronized void startRinging(String number) {
         mRinging = true;
-        mResetTimer = true;
         mRingCounter = 0;
         mCallerNumber = number;
         mCallerTicker = -6;
@@ -134,7 +100,6 @@ public class FlipFlapStatus {
     synchronized void startAlarm() {
         mAlarmClock = true;
         mRingCounter = 0;
-        mResetTimer = true;
     }
 
     synchronized void stopAlarm() {
