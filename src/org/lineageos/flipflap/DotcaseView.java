@@ -164,12 +164,12 @@ public class DotcaseView extends FlipFlapView {
     }
 
     @Override
-    public void updateRingingState(boolean ringing, String name, String number) {
-        super.updateRingingState(ringing, name, number);
-        mRinging = ringing;
+    public void updateCallState(CallState callState) {
+        super.updateCallState(callState);
+        mRinging = callState.isRinging();
         // add spaces to make the scroll effect look good
-        mCallerName = normalize(name != null ? name : null) + "  ";
-        mCallerNumber = ringing ? number : null;
+        mCallerName = normalize(callState.getName()) + "  ";
+        mCallerNumber = mRinging ? callState.getNumber() : null;
         mNameOffset = -6;
         mRingCounter = 0;
         postInvalidate();
