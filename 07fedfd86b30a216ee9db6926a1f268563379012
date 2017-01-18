@@ -22,6 +22,30 @@
       "revId": "07fedfd86b30a216ee9db6926a1f268563379012",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_f03dd5bc",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T07:17:59Z",
+      "side": 1,
+      "message": "I want to avoid the work of creating the listener, registering it and letting it process notifications if nothing will consume it later on anyway.",
+      "parentUuid": "ba3e81b7_d033f1f4",
+      "range": {
+        "startLine": 30,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 33
+      },
+      "revId": "07fedfd86b30a216ee9db6926a1f268563379012",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
