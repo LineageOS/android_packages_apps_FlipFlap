@@ -36,4 +36,24 @@ public class IceviewView extends FlipFlapView {
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
     }
+
+    @Override
+    protected boolean supportsAlarmActions() {
+        return true;
+    }
+
+    @Override
+    protected void updateAlarmState(boolean active) {
+        setVisibility(active ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    @Override
+    protected boolean supportsCallActions() {
+        return true;
+    }
+
+    @Override
+    protected void updateCallState(CallState callState) {
+        setVisibility(callState.isActive() ? View.INVISIBLE : View.VISIBLE);
+    }
 }
