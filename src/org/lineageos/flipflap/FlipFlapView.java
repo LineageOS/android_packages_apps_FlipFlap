@@ -49,7 +49,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -214,17 +213,6 @@ public class FlipFlapView extends FrameLayout {
         }
     };
 
-    private static String normalize(String str) {
-        return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .replaceAll("æ", "ae")
-                .replaceAll("ð", "d")
-                .replaceAll("ø", "o")
-                .replaceAll("þ", "th")
-                .replaceAll("ß", "ss")
-                .replaceAll("œ", "oe");
-    }
-
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
             new GestureDetector.SimpleOnGestureListener() {
         @Override
@@ -272,7 +260,7 @@ public class FlipFlapView extends FrameLayout {
                         number = "";
                     }
 
-                    updateRingingState(true, normalize(name), number);
+                    updateRingingState(true, name, number);
                 } else {
                     updateRingingState(false, null, null);
                 }
