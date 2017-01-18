@@ -20,13 +20,25 @@
 
 package org.lineageos.flipflap;
 
+import android.app.Notification;
 import android.content.Context;
+import android.service.notification.StatusBarNotification;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import android.util.Log;
+
+import java.util.List;
 
 public class IceviewView extends FlipFlapView {
     private static final String TAG = "IceviewView";
 
     private ClockPanel mClockPanel;
+    private final NotificationsAdapter mNotificationsAdapter;
 
     public IceviewView(Context context) {
         super(context);
@@ -35,5 +47,44 @@ public class IceviewView extends FlipFlapView {
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+
+        mNotificationsAdapter = new NotificationsAdapter(context);
+        ListView notificationsList = (ListView) findViewById(R.id.iceview_notifications);
+        notificationsList.setAdapter(mNotificationsAdapter);
+    }
+
+    @Override
+    public boolean supportsNotifications() {
+        return true;
+    }
+
+    @Override
+    public void updateNotifications(List<StatusBarNotification> notifications) {
+        mNotificationsAdapter.setNotifyOnChange(false);
+        mNotificationsAdapter.clear();
+        mNotificationsAdapter.addAll(notifications);
+        mNotificationsAdapter.notifyDataSetChanged();
+    }
+
+    private static class NotificationsAdapter extends ArrayAdapter<StatusBarNotification> {
+        private LayoutInflater mInflater;
+
+        public NotificationsAdapter(Context context) {
+            super(context, 0);
+            mInflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.notification_item, parent, false);
+            }
+
+            Notification notification = getItem(position).getNotification();
+            TextView title = (TextView) convertView.findViewById(R.id.notification_title);
+            title.setText(notification.extras.getString(Notification.EXTRA_TITLE));
+
+            return convertView;
+        }
     }
 }
