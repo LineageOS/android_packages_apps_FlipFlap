@@ -23,19 +23,24 @@ package org.lineageos.flipflap;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 import android.util.Log;
+import android.view.WindowManagerPolicy.WindowManagerFuncs;
 
-public class BootCompletedReceiver extends BroadcastReceiver {
+public class EventReceiver extends BroadcastReceiver {
     static final String TAG = "FlipFlap";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "Booting ");
-        Settings.Secure.putString(context.getContentResolver(),
-                Settings.Secure.IMMERSIVE_MODE_CONFIRMATIONS,
-                "org.lineageos.quickcover");
+        if (cyanogenmod.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
+            int lidState = intent.getIntExtra(cyanogenmod.content.Intent.EXTRA_LID_STATE, -1);
+            Log.d(TAG, "Got lid state change event, new state " + lidState);
 
-        context.startService(new Intent(context, FlipFlapService.class));
+            Intent serviceIntent = new Intent(context, FlipFlapService.class);
+            if (lidState == WindowManagerFuncs.LID_CLOSED) {
+                context.startService(serviceIntent);
+            } else {
+                context.stopService(serviceIntent);
+            }
+        }
     }
 }
