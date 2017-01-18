@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_d033f1f4",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-18T07:08:46Z",
+      "side": 1,
+      "message": "Wouldn\u0027t having views that don\u0027t support notifications return immediately in updateNotifications make this unnecessary?",
+      "range": {
+        "startLine": 30,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 33
+      },
+      "revId": "07fedfd86b30a216ee9db6926a1f268563379012",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
