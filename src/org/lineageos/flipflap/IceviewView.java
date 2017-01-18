@@ -21,6 +21,7 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 
 public class IceviewView extends FlipFlapView {
@@ -35,5 +36,32 @@ public class IceviewView extends FlipFlapView {
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+
+        // If a call is ringing and the cover is closed, hide ourselves to let the user answer it
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        if (tm.getCallState() == TelephonyManager.CALL_STATE_RINGING) {
+            setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    protected boolean supportsAlarmActions() {
+        return true;
+    }
+
+    @Override
+    protected void updateAlarmState(boolean active) {
+        setVisibility(active ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    @Override
+    protected boolean supportsCallActions() {
+        return true;
+    }
+
+    @Override
+    protected void updateCallState(CallState callState) {
+        setVisibility(callState.isActive() ? View.INVISIBLE : View.VISIBLE);
     }
 }
