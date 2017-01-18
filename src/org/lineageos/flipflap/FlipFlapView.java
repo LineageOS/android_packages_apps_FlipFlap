@@ -68,6 +68,7 @@ public class FlipFlapView extends FrameLayout {
     private boolean mAlarmActive;
     private boolean mRinging;
     private boolean mProximityNear;
+    private boolean mNotificationListenerRegistered;
 
     public FlipFlapView(Context context) {
         super(context);
@@ -130,6 +131,7 @@ public class FlipFlapView extends FrameLayout {
             try {
                 mNotificationListener.registerAsSystemService(getContext(),
                         new ComponentName(getContext(), getClass()), UserHandle.USER_ALL);
+                mNotificationListenerRegistered = true;
             } catch (RemoteException e) {
                 Log.e(TAG, "Unable to register notification listener", e);
             }
@@ -153,6 +155,7 @@ public class FlipFlapView extends FrameLayout {
         if (supportsNotifications()) {
             try {
                 mNotificationListener.unregisterAsSystemService();
+                mNotificationListenerRegistered = false;
             } catch (RemoteException e) {
                 // Ignore.
             }
@@ -328,6 +331,10 @@ public class FlipFlapView extends FrameLayout {
         }
 
         private void handleNotificationUpdate(RankingMap ranking) {
+            if (!mNotificationListenerRegistered) {
+                return;
+            }
+
             mRankingMap = ranking;
 
             List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
