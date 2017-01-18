@@ -40,6 +40,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import java.text.Normalizer;
+
 public class DotcaseView extends FlipFlapView {
     private static final String TAG = "DotcaseView";
 
@@ -165,7 +167,8 @@ public class DotcaseView extends FlipFlapView {
     public void updateRingingState(boolean ringing, String name, String number) {
         super.updateRingingState(ringing, name, number);
         mRinging = ringing;
-        mCallerName = name + "  "; // make the scroll effect look good
+        // add spaces to make the scroll effect look good
+        mCallerName = normalize(name != null ? name : null) + "  ";
         mCallerNumber = ringing ? number : null;
         mNameOffset = -6;
         mRingCounter = 0;
@@ -456,6 +459,17 @@ public class DotcaseView extends FlipFlapView {
             int[][] sprite = DotcaseConstants.getSmallCharSprite(mCallerNumber.charAt(i));
             dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
         }
+    }
+
+    private static String normalize(String str) {
+        return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .replaceAll("æ", "ae")
+                .replaceAll("ð", "d")
+                .replaceAll("ø", "o")
+                .replaceAll("þ", "th")
+                .replaceAll("ß", "ss")
+                .replaceAll("œ", "oe");
     }
 
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
