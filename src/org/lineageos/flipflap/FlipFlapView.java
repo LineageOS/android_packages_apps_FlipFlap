@@ -338,10 +338,11 @@ public class FlipFlapView extends FrameLayout {
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);
-        if (mPowerManager.isInteractive()) {
+        int timeout = FlipFlapUtils.getTimeout(mContext, false);
+        if (mPowerManager.isInteractive() && timeout != FlipFlapUtils.DELAYED_SCREEN_OFF_NEVER) {
             Message msg = Message.obtain();
             msg.what = COVER_CLOSED_MSG;
-            mHandler.sendMessageDelayed(msg, FlipFlapUtils.DELAYED_SCREEN_OFF_MS);
+            mHandler.sendMessageDelayed(msg, timeout);
         }
     }
 
