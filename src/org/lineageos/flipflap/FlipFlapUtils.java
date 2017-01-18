@@ -20,6 +20,10 @@
 
 package org.lineageos.flipflap;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 public class FlipFlapUtils {
 
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
@@ -39,4 +43,42 @@ public class FlipFlapUtils {
     static final int COVER_STYLE_ICEVIEW = 4;
 
     static final int DELAYED_SCREEN_OFF_MS = 5000;
+    static final int DELAYED_SCREEN_OFF_NEVER = -1;
+
+    static final String KEY_TIMEOUT_UNPLUGGED = "timeout_unplugged";
+    static final String KEY_TIMEOUT_PLUGGED = "timeout_plugged";
+    static final String KEY_BATTERY_INDICATION = "battery_indication";
+
+    public static Boolean showBatteryStatus(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(KEY_BATTERY_INDICATION, true);
+    }
+
+    public static int getPluggedTimeout(Context context) {
+        return Integer.parseInt(getPreferences(context).getString(KEY_TIMEOUT_PLUGGED, "5"));
+    }
+
+    public static int getUnpluggedTimeout(Context context) {
+        return Integer.parseInt(getPreferences(context).getString(KEY_TIMEOUT_PLUGGED, "5"));
+    }
+
+    public static int getTimeout(Context context, String key) {
+        int timeOut;
+        if (KEY_TIMEOUT_PLUGGED.equals(key)) {
+            timeOut = getPluggedTimeout(context);
+        } else {
+            timeOut = getUnpluggedTimeout(context);
+        }
+
+        return timeOut;
+    }
+
+    public static int getTimeout(Context context, Boolean isCharging) {
+        String key = isCharging ? KEY_TIMEOUT_PLUGGED : KEY_TIMEOUT_UNPLUGGED;
+        return getTimeout(context, key) * 1000;
+    }
+
+    private static SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
 }
