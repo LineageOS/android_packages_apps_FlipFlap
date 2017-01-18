@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_902689b9",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-18T07:04:47Z",
+      "side": 1,
+      "message": "Why not something like supportsProximitySensor to keep with the other function names?",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "7b6bf2469b873ac8732b1056e86cd2b305faf249",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
