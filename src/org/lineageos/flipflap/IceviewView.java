@@ -20,13 +20,23 @@
 
 package org.lineageos.flipflap;
 
+import android.app.Notification;
 import android.content.Context;
+import android.service.notification.StatusBarNotification;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+import java.util.List;
+import android.util.Log;
 
 public class IceviewView extends FlipFlapView {
     private static final String TAG = "IceviewView";
 
     private ClockPanel mClockPanel;
+    private LinearLayout mNotificationsView;
 
     public IceviewView(Context context) {
         super(context);
@@ -35,6 +45,8 @@ public class IceviewView extends FlipFlapView {
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+
+        mNotificationsView = (LinearLayout) findViewById(R.id.iceview_notifications);
     }
 
     @Override
@@ -55,5 +67,30 @@ public class IceviewView extends FlipFlapView {
     @Override
     protected void updateCallState(CallState callState) {
         setVisibility(callState.isActive() ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    @Override
+    protected boolean supportsNotifications() {
+        return true;
+    }
+
+    @Override
+    protected void updateNotifications(List<StatusBarNotification> notifications) {
+        mNotificationsView.removeAllViews();
+        for (StatusBarNotification sbn : notifications) {
+            if (shouldShowNotification(sbn)) {
+                IceviewNotificationView inv = (IceviewNotificationView) inflate(mContext,
+                        R.layout.iceview_notification_view, null);
+                inv.setNotification(sbn.getNotification());
+                mNotificationsView.addView(inv);
+            }
+        }
+    }
+
+    private boolean shouldShowNotification(StatusBarNotification sbn) {
+        if (FlipFlapUtils.OUR_PACKAGE_NAME.equals(sbn.getPackageName())) {
+             return false;
+        }
+        return true;
     }
 }

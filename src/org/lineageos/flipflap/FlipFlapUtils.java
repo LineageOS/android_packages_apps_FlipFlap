@@ -22,6 +22,8 @@ package org.lineageos.flipflap;
 
 public class FlipFlapUtils {
 
+    static final String OUR_PACKAGE_NAME = "org.lineageos.flipflap";
+
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
     static final String ACTION_ALARM_ALERT = "com.android.deskclock.ALARM_ALERT";
 

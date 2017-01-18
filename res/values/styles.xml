@@ -114,4 +114,16 @@
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="iceview_notification_big">
+        <item name="android:textSize">@dimen/iceview_notification_big_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="iceview_notification_normal">
+        <item name="android:textSize">@dimen/iceview_notification_normal_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
 </resources>
