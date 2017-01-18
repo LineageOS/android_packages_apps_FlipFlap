@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_8b3c1e95",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:11:47Z",
+      "side": 1,
+      "message": "More elegant here would be making the fragment just implement OnPreferenceChangeListener instead of using a separate object.",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_ab37e2af",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:11:47Z",
+      "side": 1,
+      "message": "This can become much simpler. See the summary handling of mAutoPowerSavePref in https://github.com/LineageOS/android_packages_apps_CMParts/blob/cm-14.1/src/org/cyanogenmod/cmparts/power/PerfProfileSettings.java ... it\u0027s essentially the same thing as yours.",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_6b41fa0a",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:11:47Z",
+      "side": 1,
+      "message": "KEY_TIMEOUT_UNPLUGGED?",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_4b463625",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:11:47Z",
+      "side": 1,
+      "message": "What\u0027s the point of this method and the two above? Why not just do\n\nint timeoutSeconds \u003d Integer.parseInt(getPreferences(context).getString(key, \"5\"));\n\nbelow?",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_2b4bf22c",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:11:47Z",
+      "side": 1,
+      "message": "Boolean -\u003e boolean",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
