@@ -63,6 +63,7 @@ public class FlipFlapView extends FrameLayout {
     private TelecomManager mTelecomManager;
     private boolean mAlarmActive;
     private boolean mProximityNear;
+    private boolean mShuttingDown;
 
     public FlipFlapView(Context context) {
         super(context);
@@ -162,6 +163,8 @@ public class FlipFlapView extends FrameLayout {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+
+        mShuttingDown = true;
 
         mHandler.removeCallbacksAndMessages(null);
         getContext().unregisterReceiver(mReceiver);
@@ -289,9 +292,15 @@ public class FlipFlapView extends FrameLayout {
         private void handleNotificationUpdate(RankingMap ranking) {
             mRankingMap = ranking;
 
-            List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
-            Collections.sort(notifications, mRankingComparator);
-            updateNotifications(notifications);
+            try {
+                List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
+                Collections.sort(notifications, mRankingComparator);
+                updateNotifications(notifications);
+            } catch (SecurityException se) {
+                if (!mShuttingDown) {
+                    throw se;
+                }
+            }
         }
     };
 
