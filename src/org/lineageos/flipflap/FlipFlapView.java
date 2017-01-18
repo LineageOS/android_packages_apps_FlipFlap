@@ -25,20 +25,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserHandle;
-import android.provider.ContactsContract;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.telecom.TelecomManager;
@@ -123,7 +120,7 @@ public class FlipFlapView extends FrameLayout {
         mProximityNear = isNear;
     }
 
-    protected void updateRingingState(boolean ringing, String name, String number) {
+    protected void updateCallState(CallState callState) {
     }
 
     protected void acceptRingingCall() {
@@ -241,29 +238,8 @@ public class FlipFlapView extends FrameLayout {
             if (TelephonyManager.ACTION_PHONE_STATE_CHANGED.equals(action) &&
                     supportsCallActions()) {
                 String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-                if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
-                    String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-                    Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-                            Uri.encode(number));
-                    Cursor cursor = context.getContentResolver().query(uri,
-                            new String[] { ContactsContract.PhoneLookup.DISPLAY_NAME },
-                            number, null, null);
-                    String name = cursor != null && cursor.moveToFirst()
-                            ? cursor.getString(0) : "";
-                    if (cursor != null) {
-                        cursor.close();
-                    }
-
-                    if (number.equalsIgnoreCase("restricted")) {
-                        // If call is restricted, don't show a number
-                        name = number;
-                        number = "";
-                    }
-
-                    updateRingingState(true, name, number);
-                } else {
-                    updateRingingState(false, null, null);
-                }
+                String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                updateCallState(new CallState(context, state, number));
             } else if (FlipFlapUtils.ACTION_ALARM_ALERT.equals(action) && supportsAlarmActions()) {
                 // add other alarm apps here
                 updateAlarmState(true);
