@@ -40,16 +40,22 @@
             android:layout_marginTop="50dp" />
     </LinearLayout>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fillViewport="true"
-        android:scrollbars="horizontal">
-        <ListView
-            android:id="@+id/iceview_notifications"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </HorizontalScrollView>
+        android:orientation="vertical"
+        android:layout_marginTop="25dp" >
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/iceview_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>
