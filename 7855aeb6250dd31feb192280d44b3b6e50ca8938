@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_8b877e61",
+        "filename": "res/drawable/ic_notification.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T15:00:47Z",
+      "side": 1,
+      "message": "This icon currently is the \u0027smartphone\u0027 one from https://material.io/icons/ ... not sure whether it\u0027s good enough as the user won\u0027t see it anyway.",
+      "revId": "7855aeb6250dd31feb192280d44b3b6e50ca8938",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
