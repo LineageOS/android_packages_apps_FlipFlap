@@ -20,46 +20,87 @@
 
 package org.lineageos.flipflap;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.pm.ActivityInfo;
 import android.os.IBinder;
-import android.os.UEventObserver;
 import android.util.Log;
-
-import org.cyanogenmod.internal.util.FileUtils;
+import android.view.ContextThemeWrapper;
+import android.view.WindowManager;
 
 public class FlipFlapService extends Service {
-
     private static final String TAG = "FlipFlap";
 
-    private DeviceCover mDeviceCover;
+    private Context mContext;
+    private FlipFlapView mCoverView;
+    private WindowManager mWm;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "Creating service");
-        final Resources res = getResources();
 
-        String ueventMatch = res.getString(R.string.cover_uevent_match);
-        String coverNode = res.getString(R.string.cover_node);
+        Log.d(TAG, "Creating cover view");
 
-        Log.e(TAG,"Cover uevent path :" + ueventMatch);
-        mFlipFlapObserver.startObserving(ueventMatch);
+        mWm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        mContext = new ContextThemeWrapper(this, R.style.FlipFlapTheme);
 
-        mDeviceCover = new DeviceCover(this);
-        mDeviceCover.onCoverEvent(FileUtils.readOneLine(coverNode));
+        final Notification notification = new Notification.Builder(this)
+                .setContentTitle(getString(R.string.notification_title))
+                .setSmallIcon(R.drawable.ic_notification)
+                .setColor(getResources().getColor(R.color.colorPrimary))
+                .setPriority(Notification.PRIORITY_MIN)
+                .setOngoing(true)
+                .setShowWhen(false)
+                .setLocalOnly(true)
+                .build();
+        startForeground(1, notification);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "Destroying cover view");
+        if (mCoverView != null) {
+            mWm.removeView(mCoverView);
+            mCoverView = null;
+        }
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (mCoverView == null) {
+            mCoverView = createCoverView();
+            if (mCoverView == null) {
+                stopSelf(startId);
+            } else {
+                WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                        WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
+                params.screenBrightness = mCoverView.getScreenBrightness();
+                params.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+                mWm.addView(mCoverView, params);
+            }
+        }
+
+        return START_STICKY;
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    private final UEventObserver mFlipFlapObserver = new UEventObserver() {
-        @Override
-        public void onUEvent(UEventObserver.UEvent event) {
-            mDeviceCover.onCoverEvent(event.get("SWITCH_STATE"));
+    private FlipFlapView createCoverView() {
+        int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
+        switch (coverStyle) {
+            case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(mContext);
+            case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(mContext);
+            case FlipFlapUtils.COVER_STYLE_RECTANGULAR: return new RectangularView(mContext);
+            case FlipFlapUtils.COVER_STYLE_ICEVIEW: return new IceviewView(mContext);
         }
-    };
+
+        // Not possible because of the check, above, matching on the valid covers
+        return null;
+    }
 }
