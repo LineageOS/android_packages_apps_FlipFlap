@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ba3e81b7_5020219b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-18T07:05:04Z",
+      "side": 1,
+      "message": "Selectively",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "7b6bf2469b873ac8732b1056e86cd2b305faf249",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3e81b7_902689b9",
         "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
         "patchSetId": 2
