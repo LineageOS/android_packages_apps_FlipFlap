@@ -45,6 +45,30 @@
       "revId": "7b6bf2469b873ac8732b1056e86cd2b305faf249",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_f092759e",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-18T07:45:30Z",
+      "side": 1,
+      "message": "In my view it\u0027s different: supports* is stuff the view supports displaying, the proximity sensor one is more a capability of the cover (whether it covers the sensor or not).\n\nMaybe we should convert all those functions into one getCapabilityFlags() method or something.",
+      "parentUuid": "ba3e81b7_902689b9",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "7b6bf2469b873ac8732b1056e86cd2b305faf249",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
