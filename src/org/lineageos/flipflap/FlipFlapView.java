@@ -59,6 +59,7 @@ public class FlipFlapView extends FrameLayout {
 
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
+    private PowerManager.WakeLock mWakeLock;
     private SensorManager mSensorManager;
     private TelecomManager mTelecomManager;
     private boolean mAlarmActive;
@@ -76,6 +77,8 @@ public class FlipFlapView extends FrameLayout {
 
         mDetector = new GestureDetector(context, mGestureListener);
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK
+                | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
     }
@@ -110,11 +113,13 @@ public class FlipFlapView extends FrameLayout {
     protected void dismissAlarm() {
         getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_DISMISS));
         updateAlarmState(false);
+        mWakeLock.release();
     }
 
     protected void snoozeAlarm() {
         getContext().sendBroadcast(new Intent(FlipFlapUtils.ACTION_ALARM_SNOOZE));
         updateAlarmState(false);
+        mWakeLock.release();
     }
 
     protected void updateProximityState(boolean isNear) {
@@ -246,8 +251,11 @@ public class FlipFlapView extends FrameLayout {
             } else if (FlipFlapUtils.ACTION_ALARM_ALERT.equals(action) && supportsAlarmActions()) {
                 // add other alarm apps here
                 updateAlarmState(true);
+                mWakeLock.acquire(60000);
             } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
-                postScreenOff();
+                if(!mAlarmActive) {
+                    postScreenOff();
+                }
             }
         }
     };
