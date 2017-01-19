@@ -30,6 +30,8 @@ public class CircleView extends FlipFlapView {
     private static final String TAG = "CircleView";
 
     private ClockPanel mClockPanel;
+    private DatePanel mDatePanel;
+    private NextAlarmPanel mNextAlarmPanel;
 
     public CircleView(Context context) {
         super(context);
@@ -38,5 +40,7 @@ public class CircleView extends FlipFlapView {
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+        mDatePanel = (DatePanel) findViewById(R.id.date_panel);
+        mNextAlarmPanel = (NextAlarmPanel) findViewById(R.id.next_alarm_panel);
     }
 }

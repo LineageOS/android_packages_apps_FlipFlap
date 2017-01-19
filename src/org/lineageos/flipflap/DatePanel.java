@@ -20,31 +20,23 @@
 
 package org.lineageos.flipflap;
 
-import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
-public class ClockPanel extends LinearLayout {
-    private static final String TAG = "ClockPanel";
+public class DatePanel extends LinearLayout {
+    private static final String TAG = "DatePanel";
 
     private final Context mContext;
 
-    private TextView mHoursView;
-    private TextView mMinsView;
-    private TextView mAmPmView;
+    private TextView mDateView;
 
     private boolean mReceiverRegistered;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -52,7 +44,7 @@ public class ClockPanel extends LinearLayout {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (Intent.ACTION_TIME_TICK.equals(action)) {
-                refreshClock();
+                refreshDate();
             }
         }
     };
@@ -62,10 +54,9 @@ public class ClockPanel extends LinearLayout {
         super.onAttachedToWindow();
         if (!mReceiverRegistered) {
             IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
-            filter.addAction(AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED);
             mContext.registerReceiver(mReceiver, filter);
             mReceiverRegistered = true;
-            refreshClock();
+            refreshDate();
         }
     }
 
@@ -78,15 +69,15 @@ public class ClockPanel extends LinearLayout {
         }
     }
 
-    public ClockPanel(Context context) {
+    public DatePanel(Context context) {
         this(context, null);
     }
 
-    public ClockPanel(Context context, AttributeSet attrs) {
+    public DatePanel(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ClockPanel(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DatePanel(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
@@ -95,30 +86,15 @@ public class ClockPanel extends LinearLayout {
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
-
-        mHoursView = (TextView) findViewById(R.id.clock1);
-        mMinsView = (TextView) findViewById(R.id.clock2);
-        mAmPmView = (TextView) findViewById(R.id.clock_ampm);
+        mDateView = (TextView) findViewById(R.id.date_regular);
     }
 
-    private void refreshClock() {
-        Locale locale = Locale.getDefault();
+    private void refreshDate() {
         Date now = new Date();
-        String hours = new SimpleDateFormat(getHourFormat(), locale).format(now);
-        String minutes = new SimpleDateFormat(mContext.getString(R.string.widget_12_hours_format_no_ampm_m),
-                locale).format(now);
-        String amPm = new SimpleDateFormat(
-                mContext.getString(R.string.widget_12_hours_format_ampm), locale).format(now);
+        String dateFormat = mContext.getString(R.string.abbrev_wday_month_day_no_year);
+        CharSequence date = DateFormat.format(dateFormat, now);
 
-        mHoursView.setText(hours);
-        mMinsView.setText(minutes);
-        mAmPmView.setText(amPm);
-
+        mDateView.setText(date);
     }
 
-    private String getHourFormat() {
-        return DateFormat.is24HourFormat(mContext) ?
-                mContext.getString(R.string.widget_24_hours_format_h_api_16) :
-                mContext.getString(R.string.widget_12_hours_format_h);
-    }
 }
