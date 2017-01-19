@@ -24,9 +24,9 @@ public class FlipFlapUtils {
 
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
     static final String ACTION_ALARM_ALERT = "com.android.deskclock.ALARM_ALERT";
-
     static final String ACTION_ALARM_DISMISS = "com.android.deskclock.ALARM_DISMISS";
     static final String ACTION_ALARM_SNOOZE = "com.android.deskclock.ALARM_SNOOZE";
+    static final String ACTION_ALARM_DONE = "com.android.deskclock.ALARM_DONE";
 
     static final int COVER_STATE_OPENED = 0;
     static final int COVER_STATE_CLOSED = 1;
