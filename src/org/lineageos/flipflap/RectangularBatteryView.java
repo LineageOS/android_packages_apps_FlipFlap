@@ -77,7 +77,9 @@ public class RectangularBatteryView extends View {
         canvas.drawRGB(0, 0, 0);
         mPaint.setStyle(Style.FILL);
 
-        if (isCharging) {
+        if (!FlipFlapUtils.showBatteryStatus(mContext)) {
+            mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+        } else if (isCharging) {
             mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
         } else if (level >= 15) {
             mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
