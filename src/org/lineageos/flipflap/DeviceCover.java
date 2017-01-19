@@ -34,12 +34,14 @@ public class DeviceCover {
     private static final String TAG = "FlipFlap";
 
     private static final int COVER_STATE_CHANGED = 0;
+    private static final int RESTORE_SECURITY_VIEW_SETTING = 1;
 
     private final Object mLock = new Object();
 
     private Context mContext;
     private FlipFlapView mCoverView;
     private WindowManager mWm;
+    private boolean mPassToSecurity;
     int mCoverStyle;
 
     public DeviceCover(Context context) {
@@ -56,6 +58,7 @@ public class DeviceCover {
                 mCoverStyle != FlipFlapUtils.COVER_STYLE_NONE) {
             Log.i(TAG, "Cover Closed, Creating FlipFlap view");
             if (mCoverView == null) {
+                FlipFlapUtils.changeSecurityViewState(mContext);
                 mCoverView = createCoverView();
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
@@ -66,6 +69,7 @@ public class DeviceCover {
         } else {
             Log.i(TAG, "Cover Opened, Killing FlipFlap Activity");
             if (mCoverView != null) {
+                restoreSecurityViewState();
                 mWm.removeView(mCoverView);
                 mCoverView = null;
             }
@@ -80,12 +84,23 @@ public class DeviceCover {
         mHandler.sendMessage(message);
     }
 
+    private void restoreSecurityViewState() {
+        Message message = new Message();
+        message.what = RESTORE_SECURITY_VIEW_SETTING;
+
+        mHandler.sendMessageDelayed(message, 2000);
+    }
+
     private final Handler mHandler = new Handler(true /*async*/) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case COVER_STATE_CHANGED:
                     handleCoverChange(msg.arg1);
+                    break;
+
+                case RESTORE_SECURITY_VIEW_SETTING:
+                    FlipFlapUtils.restoreSecurityViewState(mContext);
                     break;
             }
         }

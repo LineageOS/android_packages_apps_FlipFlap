@@ -20,6 +20,12 @@
 
 package org.lineageos.flipflap;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import cyanogenmod.providers.CMSettings;
+
 public class FlipFlapUtils {
 
     static final String ACTION_COVER_CLOSED = "org.lineageos.flipflap.COVER_CLOSED";
@@ -39,4 +45,58 @@ public class FlipFlapUtils {
     static final int COVER_STYLE_ICEVIEW = 4;
 
     static final int DELAYED_SCREEN_OFF_MS = 5000;
+    static final int DELAYED_SCREEN_OFF_NEVER = -1;
+
+    static final String KEY_PASS_TO_SECURITY = "pass_to_security_view";
+    static final String KEY_TIMEOUT_UNPLUGGED = "timeout_unplugged";
+    static final String KEY_TIMEOUT_PLUGGED = "timeout_plugged";
+    static final String KEY_BATTERY_INDICATION = "battery_indication";
+
+    static boolean mPassToSecurity;
+
+    public static boolean showBatteryStatus(Context context) {
+        return getPreferences(context).getBoolean(KEY_BATTERY_INDICATION, true);
+    }
+
+    public static int getTimeout(Context context, String key) {
+        return Integer.parseInt(getPreferences(context).getString(key, "5"));
+    }
+
+    public static int getTimeout(Context context, boolean isCharging) {
+        String key = isCharging ? KEY_TIMEOUT_PLUGGED : KEY_TIMEOUT_UNPLUGGED;
+        return getTimeout(context, key) * 1000;
+    }
+
+    public static void changeSecurityViewState(Context context) {
+        if (shouldChangeSecurityViewState(context)) {
+            mPassToSecurity = shouldPassToSecurityView(context);
+            setPassToSecurityView(context, true);
+        }
+    }
+
+    public static void restoreSecurityViewState(Context context) {
+        if (shouldChangeSecurityViewState(context)) {
+            setPassToSecurityView(context, mPassToSecurity);
+            mPassToSecurity = false;
+        }
+    }
+
+    private static SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    private static boolean shouldChangeSecurityViewState(Context context) {
+        return getPreferences(context).getBoolean(KEY_PASS_TO_SECURITY, false);
+    }
+
+    private static boolean shouldPassToSecurityView(Context context) {
+        return CMSettings.Secure.getInt(context.getContentResolver(),
+                CMSettings.Secure.LOCK_PASS_TO_SECURITY_VIEW, 0) != 0;
+    }
+
+    private static void setPassToSecurityView(Context context, boolean enabled) {
+        CMSettings.Secure.putInt(context.getContentResolver(),
+                CMSettings.Secure.LOCK_PASS_TO_SECURITY_VIEW, enabled ? 1 : 0);
+    }
+
 }
