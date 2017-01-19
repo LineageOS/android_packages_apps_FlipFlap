@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ba3e81b7_065b8355",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-19T08:21:53Z",
+      "side": 1,
+      "message": "Did this when trying to get it working at all. Switched to the proposed solution just fine now",
+      "parentUuid": "ba3e81b7_8b3c1e95",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3e81b7_ab37e2af",
         "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-18T15:11:47Z",
       "side": 1,
       "message": "This can become much simpler. See the summary handling of mAutoPowerSavePref in https://github.com/LineageOS/android_packages_apps_CMParts/blob/cm-14.1/src/org/cyanogenmod/cmparts/power/PerfProfileSettings.java ... it\u0027s essentially the same thing as yours.",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_e6575f25",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-19T08:21:53Z",
+      "side": 1,
+      "message": "Wasn\u0027t aware of that, much easier indeed. Done",
+      "parentUuid": "ba3e81b7_ab37e2af",
       "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "ba3e81b7_a631570d",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-19T08:21:53Z",
+      "side": 1,
+      "message": "Yep, sure :)",
+      "parentUuid": "ba3e81b7_4b463625",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3e81b7_2b4bf22c",
         "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2017-01-18T15:11:47Z",
       "side": 1,
       "message": "Boolean -\u003e boolean",
+      "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_86365302",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-19T08:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3e81b7_2b4bf22c",
       "revId": "e471085371850e91d9811f021cbb8a6be6d57308",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
