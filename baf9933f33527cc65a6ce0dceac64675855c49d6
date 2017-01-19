@@ -16,6 +16,57 @@
       "revId": "baf9933f33527cc65a6ce0dceac64675855c49d6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_e1b8692c",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T09:51:43Z",
+      "side": 1,
+      "message": "Remove in this commit.",
+      "revId": "baf9933f33527cc65a6ce0dceac64675855c49d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_c1b56532",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T09:51:43Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "baf9933f33527cc65a6ce0dceac64675855c49d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_a1826150",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T09:51:43Z",
+      "side": 1,
+      "message": "Remove?  And if so, also the corresponding import?",
+      "revId": "baf9933f33527cc65a6ce0dceac64675855c49d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
