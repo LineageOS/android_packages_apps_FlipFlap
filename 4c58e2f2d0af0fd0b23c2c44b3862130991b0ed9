@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_617c7973",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T09:53:39Z",
+      "side": 1,
+      "message": "These removals should be in the previous commit (where the code that used them was removed)...",
+      "revId": "4c58e2f2d0af0fd0b23c2c44b3862130991b0ed9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
