@@ -40,6 +40,7 @@ public class DeviceCover {
     private Context mContext;
     private FlipFlapView mCoverView;
     private WindowManager mWm;
+    private boolean mPassToSecurity;
     int mCoverStyle;
 
     public DeviceCover(Context context) {
@@ -56,6 +57,7 @@ public class DeviceCover {
                 mCoverStyle != FlipFlapUtils.COVER_STYLE_NONE) {
             Log.i(TAG, "Cover Closed, Creating FlipFlap view");
             if (mCoverView == null) {
+                FlipFlapUtils.changeSecurityViewState(mContext);
                 mCoverView = createCoverView();
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
@@ -68,6 +70,7 @@ public class DeviceCover {
             if (mCoverView != null) {
                 mWm.removeView(mCoverView);
                 mCoverView = null;
+                FlipFlapUtils.restoreSecurityViewState(mContext);
             }
         }
     }
