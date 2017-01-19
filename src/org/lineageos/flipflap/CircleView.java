@@ -21,10 +21,6 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.RelativeLayout;
-
-import java.util.List;
 
 public class CircleView extends FlipFlapView {
     private static final String TAG = "CircleView";

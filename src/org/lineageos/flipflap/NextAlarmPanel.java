@@ -20,35 +20,37 @@
 
 package org.lineageos.flipflap;
 
+import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
-public class ClockPanel extends LinearLayout {
+public class NextAlarmPanel extends LinearLayout {
     private static final String TAG = "ClockPanel";
 
     private final Context mContext;
 
-    private TextView mHoursView;
-    private TextView mMinsView;
-    private TextView mAmPmView;
+    private AlarmManager mAlarmManager;
+    private ImageView mAlarmIcon;
+    private TextView mAlarmText;
 
     private boolean mReceiverRegistered;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (Intent.ACTION_TIME_TICK.equals(action)) {
-                refreshClock();
+            if (AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED.equals(action)) {
+                refreshAlarmStatus();
             }
         }
     };
@@ -57,10 +59,10 @@ public class ClockPanel extends LinearLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (!mReceiverRegistered) {
-            IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
+            IntentFilter filter = new IntentFilter(AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED);
             mContext.registerReceiver(mReceiver, filter);
             mReceiverRegistered = true;
-            refreshClock();
+            refreshAlarmStatus();
         }
     }
 
@@ -73,47 +75,44 @@ public class ClockPanel extends LinearLayout {
         }
     }
 
-    public ClockPanel(Context context) {
+    public NextAlarmPanel(Context context) {
         this(context, null);
     }
 
-    public ClockPanel(Context context, AttributeSet attrs) {
+    public NextAlarmPanel(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ClockPanel(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NextAlarmPanel(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
+        mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
     }
 
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
 
-        mHoursView = (TextView) findViewById(R.id.clock1);
-        mMinsView = (TextView) findViewById(R.id.clock2);
-        mAmPmView = (TextView) findViewById(R.id.clock_ampm);
+        mAlarmIcon = (ImageView) findViewById(R.id.alarm_icon);
+        mAlarmText = (TextView) findViewById(R.id.next_alarm_regular);
     }
 
-    private void refreshClock() {
-        Locale locale = Locale.getDefault();
-        Date now = new Date();
-        String hours = new SimpleDateFormat(getHourFormat(), locale).format(now);
-        String minutes = new SimpleDateFormat(mContext.getString(R.string.widget_12_hours_format_no_ampm_m),
-                locale).format(now);
-        String amPm = new SimpleDateFormat(
-                mContext.getString(R.string.widget_12_hours_format_ampm), locale).format(now);
-
-        mHoursView.setText(hours);
-        mMinsView.setText(minutes);
-        mAmPmView.setText(amPm);
-
+    private void refreshAlarmStatus() {
+        String nextAlarm = getNextAlarm();
+        mAlarmText.setText(nextAlarm);
+        setVisibility(TextUtils.isEmpty(nextAlarm)
+                ? View.GONE : View.VISIBLE);
     }
 
-    private String getHourFormat() {
-        return DateFormat.is24HourFormat(mContext) ?
-                mContext.getString(R.string.widget_24_hours_format_h_api_16) :
-                mContext.getString(R.string.widget_12_hours_format_h);
+    private String getNextAlarm() {
+        AlarmManager.AlarmClockInfo nextAlarmClock = mAlarmManager.getNextAlarmClock();
+        if (nextAlarmClock != null) {
+            String skeleton = DateFormat.is24HourFormat(mContext) ? "EHm" : "Ehma";
+            String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), skeleton);
+            return (String) DateFormat.format(pattern, nextAlarmClock.getTriggerTime());
+        }
+
+        return null;
     }
 }
