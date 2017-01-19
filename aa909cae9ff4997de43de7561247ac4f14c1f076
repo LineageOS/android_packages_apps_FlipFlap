@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_86e2d3d3",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-01-19T04:54:20Z",
+      "side": 1,
+      "message": "This fixes alarm off after 5sec when waking from screen off for alarm.",
+      "revId": "aa909cae9ff4997de43de7561247ac4f14c1f076",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
