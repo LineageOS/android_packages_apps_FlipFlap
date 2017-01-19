@@ -16,6 +16,23 @@
       "revId": "aa909cae9ff4997de43de7561247ac4f14c1f076",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_c18c4582",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T10:02:24Z",
+      "side": 1,
+      "message": "How about instead wrapping this with\n\nif (mAlarmActive) {\n    postScreenOff();\n} else {\n    power off\n}\n\n?  That way it will turn the screen off after the alarm but not during the alarm.",
+      "revId": "aa909cae9ff4997de43de7561247ac4f14c1f076",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
