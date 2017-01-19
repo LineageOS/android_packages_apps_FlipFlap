@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_41aa95d5",
+        "filename": "src/org/lineageos/flipflap/CircleView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-19T09:45:49Z",
+      "side": 1,
+      "message": "Do you need these for anything or can you just delete these two lines and the corresponding declarations?",
+      "revId": "baf9933f33527cc65a6ce0dceac64675855c49d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
