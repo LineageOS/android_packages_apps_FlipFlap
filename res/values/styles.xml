@@ -59,6 +59,12 @@
         <item name="android:shadowColor">@color/text_shadow_opaque</item>
     </style>
 
+    <style name="widget_small_bold" parent="@style/label_shadow">
+        <item name="android:textSize">@dimen/widget_small_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
     <style name="widget_medium_light" parent="@style/label_shadow">
         <item name="android:textSize">@dimen/widget_medium_font_size</item>
         <item name="android:fontFamily">sans-serif-light</item>
