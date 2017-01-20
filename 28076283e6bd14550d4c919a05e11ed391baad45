@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_12b50acd",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-20T05:32:38Z",
+      "side": 1,
+      "message": "I think you can instantiate this just once in the constructor?",
+      "range": {
+        "startLine": 251,
+        "startChar": 16,
+        "endLine": 251,
+        "endChar": 25
+      },
+      "revId": "28076283e6bd14550d4c919a05e11ed391baad45",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_32b00edd",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-01-20T05:32:38Z",
+      "side": 1,
+      "message": "space goes here",
+      "revId": "28076283e6bd14550d4c919a05e11ed391baad45",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
