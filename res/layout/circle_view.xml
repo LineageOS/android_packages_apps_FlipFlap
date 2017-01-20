@@ -56,4 +56,13 @@
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
+
+    <include layout="@layout/alarm_panel"
+        android:id="@+id/alarm_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/clock_panel"
+        android:visibility="gone"/>
 </RelativeLayout>
