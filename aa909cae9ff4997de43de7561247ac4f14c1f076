@@ -33,6 +33,24 @@
       "revId": "aa909cae9ff4997de43de7561247ac4f14c1f076",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_af57f925",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-01-20T03:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3e81b7_c18c4582",
+      "revId": "aa909cae9ff4997de43de7561247ac4f14c1f076",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
