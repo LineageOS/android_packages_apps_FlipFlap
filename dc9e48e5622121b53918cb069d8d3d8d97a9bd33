@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_751200b6",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-20T15:33:33Z",
+      "side": 1,
+      "message": "You can drop the handling of this intent now, TextClock updates by itself.",
+      "revId": "dc9e48e5622121b53918cb069d8d3d8d97a9bd33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
