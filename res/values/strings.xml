@@ -21,6 +21,7 @@
 <resources>
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Smart cover detected</string>
+    <string name="alarm_label">ALARM</string>
 
     <!-- Formating strings for widget clock -->
     <string name="widget_12_hours_format_h" translatable="false">h</string>

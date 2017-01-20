@@ -21,11 +21,19 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class CircleView extends FlipFlapView {
     private static final String TAG = "CircleView";
 
     private ClockPanel mClockPanel;
+    private DatePanel mDatePanel;
+    private NextAlarmPanel mNextAlarmPanel;
+    private AlarmPanel mAlarmPanel;
+    private ImageButton mAlarmSnoozeButton;
+    private ImageButton mAlarmDismissButton;
 
     public CircleView(Context context) {
         super(context);
@@ -34,5 +42,44 @@ public class CircleView extends FlipFlapView {
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
+        mDatePanel = (DatePanel) findViewById(R.id.date_panel);
+        mNextAlarmPanel = (NextAlarmPanel) findViewById(R.id.next_alarm_panel);
+        mAlarmPanel = (AlarmPanel) findViewById(R.id.alarm_panel);
+
+        mAlarmSnoozeButton = (ImageButton) findViewById(R.id.snooze_button);
+        mAlarmDismissButton = (ImageButton) findViewById(R.id.dismiss_button);
+
+        mAlarmSnoozeButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snoozeAlarm();
+            }
+        });
+
+        mAlarmDismissButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismissAlarm();
+            }
+        });
+    }
+
+    @Override
+    protected boolean supportsAlarmActions() {
+        return true;
+    }
+
+    @Override
+    protected void updateAlarmState(boolean active) {
+        super.updateAlarmState(active);
+        if (active) {
+            mDatePanel.setVisibility(View.GONE);
+            mNextAlarmPanel.setVisibility(View.GONE);
+            mAlarmPanel.setVisibility(View.VISIBLE);
+        } else {
+            mDatePanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mAlarmPanel.setVisibility(View.GONE);
+        }
     }
 }
