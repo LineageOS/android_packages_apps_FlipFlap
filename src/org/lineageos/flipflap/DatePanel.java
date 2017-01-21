@@ -20,54 +20,20 @@
 
 package org.lineageos.flipflap;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.TextClock;
 
-import java.util.Date;
+import java.util.Locale;
 
 public class DatePanel extends LinearLayout {
     private static final String TAG = "DatePanel";
 
     private final Context mContext;
 
-    private TextView mDateView;
-
-    private boolean mReceiverRegistered;
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (Intent.ACTION_DATE_CHANGED.equals(action)) {
-                refreshDate();
-            }
-        }
-    };
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (!mReceiverRegistered) {
-            IntentFilter filter = new IntentFilter(Intent.ACTION_DATE_CHANGED);
-            mContext.registerReceiver(mReceiver, filter);
-            mReceiverRegistered = true;
-            refreshDate();
-        }
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (mReceiverRegistered) {
-            mContext.unregisterReceiver(mReceiver);
-            mReceiverRegistered = false;
-        }
-    }
+    private TextClock mDateView;
 
     public DatePanel(Context context) {
         this(context, null);
@@ -86,15 +52,15 @@ public class DatePanel extends LinearLayout {
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
-        mDateView = (TextView) findViewById(R.id.date_regular);
+        final CharSequence dateFormat = getDateFormat(mContext);
+        mDateView = (TextClock) findViewById(R.id.date_regular);
+        mDateView.setFormat12Hour(dateFormat);
+        mDateView.setFormat24Hour(dateFormat);
     }
 
-    private void refreshDate() {
-        Date now = new Date();
-        String dateFormat = mContext.getString(R.string.abbrev_wday_month_day_no_year);
-        CharSequence date = DateFormat.format(dateFormat, now);
-
-        mDateView.setText(date);
+    private static CharSequence getDateFormat(Context context) {
+        final String dateFormat = context.getString(R.string.abbrev_wday_month_day_no_year);
+        return DateFormat.getBestDateTimePattern(Locale.getDefault(), dateFormat);
     }
 
 }

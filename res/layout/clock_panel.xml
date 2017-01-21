@@ -36,35 +36,15 @@
         android:layoutDirection="ltr"
         android:layout_gravity="center_horizontal|top" >
 
-        <!-- Hours -->
-        <TextView
-            android:id="@+id/clock1"
-            style="@style/widget_big_thin"
+        <!-- Time -->
+        <TextClock
+            android:id="@+id/the_clock"
+            style="@style/widget_medium_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:baselineAligned="true"
+            android:maxLines="1"
             android:layout_gravity="top|center"
             android:textColor="@color/clock_white" />
-
-        <!-- Minutes -->
-
-        <TextView
-            android:id="@+id/clock2"
-            style="@style/widget_big_thin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center"
-            android:textColor="@color/clock_white" />
-
-        <!-- AM/PM -->
-        <TextView
-            android:id="@+id/clock_ampm"
-            style="@style/label_thin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/clock_white"
-            android:visibility="gone"
-            text="PM" />
     </LinearLayout>
 </org.lineageos.flipflap.ClockPanel>
