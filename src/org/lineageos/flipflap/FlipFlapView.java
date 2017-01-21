@@ -185,9 +185,14 @@ public class FlipFlapView extends FrameLayout {
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        postScreenOff();
+        return false;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!mProximityNear) {
-            postScreenOff();
             mDetector.onTouchEvent(event);
             return super.onTouchEvent(event);
         } else {
