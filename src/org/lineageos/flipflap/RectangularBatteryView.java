@@ -20,6 +20,7 @@
 
 package org.lineageos.flipflap;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -40,6 +41,26 @@ public class RectangularBatteryView extends View {
     private Paint mPaint;
     private Rect mRect;
 
+    private boolean mBatteryStateReceiverRegistered;
+    private final BroadcastReceiver mBatteryStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                    status == BatteryManager.BATTERY_STATUS_FULL;
+
+            if (isCharging) {
+                mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
+            } else if (level >= 15) {
+                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+            } else {
+                mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
+            }
+            postInvalidate();
+        }
+    };
+
     public RectangularBatteryView(Context context) {
         this(context, null);
     }
@@ -55,8 +76,32 @@ public class RectangularBatteryView extends View {
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mPaint.setStyle(Style.FILL);
         mResources = mContext.getResources();
+    }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (!mBatteryStateReceiverRegistered) {
+            mContext.registerReceiver(mBatteryStateReceiver,
+                    new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            mBatteryStateReceiverRegistered = true;
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mBatteryStateReceiverRegistered) {
+            mContext.unregisterReceiver(mBatteryStateReceiver);
+            mBatteryStateReceiverRegistered = false;
+        }
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
         int left = mResources.getInteger(R.integer.rectangular_window_left);
         int top = mResources.getInteger(R.integer.rectangular_window_top);
         int width = mResources.getInteger(R.integer.rectangular_window_width);
@@ -67,23 +112,7 @@ public class RectangularBatteryView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        Intent batteryStatus = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL;
-
         canvas.drawRGB(0, 0, 0);
-        mPaint.setStyle(Style.FILL);
-
-        if (isCharging) {
-            mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
-        } else if (level >= 15) {
-            mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
-        } else {
-            mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
-        }
         canvas.drawRect(mRect, mPaint);
     }
 }
