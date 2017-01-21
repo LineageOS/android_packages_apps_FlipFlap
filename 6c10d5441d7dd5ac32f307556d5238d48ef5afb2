@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_03137e5d",
+        "filename": "src/org/lineageos/flipflap/ClockPanel.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-21T00:26:22Z",
+      "side": 1,
+      "message": "Doesn\u0027t TextClock already handle this?",
+      "revId": "6c10d5441d7dd5ac32f307556d5238d48ef5afb2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
