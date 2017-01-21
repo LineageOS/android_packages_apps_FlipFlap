@@ -22,23 +22,8 @@
     <string name="app_name">FlipFlap</string>
     <string name="loading_indicator">Loading widget\u2026</string>
 
-    <!-- Formating strings for widget clock -->
-    <string name="widget_12_hours_format_h" translatable="false">h</string>
-    <string name="widget_12_hours_format_no_ampm_m" translatable="false">:mm</string>
-    <string name="widget_12_hours_format_m" translatable="false">:mm<font size="15">aa</font></string>
-    <string name="widget_12_hours_format_ampm" translatable="false">a</string>
-
-    <!-- java.text.SimpleDateFormat uses H for hours in the 0-23 range and
-         android.text.format.DateFormat uses k for hours in the 0-23 range.
-         We need to support both -->
-    <string name="widget_24_hours_format_h" translatable="false">kk</string>
-    <string name="widget_24_hours_format_h_api_16" translatable="false">HH</string>
-    <string name="widget_24_hours_format_m" translatable="false">:mm</string>
-
     <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
-    <!-- Format for describing the date, for accessibility. -->
-    <string name="full_wday_month_day_no_year">EEEE, MMMM d</string>
 
     <!-- Strings for the Settings -->
     <string name="settings_name">Flip cover</string>
