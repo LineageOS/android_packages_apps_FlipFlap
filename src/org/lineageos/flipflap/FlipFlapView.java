@@ -77,6 +77,9 @@ public class FlipFlapView extends FrameLayout {
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        updateCallState(new CallState(context, tm.getCallState(), null));
     }
 
     protected boolean canUseProximitySensor() {
