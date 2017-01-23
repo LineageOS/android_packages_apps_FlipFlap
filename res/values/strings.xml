@@ -41,4 +41,8 @@
     <!-- Format for describing the date, for accessibility. -->
     <string name="full_wday_month_day_no_year">EEEE, MMMM d</string>
 
+    <string name="answer_call">ANSWER</string>
+    <string name="ignore_call">IGNORE</string>
+    <string name="end_call">END CALL</string>
+
 </resources>
