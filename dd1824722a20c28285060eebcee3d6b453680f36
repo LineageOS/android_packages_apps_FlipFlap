@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_4c5f6e73",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 6351
+      },
+      "writtenOn": "2017-01-23T09:43:48Z",
+      "side": 1,
+      "message": "null should the number that is calling or connected, how do you get that number here?",
+      "revId": "dd1824722a20c28285060eebcee3d6b453680f36",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
