@@ -25,6 +25,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ import java.util.List;
 public class IceviewNotificationView extends LinearLayout {
     private static final String TAG = "IceviewNotificationView";
 
+    private GestureDetector mDetector;
     private Notification mNotification;
 
     public IceviewNotificationView(Context context) {
@@ -44,6 +47,8 @@ public class IceviewNotificationView extends LinearLayout {
 
     public IceviewNotificationView(Context context, AttributeSet attrSet) {
         super(context, attrSet);
+
+        mDetector = new GestureDetector(context, mGestureListener);
     }
 
     public void setNotification(Notification notification) {
@@ -65,4 +70,32 @@ public class IceviewNotificationView extends LinearLayout {
             iconView.setImageDrawable(drawable);
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    private final GestureDetector.SimpleOnGestureListener mGestureListener =
+            new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+Log.e(TAG, "double tap " + mNotification);
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+Log.e(TAG, "double tap event " + mNotification);
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+Log.e(TAG, "single tap " + mNotification);
+            return true;
+        }
+    };
+
 }
