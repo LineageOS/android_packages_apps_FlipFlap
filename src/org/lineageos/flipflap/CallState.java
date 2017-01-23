@@ -79,6 +79,10 @@ public class CallState {
         return mNumber;
     }
 
+    public String toString() {
+        return "CallState[mState=" + mState + ", mName=" + mName + ", mNumber=" + mNumber + "]";
+    }
+
     private static int stateStringToInt(String state) {
         if (TelephonyManager.EXTRA_STATE_IDLE.equals(state)) {
             return TelephonyManager.CALL_STATE_IDLE;
