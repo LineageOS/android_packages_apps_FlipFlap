@@ -35,16 +35,11 @@ public class CallState {
     private final String mNumber;
 
     public CallState(Context context, String state, String number) {
-        if (TelephonyManager.EXTRA_STATE_IDLE.equals(state)) {
-            mState = TelephonyManager.CALL_STATE_IDLE;
-        } else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(state)) {
-            mState = TelephonyManager.CALL_STATE_OFFHOOK;
-        } else if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {
-            mState = TelephonyManager.CALL_STATE_RINGING;
-        } else {
-            throw new IllegalArgumentException("Invalid state " + state);
-        }
+        this(context, stateStringToInt(state), number);
+    }
 
+    public CallState(Context context, int state, String number) {
+        mState = state;
         if ("restricted".equalsIgnoreCase(number)) {
             // If call is restricted, don't show a number
             mName = number;
@@ -82,5 +77,17 @@ public class CallState {
 
     public String getNumber() {
         return mNumber;
+    }
+
+    private static int stateStringToInt(String state) {
+        if (TelephonyManager.EXTRA_STATE_IDLE.equals(state)) {
+            return TelephonyManager.CALL_STATE_IDLE;
+        } else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(state)) {
+            return TelephonyManager.CALL_STATE_OFFHOOK;
+        } else if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {
+            return TelephonyManager.CALL_STATE_RINGING;
+        } else {
+            throw new IllegalArgumentException("Invalid state " + state);
+        }
     }
 }

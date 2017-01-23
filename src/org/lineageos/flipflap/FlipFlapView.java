@@ -82,6 +82,10 @@ public class FlipFlapView extends FrameLayout {
 
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.setReferenceCounted(false);
+
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        updateCallState(new CallState(context, tm.getCallState(), null));
     }
 
     protected boolean canUseProximitySensor() {
