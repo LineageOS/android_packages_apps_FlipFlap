@@ -98,6 +98,10 @@ public class FlipFlapView extends FrameLayout {
         return 0.5F;
     }
 
+    protected boolean isRinging() {
+        return mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_RINGING;
+    }
+
     protected boolean supportsAlarmActions() {
         return false;
     }
@@ -136,10 +140,12 @@ public class FlipFlapView extends FrameLayout {
 
     protected void acceptRingingCall() {
         mTelecomManager.acceptRingingCall();
+        mWakeLock.release();
     }
 
     protected void endCall() {
         mTelecomManager.endCall();
+        mWakeLock.release();
     }
 
     @Override
@@ -147,6 +153,9 @@ public class FlipFlapView extends FrameLayout {
         super.onAttachedToWindow();
 
         updateCallState(new CallState(getContext(), mTelephonyManager.getCallState(), null));
+        if((isRinging() == true) && !mWakeLock.isHeld()) {
+            mWakeLock.acquire();
+        }
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
@@ -199,6 +208,9 @@ public class FlipFlapView extends FrameLayout {
         }
 
         mPowerManager.wakeUp(SystemClock.uptimeMillis(), "Cover Opened");
+        if(mWakeLock.isHeld()) {
+            mWakeLock.release();
+        }
     }
 
     @Override
@@ -262,6 +274,13 @@ public class FlipFlapView extends FrameLayout {
                 String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
                 String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                 updateCallState(new CallState(context, state, number));
+                if((isRinging() == true) && !mWakeLock.isHeld()) {
+                    mWakeLock.acquire();
+                } else {
+                    if((isRinging() == false) && mWakeLock.isHeld()) {
+                        mWakeLock.release();
+                    }
+                }
             } else if (FlipFlapUtils.ACTION_ALARM_ALERT.equals(action) && supportsAlarmActions()) {
                 // add other alarm apps here
                 updateAlarmState(true);
@@ -347,7 +366,7 @@ public class FlipFlapView extends FrameLayout {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case COVER_CLOSED_MSG:
-                    if (!mAlarmActive) {
+                    if (!mAlarmActive && (isRinging() == false)) {
                         mPowerManager.goToSleep(SystemClock.uptimeMillis());
                     }
                     break;
