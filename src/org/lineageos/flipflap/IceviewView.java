@@ -35,12 +35,13 @@ import android.util.Log;
 public class IceviewView extends FlipFlapView {
     private static final String TAG = "IceviewView";
 
+    private Context mContext;
     private ClockPanel mClockPanel;
     private LinearLayout mNotificationsView;
 
     public IceviewView(Context context) {
         super(context);
-
+        mContext = context;
         inflate(mContext, R.layout.iceview_view, this);
 
         mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
