@@ -56,7 +56,9 @@ public class FlipFlapView extends FrameLayout {
     private static final String TAG = "FlipFlapView";
 
     private static final int COVER_CLOSED_MSG = 0;
+    private static final int RESTORE_SECURITY_VIEW_STATE = 1;
 
+    private Context mContext;
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
     private PowerManager.WakeLock mWakeLock;
@@ -69,7 +71,7 @@ public class FlipFlapView extends FrameLayout {
 
     public FlipFlapView(Context context) {
         super(context);
-
+        mContext = context;
         setBackgroundColor(Color.BLACK);
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
@@ -84,6 +86,8 @@ public class FlipFlapView extends FrameLayout {
 
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.setReferenceCounted(false);
+
+        FlipFlapUtils.changeSecurityViewState(context);
     }
 
     protected boolean canUseProximitySensor() {
@@ -176,6 +180,7 @@ public class FlipFlapView extends FrameLayout {
 
         mHandler.removeCallbacksAndMessages(null);
         getContext().unregisterReceiver(mReceiver);
+        restoreSecurityViewState();
 
         if (supportsNotifications()) {
             try {
@@ -322,11 +327,19 @@ public class FlipFlapView extends FrameLayout {
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);
-        if (mPowerManager.isInteractive()) {
+        int timeout = FlipFlapUtils.getTimeout(mContext, false);
+        if (mPowerManager.isInteractive() && timeout != FlipFlapUtils.DELAYED_SCREEN_OFF_NEVER) {
             Message msg = Message.obtain();
             msg.what = COVER_CLOSED_MSG;
-            mHandler.sendMessageDelayed(msg, FlipFlapUtils.DELAYED_SCREEN_OFF_MS);
+            mHandler.sendMessageDelayed(msg, timeout);
         }
+    }
+
+    private void restoreSecurityViewState() {
+        Message message = new Message();
+        message.what = RESTORE_SECURITY_VIEW_STATE;
+
+        mHandler.sendMessageDelayed(message, 1500);
     }
 
     private final Handler mHandler = new Handler(true /*async*/) {
@@ -337,6 +350,9 @@ public class FlipFlapView extends FrameLayout {
                     if (!mAlarmActive) {
                         mPowerManager.goToSleep(SystemClock.uptimeMillis());
                     }
+                    break;
+                case RESTORE_SECURITY_VIEW_STATE:
+                    FlipFlapUtils.restoreSecurityViewState(mContext);
                     break;
             }
         }
