@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_14815b8f",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-28T14:44:33Z",
+      "side": 1,
+      "message": "if (isRinging() \u0026\u0026 !mWakeLock.isHeld())\nDo not mix styles, either always compare with true and false or don\u0027t (I prefer not to), but don\u0027t do both styles within the same line ^^\nAlso keep a space between \"if\" and the opening \"(\"",
+      "revId": "ba2362e7a01b42fa3e1fcc68904ea9053e77dbab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_94442b75",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-28T14:44:33Z",
+      "side": 1,
+      "message": "\"if (\" \u003c- add space before \"(\"",
+      "revId": "ba2362e7a01b42fa3e1fcc68904ea9053e77dbab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_b4684ff6",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-28T14:44:33Z",
+      "side": 1,
+      "message": "if (isRinging() \u0026\u0026 !mWakeLock.isHeld())",
+      "range": {
+        "startLine": 277,
+        "startChar": 19,
+        "endLine": 277,
+        "endChar": 41
+      },
+      "revId": "ba2362e7a01b42fa3e1fcc68904ea9053e77dbab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_7472e7e6",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-28T14:44:33Z",
+      "side": 1,
+      "message": "if (!isRinging() \u0026\u0026 mWakeLock.isHeld())",
+      "revId": "ba2362e7a01b42fa3e1fcc68904ea9053e77dbab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_5477e3d4",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-01-28T14:44:33Z",
+      "side": 1,
+      "message": "\u0026\u0026 !isRinging()",
+      "revId": "ba2362e7a01b42fa3e1fcc68904ea9053e77dbab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
