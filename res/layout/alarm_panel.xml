@@ -7,8 +7,9 @@
 
     <ImageButton
         android:id="@+id/snooze_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="60dip"
         android:layout_centerVertical="true"
@@ -24,8 +25,9 @@
         android:tint="@color/clock_white" />
 
     <ImageButton android:id="@+id/dismiss_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="60dip"

@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/clock_white"
-        android:layout_marginBottom="15dp"
         android:textAlignment="center" />
 
     <TextView
@@ -23,13 +22,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/clock_white"
-        android:layout_marginBottom="15dp"
         android:layout_below="@id/incoming_call_name"
         android:textAlignment="center" />
 
     <ImageView android:id="@+id/incoming_call_alert_icon"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:drawablePadding="2dip"
         android:gravity="center"
         android:layout_below="@id/incoming_call_number"
@@ -37,8 +35,9 @@
 
     <ImageButton
         android:id="@+id/answer_button"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="80dip"
         android:layout_alignBottom="@id/incoming_call_alert_icon"
@@ -47,8 +46,9 @@
         android:background="@android:color/transparent" />
 
     <ImageButton android:id="@+id/ignore_button"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:layout_alignParentRight="true"
         android:layout_marginRight="80dip"
         android:layout_alignBottom="@id/incoming_call_alert_icon"
@@ -89,7 +89,6 @@
         android:src="@drawable/ic_call_end"
         android:layout_below="@id/incoming_call_alert_icon"
         android:background="@android:color/transparent"
-        android:layout_marginBottom="15dp"
         android:visibility="invisible" />
 
     <TextView

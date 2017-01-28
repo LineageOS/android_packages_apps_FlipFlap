@@ -40,4 +40,6 @@
     <integer name="rectangular_window_width" translatable="false">0</integer>
     <integer name="rectangular_window_height" translatable="false">0</integer>
 
+    <bool name="config_DeviceNeedsSmallRect">false</bool>
+
 </resources>

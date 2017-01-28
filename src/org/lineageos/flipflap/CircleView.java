@@ -127,12 +127,13 @@ public class CircleView extends FlipFlapView {
     }
 
     private void updateViewVisibility() {
+        mClockPanel.setVisibility(View.VISIBLE);
+
         if (mRinging || mCallActive) {
-            mClockPanel.setVisibility(View.GONE);
-            mDatePanel.setVisibility(View.GONE);
-            mNextAlarmPanel.setVisibility(View.GONE);
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.VISIBLE);
+            mDatePanel.setVisibility(View.GONE);
+            mNextAlarmPanel.setVisibility(View.GONE);
             if (mRinging) {
                 mAnswerCallButton.setVisibility(View.VISIBLE);
                 mIgnoreCallButton.setVisibility(View.VISIBLE);
@@ -143,13 +144,11 @@ public class CircleView extends FlipFlapView {
                 mEndCallButton.setVisibility(View.VISIBLE);
             }
         } else if (mAlarmActive) {
-            mClockPanel.setVisibility(View.VISIBLE);
-            mDatePanel.setVisibility(View.GONE);
-            mNextAlarmPanel.setVisibility(View.GONE);
+            mDatePanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.setVisibility(View.VISIBLE);
             mAlarmPanel.setVisibility(View.VISIBLE);
             mPhonePanel.setVisibility(View.GONE);
         } else {
-            mClockPanel.setVisibility(View.VISIBLE);
             mDatePanel.setVisibility(View.VISIBLE);
             mNextAlarmPanel.setVisibility(View.VISIBLE);
             mAlarmPanel.setVisibility(View.GONE);

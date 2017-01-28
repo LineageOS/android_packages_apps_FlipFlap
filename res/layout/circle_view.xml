@@ -34,9 +34,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="60dp" />
 
     <LinearLayout
+        android:id="@+id/date_next_alarm_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="ltr"
@@ -62,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/clock_panel"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/date_next_alarm_panel"
         android:visibility="gone"/>
 
     <include layout="@layout/phone_panel"
@@ -71,6 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/date_next_alarm_panel"
         android:visibility="gone"/>
 </RelativeLayout>
