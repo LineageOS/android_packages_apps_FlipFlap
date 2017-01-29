@@ -168,7 +168,7 @@ public class DotcaseView extends FlipFlapView {
         super.updateCallState(callState);
         mRinging = callState.isRinging();
         // add spaces to make the scroll effect look good
-        mCallerName = normalize(callState.getName()) + "  ";
+        mCallerName = mRinging ? normalize(callState.getName()) + "  " : null;
         mCallerNumber = mRinging ? callState.getNumber() : null;
         mNameOffset = -6;
         mRingCounter = 0;
@@ -462,6 +462,9 @@ public class DotcaseView extends FlipFlapView {
     }
 
     private static String normalize(String str) {
+        if (str == null) {
+            return "";
+        }
         return Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
                 .replaceAll("æ", "ae")
