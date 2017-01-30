@@ -1,0 +1,57 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_5a4b8559",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-30T17:13:09Z",
+      "side": 1,
+      "message": "Can drop this and use getActivity() instead.",
+      "revId": "c4be39cc170da87bc7dbd4cdab7d8f714f71c203",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_1a75fd97",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-30T17:13:09Z",
+      "side": 1,
+      "message": "Constants (static final) don\u0027t need the s prefix. Maybe also improve naming, e.g. COVER_TYPES_WITH_CHARGING_INDICATION?",
+      "parentUuid": "",
+      "revId": "c4be39cc170da87bc7dbd4cdab7d8f714f71c203",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_3a48c15a",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-01-30T17:13:09Z",
+      "side": 1,
+      "message": "statics should have s prefix. Besides that, this static member doesn\u0027t really feel appropriate here and should be a non-static member in FlipFlapView.",
+      "parentUuid": "",
+      "revId": "c4be39cc170da87bc7dbd4cdab7d8f714f71c203",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
