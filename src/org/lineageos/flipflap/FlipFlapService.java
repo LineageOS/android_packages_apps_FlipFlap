@@ -92,7 +92,7 @@ public class FlipFlapService extends Service {
     }
 
     private FlipFlapView createCoverView() {
-        int coverStyle = getResources().getInteger(R.integer.config_deviceCoverType);
+        int coverStyle = FlipFlapUtils.getCoverStyle(mContext);
         switch (coverStyle) {
             case FlipFlapUtils.COVER_STYLE_DOTCASE: return new DotcaseView(mContext);
             case FlipFlapUtils.COVER_STYLE_CIRCLE: return new CircleView(mContext);
