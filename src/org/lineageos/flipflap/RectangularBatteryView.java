@@ -50,7 +50,9 @@ public class RectangularBatteryView extends View {
             boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                     status == BatteryManager.BATTERY_STATUS_FULL;
 
-            if (isCharging) {
+            if (!FlipFlapUtils.showBatteryStatus(mContext)) {
+                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+            } else if (isCharging) {
                 mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
             } else if (level >= 15) {
                 mPaint.setColor(mResources.getColor(R.color.full_bat_bg));

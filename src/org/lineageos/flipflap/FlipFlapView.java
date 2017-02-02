@@ -25,6 +25,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -33,6 +34,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserHandle;
@@ -52,11 +54,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.cyanogenmod.internal.util.CmLockPatternUtils;
+
 public class FlipFlapView extends FrameLayout {
     private static final String TAG = "FlipFlapView";
+    private static final String KEY_PASS_TO_SECURITY = "pass_to_security_view";
 
     private static final int COVER_CLOSED_MSG = 0;
+    private static final int RESTORE_SECURITY_VIEW_STATE = 1;
 
+    private Context mContext;
     private GestureDetector mDetector;
     private PowerManager mPowerManager;
     private PowerManager.WakeLock mWakeLock;
@@ -66,10 +73,15 @@ public class FlipFlapView extends FrameLayout {
     private boolean mAlarmActive;
     private boolean mProximityNear;
     private boolean mNotificationListenerRegistered;
+    private boolean mPassToSecurity;
+
+    /* Required to only read the setting when it's already restored, else when closing the cover
+    within the timeout (1.5s), it would read "true" (because we set it) and always restore that */
+    private static boolean mRestoredPassToSecurity = true;
 
     public FlipFlapView(Context context) {
         super(context);
-
+        mContext = context;
         setBackgroundColor(Color.BLACK);
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
@@ -84,6 +96,8 @@ public class FlipFlapView extends FrameLayout {
 
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.setReferenceCounted(false);
+
+        changeSecurityViewState();
     }
 
     protected boolean canUseProximitySensor() {
@@ -176,6 +190,7 @@ public class FlipFlapView extends FrameLayout {
 
         mHandler.removeCallbacksAndMessages(null);
         getContext().unregisterReceiver(mReceiver);
+        restoreSecurityViewState();
 
         if (supportsNotifications()) {
             try {
@@ -322,11 +337,19 @@ public class FlipFlapView extends FrameLayout {
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);
-        if (mPowerManager.isInteractive()) {
+        int timeout = FlipFlapUtils.getTimeout(mContext, false);
+        if (mPowerManager.isInteractive() && timeout != FlipFlapUtils.DELAYED_SCREEN_OFF_NEVER) {
             Message msg = Message.obtain();
             msg.what = COVER_CLOSED_MSG;
-            mHandler.sendMessageDelayed(msg, FlipFlapUtils.DELAYED_SCREEN_OFF_MS);
+            mHandler.sendMessageDelayed(msg, timeout);
         }
+    }
+
+    private void restoreSecurityViewState() {
+        Message message = new Message();
+        message.what = RESTORE_SECURITY_VIEW_STATE;
+
+        mHandler.sendMessageDelayed(message, 1500);
     }
 
     private final Handler mHandler = new Handler(true /*async*/) {
@@ -338,7 +361,41 @@ public class FlipFlapView extends FrameLayout {
                         mPowerManager.goToSleep(SystemClock.uptimeMillis());
                     }
                     break;
+
+                case RESTORE_SECURITY_VIEW_STATE:
+                    if (shouldChangeSecurityViewState()) {
+                        setPassToSecurityView(mPassToSecurity);
+                        mPassToSecurity = false;
+                        mRestoredPassToSecurity = true;
+                    }
+                    break;
             }
         }
     };
+
+    private void changeSecurityViewState() {
+        if (shouldChangeSecurityViewState() && mRestoredPassToSecurity) {
+            mPassToSecurity = shouldPassToSecurityView();
+            setPassToSecurityView(true);
+            mRestoredPassToSecurity = false;
+        }
+    }
+
+    private boolean shouldChangeSecurityViewState() {
+        return FlipFlapUtils.getPreferences(mContext).getBoolean(KEY_PASS_TO_SECURITY, false);
+    }
+
+    private boolean shouldPassToSecurityView() {
+        CmLockPatternUtils cml = new CmLockPatternUtils(mContext);
+        return cml.shouldPassToSecurityView(getUserId());
+    }
+
+    private void setPassToSecurityView(boolean enabled) {
+        CmLockPatternUtils cml = new CmLockPatternUtils(mContext);
+        cml.setPassToSecurityView(enabled, getUserId());
+    }
+
+    private int getUserId() {
+        return UserHandle.getUserId(Process.myUid());
+    }
 }
