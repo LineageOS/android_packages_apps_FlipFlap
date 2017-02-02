@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_c33c2832",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-02T12:38:45Z",
+      "side": 1,
+      "message": "Should probably expand those: 5 seconds, 10 seconds, ..., 1 minute, ...",
+      "revId": "399b983d8b74b561c6235c60ae439d3938344275",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
