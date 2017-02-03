@@ -20,6 +20,7 @@
 
 <resources>
     <string-array name="timeout_entries" translatable="false">
+        <item>@string/timeout_entry_immediately</item>
         <item>@string/timeout_entry_5s</item>
         <item>@string/timeout_entry_10s</item>
         <item>@string/timeout_entry_30s</item>
@@ -29,6 +30,7 @@
     </string-array>
 
     <string-array name="timeout_values" translatable="false">
+        <item>0</item>
         <item>5</item>
         <item>10</item>
         <item>30</item>
