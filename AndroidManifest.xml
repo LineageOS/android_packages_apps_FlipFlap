@@ -40,7 +40,8 @@
         <activity
             android:name=".FlipFlapSettingsActivity"
             android:label="@string/settings_name"
-            android:theme="@style/FlipFlapSettingsTheme">
+            android:theme="@style/FlipFlapSettingsTheme"
+            android:enabled="false">
 
             <intent-filter>
                 <action android:name="com.android.settings.action.EXTRA_SETTINGS" />

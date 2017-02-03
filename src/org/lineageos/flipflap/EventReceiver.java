@@ -21,13 +21,20 @@
 package org.lineageos.flipflap;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
+import android.os.BatteryManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.WindowManagerPolicy.WindowManagerFuncs;
 
 public class EventReceiver extends BroadcastReceiver {
     static final String TAG = "FlipFlap";
+    static final String SETTINGS_ACTIVE = "settings_active";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -35,12 +42,42 @@ public class EventReceiver extends BroadcastReceiver {
             int lidState = intent.getIntExtra(cyanogenmod.content.Intent.EXTRA_LID_STATE, -1);
             Log.d(TAG, "Got lid state change event, new state " + lidState);
 
+            activateSettings(context, false);
+
+            int timeout = getTimeout(context);
             Intent serviceIntent = new Intent(context, FlipFlapService.class);
-            if (lidState == WindowManagerFuncs.LID_CLOSED) {
+            if (lidState == WindowManagerFuncs.LID_CLOSED && timeout != 0) {
                 context.startService(serviceIntent);
+                activateSettings(context, true);
             } else {
                 context.stopService(serviceIntent);
             }
         }
+    }
+
+    private void activateSettings(Context context, boolean activate)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean settings_active = prefs.getBoolean(SETTINGS_ACTIVE, false);
+
+        if (activate) {
+            prefs.edit().putBoolean(SETTINGS_ACTIVE, true).commit();
+        }
+
+        if (settings_active || activate) {
+            ComponentName settings = new ComponentName(context, FlipFlapSettingsActivity.class);
+            PackageManager pm = context.getPackageManager();
+            pm.setComponentEnabledSetting(settings,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
+        }
+    }
+
+    private int getTimeout(Context context)
+    {
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, filter);
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING;
+        return FlipFlapUtils.getTimeout(context, isCharging);
     }
 }
