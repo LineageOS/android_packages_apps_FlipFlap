@@ -46,7 +46,9 @@
     <string name="timeout_unplugged_title">Unplugged</string>
     <string name="timeout_summary">Display the cover app for %s after closing the lid</string>
     <string name="timeout_summary_never">After closing the lid, the cover app will always stay on</string>
+    <string name="timeout_summary_immediately">The screen will be turned off when closing the cover</string>
 
+    <string name="timeout_entry_immediately">Immediately</string>
     <string name="timeout_entry_5s">5 seconds</string>
     <string name="timeout_entry_10s">10 seconds</string>
     <string name="timeout_entry_30s">30 seconds</string>
