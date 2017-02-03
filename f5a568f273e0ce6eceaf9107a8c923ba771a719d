@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_51bb96c4",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "\u0027The screen will be turned off when closing the cover\u0027?",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_31e7eae6",
+        "filename": "src/org/lineageos/flipflap/EventReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "This should be nuked, otherwise you\u0027ll have the settings only while the cover is closed.",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_11eceec6",
+        "filename": "src/org/lineageos/flipflap/EventReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "https://developer.android.com/reference/android/content/Context.html#BATTERY_SERVICE",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_f1d042f9",
+        "filename": "src/org/lineageos/flipflap/EventReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "Should only do the RPC call once.",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_d1cd465f",
+        "filename": "src/org/lineageos/flipflap/EventReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "This should go on the previous line.",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_51095694",
+        "filename": "src/org/lineageos/flipflap/EventReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "Besides the variable name being off (underscore), what\u0027s the point of this shared pref stuff?",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_31feca6c",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-02-03T19:03:10Z",
+      "side": 1,
+      "message": "Instead of the magic value, should probably just pass in the real setting value here, fetched via the utils method, and drop the special handling below.",
+      "revId": "f5a568f273e0ce6eceaf9107a8c923ba771a719d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
