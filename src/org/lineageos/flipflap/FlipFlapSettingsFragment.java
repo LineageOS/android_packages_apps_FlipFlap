@@ -40,8 +40,6 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
 
     private final String KEY_DESIGN_CATEGORY = "category_design";
 
-    private Context mContext;
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.flipflapsettings_panel);
@@ -55,8 +53,8 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
                 findPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
         unpluggedTimeout.setOnPreferenceChangeListener(this);
 
-        setTimeoutSummary(pluggedTimeout, 0);
-        setTimeoutSummary(unpluggedTimeout, 0);
+        setTimeoutSummary(pluggedTimeout, FlipFlapUtils.getTimeout(getActivity(), true));
+        setTimeoutSummary(unpluggedTimeout, FlipFlapUtils.getTimeout(getActivity(), false));
 
         int cover = FlipFlapUtils.getCoverStyle(getActivity());
         if (!FlipFlapUtils.showsChargingStatus(cover)) {
@@ -85,10 +83,10 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
     }
 
     private void setTimeoutSummary(Preference pref, int timeOut) {
-        timeOut = (timeOut != 0) ? timeOut : FlipFlapUtils.getTimeout(getContext(), pref.getKey());
-
-        pref.setSummary(timeOut == -1
+        pref.setSummary(timeOut < 0
                 ? R.string.timeout_summary_never
-                : R.string.timeout_summary);
+                : timeOut == 0
+                    ? R.string.timeout_summary_immediately
+                    : R.string.timeout_summary);
     }
 }
