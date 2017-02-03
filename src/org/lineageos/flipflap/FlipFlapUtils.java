@@ -47,7 +47,7 @@ public class FlipFlapUtils {
     static final int COVER_STYLE_ICEVIEW = 4;
 
     static final int DELAYED_SCREEN_OFF_MS = 5000;
-    static final int DELAYED_SCREEN_OFF_NEVER = -1;
+    static final int DELAYED_SCREEN_OFF_NEVER = -1000;
 
     static final String KEY_TIMEOUT_UNPLUGGED = "timeout_unplugged";
     static final String KEY_TIMEOUT_PLUGGED = "timeout_plugged";
