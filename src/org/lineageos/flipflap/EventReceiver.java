@@ -21,26 +21,47 @@
 package org.lineageos.flipflap;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.BatteryManager;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.WindowManagerPolicy.WindowManagerFuncs;
 
 public class EventReceiver extends BroadcastReceiver {
     static final String TAG = "FlipFlap";
+    private PowerManager mPowerManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (cyanogenmod.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
+            mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             int lidState = intent.getIntExtra(cyanogenmod.content.Intent.EXTRA_LID_STATE, -1);
             Log.d(TAG, "Got lid state change event, new state " + lidState);
 
+            BatteryManager batMan = (BatteryManager) context.getSystemService(
+                    Context.BATTERY_SERVICE);
+            int timeout = FlipFlapUtils.getTimeout(context, batMan.isCharging());
             Intent serviceIntent = new Intent(context, FlipFlapService.class);
-            if (lidState == WindowManagerFuncs.LID_CLOSED) {
+            if (lidState == WindowManagerFuncs.LID_CLOSED && timeout != 0) {
                 context.startService(serviceIntent);
+                activateSettings(context);
+            } else if (lidState == WindowManagerFuncs.LID_CLOSED && timeout == 0) {
+                if (mPowerManager.isInteractive()) {
+                    mPowerManager.goToSleep(SystemClock.uptimeMillis());
+                }
             } else {
                 context.stopService(serviceIntent);
             }
         }
+    }
+
+    private void activateSettings(Context context) {
+        ComponentName settings = new ComponentName(context, FlipFlapSettingsActivity.class);
+        PackageManager pm = context.getPackageManager();
+        pm.setComponentEnabledSetting(settings, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
     }
 }
