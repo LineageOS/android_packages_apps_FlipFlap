@@ -34,9 +34,12 @@ import android.view.WindowManagerPolicy.WindowManagerFuncs;
 public class EventReceiver extends BroadcastReceiver {
     static final String TAG = "FlipFlap";
 
+    private final String KEY_MASTER_SWITCH = "master_switch";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (cyanogenmod.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
+        if (FlipFlapUtils.getPreferences(context).getBoolean(KEY_MASTER_SWITCH, true) &&
+                cyanogenmod.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
             PowerManager powerManager = (PowerManager) context.getSystemService(
                     Context.POWER_SERVICE);
             BatteryManager batMan = (BatteryManager) context.getSystemService(

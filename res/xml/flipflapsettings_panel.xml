@@ -20,6 +20,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:persistent="true">
 
+    <SwitchPreference
+        android:key="master_switch"
+        android:defaultValue="true"
+        android:title="@string/master_switch_title"
+        android:summary="@string/master_switch_summary" />
+
     <PreferenceCategory
         android:title="@string/category_behaviour" >
 
@@ -27,7 +33,8 @@
             android:key="pass_to_security_view"
             android:defaultValue="false"
             android:title="@string/pass_to_security_view_title"
-            android:summary="@string/pass_to_security_view_summary" />
+            android:summary="@string/pass_to_security_view_summary"
+            android:dependency="master_switch"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -38,7 +45,8 @@
             android:key="battery_indication"
             android:defaultValue="true"
             android:title="@string/switch_charging_status_title"
-            android:summary="@string/switch_charging_status_summary" />
+            android:summary="@string/switch_charging_status_summary"
+            android:dependency="master_switch"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -50,7 +58,8 @@
             android:summary=""
             android:entries="@array/timeout_entries"
             android:entryValues="@array/timeout_values"
-            android:defaultValue="5" />
+            android:defaultValue="5"
+            android:dependency="master_switch"/>
 
         <ListPreference
             android:key="timeout_unplugged"
@@ -58,7 +67,8 @@
             android:summary=""
             android:entries="@array/timeout_entries"
             android:entryValues="@array/timeout_values"
-            android:defaultValue="5" />
+            android:defaultValue="5"
+            android:dependency="master_switch"/>
 
     </PreferenceCategory>
 
