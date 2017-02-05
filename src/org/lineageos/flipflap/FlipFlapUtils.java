@@ -67,12 +67,12 @@ public class FlipFlapUtils {
     }
 
     public static int getTimeout(Context context, String key) {
-        return Integer.parseInt(getPreferences(context).getString(key, "5"));
+        return Integer.parseInt(getPreferences(context).getString(key, "5")) * 1000;
     }
 
     public static int getTimeout(Context context, boolean isCharging) {
         String key = isCharging ? KEY_TIMEOUT_PLUGGED : KEY_TIMEOUT_UNPLUGGED;
-        return getTimeout(context, key) * 1000;
+        return getTimeout(context, key);
     }
 
     public static boolean showsChargingStatus(int cover) {

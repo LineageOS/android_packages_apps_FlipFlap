@@ -31,6 +31,10 @@
     <color name="text_shadow_opaque">#3f000000</color>
     <color name="list_selector_focused">#cc33b5e5</color>
     <color name="list_selector_activated">#4d33b5e5</color>
+
+    <color name="switch_bar_background">#ff37474f</color>
+    <color name="switch_accent_color">#ff7fcac3</color>
+
     <!-- Material design app colors -->
     <color name="colorPrimary">#3462b3</color>
     <color name="colorPrimaryDark">#294d8c</color>

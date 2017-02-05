@@ -20,47 +20,72 @@
 
 package org.lineageos.flipflap;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v14.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import org.lineageos.flipflap.R;
 
 public class FlipFlapSettingsFragment extends PreferenceFragment
-        implements OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
     public final String TAG = "FlipFlapSettings";
 
     private final String KEY_DESIGN_CATEGORY = "category_design";
 
+    private Switch mSwitch;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final ViewGroup frame =
+                (ViewGroup) inflater.inflate(R.layout.flipflap_settings, container, false);
+        final View content = super.onCreateView(inflater, frame, savedInstanceState);
+        frame.addView(content);
+        return frame;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final View switchBar = view.findViewById(R.id.switch_bar);
+        switchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSwitch.setChecked(!mSwitch.isChecked());
+            }
+        });
+
+        mSwitch = (Switch) switchBar.findViewById(android.R.id.switch_widget);
+        mSwitch.setChecked(isEventReceiverEnabled());
+        mSwitch.setOnCheckedChangeListener(this);
+        updateEnableStates(mSwitch.isChecked());
+    }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.flipflapsettings_panel);
 
-        PreferenceScreen preferenceScreen = getPreferenceScreen();
-
-        ListPreference pluggedTimeout = (ListPreference)
-                findPreference(FlipFlapUtils.KEY_TIMEOUT_PLUGGED);
-        pluggedTimeout.setOnPreferenceChangeListener(this);
-        ListPreference unpluggedTimeout = (ListPreference)
-                findPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
-        unpluggedTimeout.setOnPreferenceChangeListener(this);
-
-        setTimeoutSummary(pluggedTimeout, FlipFlapUtils.getTimeout(getActivity(), true));
-        setTimeoutSummary(unpluggedTimeout, FlipFlapUtils.getTimeout(getActivity(), false));
+        setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_PLUGGED);
+        setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
 
         int cover = FlipFlapUtils.getCoverStyle(getActivity());
         if (!FlipFlapUtils.showsChargingStatus(cover)) {
-            PreferenceCategory designCategory = (PreferenceCategory)
-                    findPreference(KEY_DESIGN_CATEGORY);
-            preferenceScreen.removePreference(designCategory);
+            PreferenceScreen ps = getPreferenceScreen();
+            ps.removePreference(ps.findPreference(KEY_DESIGN_CATEGORY));
         }
     }
 
@@ -80,6 +105,38 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
                 return true;
 
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
+        ComponentName cn = new ComponentName(getContext(), EventReceiver.class);
+        int state = enabled
+                ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+        getContext().getPackageManager().setComponentEnabledSetting(cn, state,
+                PackageManager.DONT_KILL_APP);
+
+        updateEnableStates(enabled);
+    }
+
+    private void setupTimeoutPreference(String key) {
+        ListPreference list = (ListPreference) findPreference(key);
+        list.setOnPreferenceChangeListener(this);
+        setTimeoutSummary(list, FlipFlapUtils.getTimeout(getActivity(), key));
+    }
+
+    private void updateEnableStates(boolean masterSwitchEnabled) {
+        PreferenceScreen ps = getPreferenceScreen();
+        int count = ps.getPreferenceCount();
+        for (int i = 0; i < count; i++) {
+            ps.getPreference(i).setEnabled(masterSwitchEnabled);
+        }
+    }
+
+    private boolean isEventReceiverEnabled() {
+        ComponentName cn = new ComponentName(getContext(), EventReceiver.class);
+        int state = getContext().getPackageManager().getComponentEnabledSetting(cn);
+        return state != PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
     }
 
     private void setTimeoutSummary(Preference pref, int timeOut) {
