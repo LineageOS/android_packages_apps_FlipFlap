@@ -29,6 +29,8 @@ public class FlipFlapSettingsActivity extends SettingsDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.flipflap_settings);
+
         getFragmentManager().beginTransaction().replace(R.id.content_frame,
                 new FlipFlapSettingsFragment()).commit();
     }
