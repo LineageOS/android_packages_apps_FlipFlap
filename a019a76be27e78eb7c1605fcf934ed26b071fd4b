@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_55ca5ba2",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-02-06T07:41:05Z",
+      "side": 1,
+      "message": "Not related to patch",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 68
+      },
+      "revId": "a019a76be27e78eb7c1605fcf934ed26b071fd4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_15c4d390",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-02-06T07:41:05Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 72
+      },
+      "revId": "a019a76be27e78eb7c1605fcf934ed26b071fd4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_d5bd2b04",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-02-06T07:41:05Z",
+      "side": 1,
+      "message": "Not related",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 5
+      },
+      "revId": "a019a76be27e78eb7c1605fcf934ed26b071fd4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_75d55742",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2017-02-06T07:41:05Z",
+      "side": 1,
+      "message": "Not related to the commit message",
+      "range": {
+        "startLine": 70,
+        "startChar": 75,
+        "endLine": 70,
+        "endChar": 84
+      },
+      "revId": "a019a76be27e78eb7c1605fcf934ed26b071fd4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
