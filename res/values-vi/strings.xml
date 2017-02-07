@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Đã rút sạc</string>
   <string name="timeout_summary">Hiển thị ứng dụng nắp cho %s sau khi đóng nắp</string>
   <string name="timeout_summary_never">Sau khi đóng nắp, các ứng dụng nắp sẽ luôn luôn ở trên</string>
+  <string name="timeout_summary_immediately">Màn hình sẽ bị tắt khi đóng nắp đậy</string>
+  <string name="timeout_entry_immediately">Ngay lập tức</string>
   <string name="timeout_entry_5s">5 giây</string>
   <string name="timeout_entry_10s">10 giây</string>
   <string name="timeout_entry_30s">30 giây</string>

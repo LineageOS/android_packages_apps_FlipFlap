@@ -20,5 +20,18 @@
 -->
 <resources>
   <!-- String matching the lock screen format for displaying the date. -->
+  <string name="answer_call">VÁLASZ</string>
+  <string name="ignore_call">FIGYELMEN KÍVÜL HAGY</string>
+  <string name="end_call">HÍVÁS BEFEJEZÉSE</string>
   <!-- Strings for the Settings -->
+  <string name="pass_to_security_view_title">Közvetlen jelszó megadás megjelenítése</string>
+  <string name="category_design">Kinézet</string>
+  <string name="timeout_plugged_title">Töltés közben</string>
+  <string name="timeout_unplugged_title">Kihúzva</string>
+  <string name="timeout_entry_5s">5 másodperc</string>
+  <string name="timeout_entry_10s">10 másodperc</string>
+  <string name="timeout_entry_30s">30 másodperc</string>
+  <string name="timeout_entry_1min">1 perc</string>
+  <string name="timeout_entry_5min">5 perc</string>
+  <string name="timeout_entry_never">Soha</string>
 </resources>

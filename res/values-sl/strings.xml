@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Odklopljeno</string>
   <string name="timeout_summary">Prikaži osnovno aplikacijo po zapiranju pokrova za %s</string>
   <string name="timeout_summary_never">Po zaprtju pokrova bo osnovna aplikacija vedno ostala odprta</string>
+  <string name="timeout_summary_immediately">Zaslon se bo ugasnil, ko zaprete ovitek</string>
+  <string name="timeout_entry_immediately">Takoj</string>
   <string name="timeout_entry_5s">5 sekund</string>
   <string name="timeout_entry_10s">10 sekund</string>
   <string name="timeout_entry_30s">30 sekund</string>

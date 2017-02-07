@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Şarj Olmuyor</string>
   <string name="timeout_summary">Kapağı kapattıktan %s sonra için kapak uygulamasını görüntüleyin</string>
   <string name="timeout_summary_never">Kapağı kapattıktan sonra, kapak uygulaması her zaman açık kalacaktır</string>
+  <string name="timeout_summary_immediately">Kapak kapatıldığında ekran kapanacaktır</string>
+  <string name="timeout_entry_immediately">Hemen</string>
   <string name="timeout_entry_5s">5 saniye</string>
   <string name="timeout_entry_10s">10 saniye</string>
   <string name="timeout_entry_30s">30 Saniye</string>

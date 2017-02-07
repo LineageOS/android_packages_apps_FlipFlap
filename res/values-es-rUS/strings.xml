@@ -38,8 +38,10 @@
   <string name="category_timeouts">Tiempo de espera</string>
   <string name="timeout_plugged_title">Durante la carga</string>
   <string name="timeout_unplugged_title">Desconectado</string>
-  <string name="timeout_summary">Mostrar la aplicación de la funda %s después de cerrar la tapa</string>
-  <string name="timeout_summary_never">Después de cerrar la tapa, la aplicación de la funda siempre estará encendida</string>
+  <string name="timeout_summary">Mostrar la aplicación de la funda %s al cerrar la tapa</string>
+  <string name="timeout_summary_never">Al cerrar la tapa, la aplicación de la funda siempre estará encendida</string>
+  <string name="timeout_summary_immediately">La pantalla se apagará al cerrar la tapa</string>
+  <string name="timeout_entry_immediately">Inmediatamente</string>
   <string name="timeout_entry_5s">5 segundos</string>
   <string name="timeout_entry_10s">10 segundos</string>
   <string name="timeout_entry_30s">30 segundos</string>

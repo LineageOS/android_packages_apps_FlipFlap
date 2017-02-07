@@ -38,6 +38,10 @@
   <string name="category_timeouts">Comptes enrera</string>
   <string name="timeout_plugged_title">Mentre es carrega</string>
   <string name="timeout_unplugged_title">Desendollat</string>
+  <string name="timeout_summary">Mostra l\'aplicació de la funda durant %s després de tancar la tapa</string>
+  <string name="timeout_summary_never">Després de tancar la tapa, l\'aplicació de la funda sempre es quedarà encesa</string>
+  <string name="timeout_summary_immediately">La pantalla s\'apagarà en tancar la tapa</string>
+  <string name="timeout_entry_immediately">Immediatament</string>
   <string name="timeout_entry_5s">5 segons</string>
   <string name="timeout_entry_10s">10 segons</string>
   <string name="timeout_entry_30s">30 segons</string>

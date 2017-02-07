@@ -27,9 +27,13 @@
   <string name="ignore_call">ABAIKAN</string>
   <string name="end_call">AKHIRI PANGGILAN</string>
   <!-- Strings for the Settings -->
+  <string name="pass_to_security_view_summary">Langsung tampilkan layar kunci ketika penutup dibuka</string>
+  <string name="switch_charging_status_title">Tampilkan status pengisian</string>
+  <string name="category_timeouts">Batas waktu</string>
   <string name="timeout_entry_5s">5 detik</string>
   <string name="timeout_entry_10s">10 detik</string>
   <string name="timeout_entry_30s">30 detik</string>
   <string name="timeout_entry_1min">1 menit</string>
   <string name="timeout_entry_5min">5 menit</string>
+  <string name="timeout_entry_never">Jangan pernah</string>
 </resources>

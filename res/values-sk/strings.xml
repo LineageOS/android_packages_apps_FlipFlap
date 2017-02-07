@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Odpojené</string>
   <string name="timeout_summary">Spustiť aplikáciu %s po uzatvorení obalu</string>
   <string name="timeout_summary_never">Po zatvorení flipového obalu zostane aplikácia aktívna</string>
+  <string name="timeout_summary_immediately">Obrazovka sa vypne pri zatvorení krytu</string>
+  <string name="timeout_entry_immediately">Okamžite</string>
   <string name="timeout_entry_5s">5 sekúnd</string>
   <string name="timeout_entry_10s">10 sekúnd</string>
   <string name="timeout_entry_30s">30 sekúnd</string>

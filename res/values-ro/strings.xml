@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Deconectat</string>
   <string name="timeout_summary">Afișează aplicația copertă pentru %s după închiderea capacului</string>
   <string name="timeout_summary_never">După închiderea capacului, aplicația copertă va rămâne întotdeauna pornită</string>
+  <string name="timeout_summary_immediately">Ecranul va fi oprit când se va închide coperta</string>
+  <string name="timeout_entry_immediately">Imediat</string>
   <string name="timeout_entry_5s">5 secunde</string>
   <string name="timeout_entry_10s">10 secunde</string>
   <string name="timeout_entry_30s">30 de secunde</string>

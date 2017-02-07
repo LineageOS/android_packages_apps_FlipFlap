@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">未插电</string>
   <string name="timeout_summary">盖上保护盖后显示 %s 保护盖应用</string>
   <string name="timeout_summary_never">盖上保护盖后，始终显示保护盖应用</string>
+  <string name="timeout_summary_immediately">当保护盖盖上时屏幕将会关闭</string>
+  <string name="timeout_entry_immediately">立即</string>
   <string name="timeout_entry_5s">5 秒</string>
   <string name="timeout_entry_10s">10 秒</string>
   <string name="timeout_entry_30s">30 秒</string>

@@ -40,6 +40,8 @@
   <string name="timeout_unplugged_title">Frakoblet</string>
   <string name="timeout_summary">Vis deksel-appen i %s etter at du har lukket dekselet</string>
   <string name="timeout_summary_never">Etter du har lukket dekselet, vil deksel-appen alltid være på</string>
+  <string name="timeout_summary_immediately">Skjermen vil bli slått av når dekselet lukkes</string>
+  <string name="timeout_entry_immediately">Umiddelbart</string>
   <string name="timeout_entry_5s">5 sekunder</string>
   <string name="timeout_entry_10s">10 sekunder</string>
   <string name="timeout_entry_30s">30 sekunder</string>

@@ -33,6 +33,8 @@
   <string name="switch_charging_status_title">Ladestatus anzeigen</string>
   <string name="switch_charging_status_summary">Farbe dem Batteriestatus anpassen</string>
   <string name="timeout_plugged_title">Beim Laden</string>
+  <string name="timeout_unplugged_title">Nicht angeschlossen</string>
+  <string name="timeout_entry_immediately">Sofort</string>
   <string name="timeout_entry_5s">5 Sekunden</string>
   <string name="timeout_entry_10s">10 Sekunden</string>
   <string name="timeout_entry_30s">30 Sekunden</string>

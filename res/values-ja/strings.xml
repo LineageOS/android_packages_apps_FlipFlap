@@ -38,6 +38,8 @@
   <string name="timeout_unplugged_title">接続されていません</string>
   <string name="timeout_summary">カバーを閉じた後、カバーアプリを%s間表示します</string>
   <string name="timeout_summary_never">カバーを閉じた後、カバーアプリを常に表示します</string>
+  <string name="timeout_summary_immediately">カバーを閉じたとき画面を消灯します</string>
+  <string name="timeout_entry_immediately">すぐに</string>
   <string name="timeout_entry_5s">5秒</string>
   <string name="timeout_entry_10s">10秒</string>
   <string name="timeout_entry_30s">30秒</string>
