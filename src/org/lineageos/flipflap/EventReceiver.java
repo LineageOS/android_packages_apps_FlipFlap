@@ -48,14 +48,16 @@ public class EventReceiver extends BroadcastReceiver {
             Intent serviceIntent = new Intent(context, FlipFlapService.class);
             if (lidState == WindowManagerFuncs.LID_CLOSED) {
                 activateSettings(context);
-                if (timeout != 0) {
-                    context.startService(serviceIntent);
-                } else if (powerManager.isInteractive()) {
-                    powerManager.goToSleep(SystemClock.uptimeMillis());
+                if (timeout > 0) {
+                     context.startService(serviceIntent);
+                } else if (timeout == 0 && powerManager.isInteractive()) {
+                     powerManager.goToSleep(SystemClock.uptimeMillis());
+                } else {
+                     context.stopService(serviceIntent);
                 }
-            } else {
-                context.stopService(serviceIntent);
-            }
+             } else {
+                 context.stopService(serviceIntent);
+             }
         }
     }
 
