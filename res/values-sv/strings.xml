@@ -27,7 +27,11 @@
   <!-- Strings for the Settings -->
   <string name="category_design">Design</string>
   <string name="switch_charging_status_title">Visa laddningsstatus</string>
+  <string name="timeout_plugged_title">Under laddning</string>
   <string name="timeout_entry_5s">5 sekunder</string>
+  <string name="timeout_entry_10s">10 sekunder</string>
+  <string name="timeout_entry_30s">30 sekunder</string>
   <string name="timeout_entry_1min">1 minut</string>
   <string name="timeout_entry_5min">5 minuter</string>
+  <string name="timeout_entry_never">Aldrig</string>
 </resources>

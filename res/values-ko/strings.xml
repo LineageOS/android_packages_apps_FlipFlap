@@ -19,6 +19,16 @@
 
 -->
 <resources>
+  <string name="alarm_label">알람</string>
   <!-- String matching the lock screen format for displaying the date. -->
+  <string name="answer_call">응답</string>
+  <string name="ignore_call">무시</string>
   <!-- Strings for the Settings -->
+  <string name="settings_name">플립 커버</string>
+  <string name="category_design">디자인</string>
+  <string name="timeout_entry_5s">5초</string>
+  <string name="timeout_entry_10s">10초</string>
+  <string name="timeout_entry_30s">30초</string>
+  <string name="timeout_entry_1min">1분</string>
+  <string name="timeout_entry_5min">5분</string>
 </resources>
