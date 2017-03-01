@@ -20,7 +20,7 @@
 -->
 <resources>
   <string name="app_name">FlipFlap</string>
-  <string name="notification_title">Smartcover gedetecteerd</string>
+  <string name="notification_title">Slimme hoes gedetecteerd</string>
   <string name="alarm_label">ALARM</string>
   <!-- String matching the lock screen format for displaying the date. -->
   <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
@@ -38,6 +38,8 @@
   <string name="category_timeouts">Time-outs</string>
   <string name="timeout_plugged_title">Tijdens het opladen</string>
   <string name="timeout_unplugged_title">Niet aangesloten</string>
+  <string name="timeout_summary">Cover-app %s weergeven na sluiten van de hoes</string>
+  <string name="timeout_summary_never">Na sluiten van de hoes zal de cover-app altijd aan blijven</string>
   <string name="timeout_summary_immediately">Scherm wordt uitgeschakeld als de hoes gesloten wordt</string>
   <string name="timeout_entry_immediately">Onmiddelijk</string>
   <string name="timeout_entry_5s">5 seconden</string>

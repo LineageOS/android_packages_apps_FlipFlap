@@ -20,6 +20,16 @@
 -->
 <resources>
   <!-- String matching the lock screen format for displaying the date. -->
+  <string name="answer_call">ERANTZUN</string>
+  <string name="ignore_call">EZIKUSI</string>
+  <string name="end_call">AMAITU DEIA</string>
   <!-- Strings for the Settings -->
   <string name="category_behaviour">Portaera</string>
+  <string name="category_design">Diseinua</string>
+  <string name="timeout_summary_immediately">Pantaila itzaliko da azala ixtean</string>
+  <string name="timeout_entry_5s">5 segundo</string>
+  <string name="timeout_entry_10s">10 segundo</string>
+  <string name="timeout_entry_30s">30 segundo</string>
+  <string name="timeout_entry_1min">minutu 1</string>
+  <string name="timeout_entry_never">Inoiz ez</string>
 </resources>
