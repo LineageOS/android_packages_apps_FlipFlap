@@ -29,12 +29,15 @@
      For example, a device with Asus Circle Cover would set 2 -->
     <integer name="config_deviceCoverType">0</integer>
 
-    <!-- Define main circle parameters (config_deviceCoverType == 1) -->
+    <!-- Define main circle parameters (config_deviceCoverType == 2) -->
     <integer name="x_offset" translatable="false">0</integer>
     <integer name="y_offset" translatable="false">0</integer>
     <integer name="radius_offset" translatable="false">0</integer>
+    <bool name="fill_paint" translatable="false">true</bool>
+    <integer name="line_width" translatable="false">0</integer>
 
-    <!-- Rectangular parameters (config_deviceCoverType == 2) -->
+
+    <!-- Rectangular parameters (config_deviceCoverType == 3) -->
     <integer name="rectangular_window_top" translatable="false">0</integer>
     <integer name="rectangular_window_left" translatable="false">0</integer>
     <integer name="rectangular_window_width" translatable="false">0</integer>

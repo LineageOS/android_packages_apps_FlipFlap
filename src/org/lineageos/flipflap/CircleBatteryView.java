@@ -41,6 +41,10 @@ public class CircleBatteryView extends View {
     private float mCenterX;
     private float mCenterY;
     private float mRadius;
+    private boolean mFillPaint;
+    private int mBattFullColor;
+    private int mBattLowColor;
+    private int mBattChargeColor;
 
     private boolean mBatteryStateReceiverRegistered;
     private final BroadcastReceiver mBatteryStateReceiver = new BroadcastReceiver() {
@@ -52,13 +56,13 @@ public class CircleBatteryView extends View {
                     status == BatteryManager.BATTERY_STATUS_FULL;
 
             if (!FlipFlapUtils.showBatteryStatus(mContext)) {
-                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+                mPaint.setColor(mBattFullColor);
             } else if (isCharging) {
-                mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
+                mPaint.setColor(mBattChargeColor);
             } else if (level >= 15) {
-                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+                mPaint.setColor(mBattFullColor);
             } else {
-                mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
+                mPaint.setColor(mBattLowColor);
             }
             postInvalidate();
         }
@@ -76,11 +80,23 @@ public class CircleBatteryView extends View {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
-
+        mResources = mContext.getResources();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setStyle(Style.FILL);
-        mResources = mContext.getResources();
+
+        mFillPaint = mResources.getBoolean(R.bool.fill_paint);
+        if (mFillPaint) {
+            mPaint.setStyle(Style.FILL);
+            mBattFullColor = mResources.getColor(R.color.full_bat_bg);
+            mBattLowColor = mResources.getColor(R.color.low_bat_bg);
+            mBattChargeColor = mResources.getColor(R.color.charge_bat_bg);
+        } else {
+            mPaint.setStyle(Style.STROKE);
+            mPaint.setStrokeWidth(mResources.getInteger(R.integer.line_width));
+            mBattFullColor = mResources.getColor(R.color.outline_full_bat_bg);
+            mBattLowColor = mResources.getColor(R.color.outline_low_bat_bg);
+            mBattChargeColor = mResources.getColor(R.color.outline_charge_bat_bg);
+        }
     }
 
     @Override
