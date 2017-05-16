@@ -23,6 +23,9 @@
     <color name="full_bat_bg">#01487f</color> <!-- blue-->
     <color name="low_bat_bg">#841515</color> <!-- red-->
     <color name="charge_bat_bg">#ffc107</color> <!-- yellow-->
+    <color name="outline_full_bat_bg">#0180c0</color> <!-- bright blue-->
+    <color name="outline_low_bat_bg">#c03030</color> <!-- bright red-->
+    <color name="outline_charge_bat_bg">#ffe107</color> <!-- bright yellow-->
     <color name="clock_text_color">@android:color/white</color>
 
     <color name="clock_white">#ffffff</color>
