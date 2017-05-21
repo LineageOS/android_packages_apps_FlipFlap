@@ -21,6 +21,7 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -46,9 +47,15 @@ public class RectangularView extends FlipFlapView {
     private boolean mRinging;
     private boolean mCallActive;
     private boolean mAlarmActive;
+    private boolean mNeedsSmallView;
+    private final Resources mResources;
 
     public RectangularView(Context context) {
         super(context);
+
+        mResources = context.getResources();
+        int top = mResources.getInteger(R.integer.rectangular_window_top);
+        int height = mResources.getInteger(R.integer.rectangular_window_height);
 
         inflate(context, R.layout.rectangular_view, this);
 
@@ -97,6 +104,9 @@ public class RectangularView extends FlipFlapView {
                 dismissAlarm();
             }
         });
+
+        if((height - top) < (mResources.getSystem().getDisplayMetrics().heightPixels /3)) {mNeedsSmallView = true;}
+        Log.e(TAG, "getHeight =" + mResources.getSystem().getDisplayMetrics().heightPixels );
     }
 
     @Override
@@ -128,9 +138,15 @@ public class RectangularView extends FlipFlapView {
 
     private void updateViewVisibility() {
         if (mRinging || mCallActive) {
-            mClockPanel.setVisibility(View.GONE);
-            mDatePanel.setVisibility(View.GONE);
-            mNextAlarmPanel.setVisibility(View.GONE);
+            if (mNeedsSmallView) {
+                mClockPanel.setVisibility(View.GONE);
+                mDatePanel.setVisibility(View.GONE);
+                mNextAlarmPanel.setVisibility(View.GONE);
+            } else {
+                mClockPanel.setVisibility(View.VISIBLE);
+                mDatePanel.setVisibility(View.VISIBLE);
+                mNextAlarmPanel.setVisibility(View.VISIBLE);
+            }
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.VISIBLE);
             if (mRinging) {
@@ -143,9 +159,15 @@ public class RectangularView extends FlipFlapView {
                 mEndCallButton.setVisibility(View.VISIBLE);
             }
         } else if (mAlarmActive) {
-            mClockPanel.setVisibility(View.VISIBLE);
-            mDatePanel.setVisibility(View.GONE);
-            mNextAlarmPanel.setVisibility(View.GONE);
+            if (mNeedsSmallView) {
+                mClockPanel.setVisibility(View.GONE);
+                mDatePanel.setVisibility(View.GONE);
+                mNextAlarmPanel.setVisibility(View.GONE);
+            } else {
+                mClockPanel.setVisibility(View.VISIBLE);
+                mDatePanel.setVisibility(View.VISIBLE);
+                mNextAlarmPanel.setVisibility(View.VISIBLE);
+            }
             mAlarmPanel.setVisibility(View.VISIBLE);
             mPhonePanel.setVisibility(View.GONE);
         } else {
