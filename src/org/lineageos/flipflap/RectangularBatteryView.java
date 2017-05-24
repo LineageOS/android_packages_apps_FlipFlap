@@ -31,6 +31,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.os.BatteryManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class RectangularBatteryView extends View {
@@ -79,6 +80,7 @@ public class RectangularBatteryView extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Style.FILL);
+        mPaint.setStrokeWidth(1);
         mResources = mContext.getResources();
     }
 
@@ -104,12 +106,11 @@ public class RectangularBatteryView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        int left = mResources.getInteger(R.integer.rectangular_window_left);
-        int top = mResources.getInteger(R.integer.rectangular_window_top);
-        int width = mResources.getInteger(R.integer.rectangular_window_width);
-        int height = mResources.getInteger(R.integer.rectangular_window_height);
-
-        mRect = new Rect(left, top, left + width, top + height);
+        int left = mResources.getDimensionPixelSize(R.dimen.rectangular_window_left);
+        int top = mResources.getDimensionPixelSize(R.dimen.rectangular_window_top);
+        int width = mResources.getDimensionPixelSize(R.dimen.rectangular_window_width);
+        int height = mResources.getDimensionPixelSize(R.dimen.rectangular_window_height);
+        mRect = new Rect(0, 0, width, height);
     }
 
     @Override
