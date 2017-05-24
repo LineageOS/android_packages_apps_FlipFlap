@@ -19,9 +19,11 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal|top">
+    android:layout_marginTop="@dimen/rectangular_window_top"
+    android:layout_marginLeft="@dimen/rectangular_window_left"
+    android:layout_width="@dimen/rectangular_window_width"
+    android:layout_height="@dimen/rectangular_window_height"
+    android:layout_gravity="left">
 
     <org.lineageos.flipflap.RectangularBatteryView
         android:id="@+id/rectangular_battery"
