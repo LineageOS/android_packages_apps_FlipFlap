@@ -54,8 +54,8 @@ public class RectangularView extends FlipFlapView {
         super(context);
 
         mResources = context.getResources();
-        int top = mResources.getInteger(R.integer.rectangular_window_top);
-        int height = mResources.getInteger(R.integer.rectangular_window_height);
+        int top = mResources.getDimensionPixelSize(R.dimen.rectangular_window_top);
+        int height = mResources.getDimensionPixelSize(R.dimen.rectangular_window_height);
 
         inflate(context, R.layout.rectangular_view, this);
 

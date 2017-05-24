@@ -19,6 +19,16 @@
 -->
 
 <resources>
+    <!-- Define main circle parameters (config_deviceCoverType == 2) -->
+    <dimen name="y_offset">0px</dimen>
+    <dimen name="radius_offset">0px</dimen>
+
+    <!-- Rectangular parameters (config_deviceCoverType == 3) -->
+    <dimen name="rectangular_window_top">0px</dimen>
+    <dimen name="rectangular_window_left">0px</dimen>
+    <dimen name="rectangular_window_width">0px</dimen>
+    <dimen name="rectangular_window_height">0px</dimen>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

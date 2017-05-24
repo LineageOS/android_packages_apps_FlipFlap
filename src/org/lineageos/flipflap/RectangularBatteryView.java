@@ -104,12 +104,9 @@ public class RectangularBatteryView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        int left = mResources.getInteger(R.integer.rectangular_window_left);
-        int top = mResources.getInteger(R.integer.rectangular_window_top);
-        int width = mResources.getInteger(R.integer.rectangular_window_width);
-        int height = mResources.getInteger(R.integer.rectangular_window_height);
-
-        mRect = new Rect(left, top, left + width, top + height);
+        int width = mResources.getDimensionPixelSize(R.dimen.rectangular_window_width);
+        int height = mResources.getDimensionPixelSize(R.dimen.rectangular_window_height);
+        mRect = new Rect(0, 0, width, height);
     }
 
     @Override
