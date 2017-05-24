@@ -105,9 +105,9 @@ public class CircleBatteryView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mCenterX = 0.5F * w + mResources.getInteger(R.integer.x_offset);
-        mCenterY = 13.0F * h / 48.0F + mResources.getInteger(R.integer.y_offset);
-        mRadius = 4.0F * w / 9.0F + mResources.getInteger(R.integer.radius_offset);
+        mCenterX = 0.5F * w;
+        mCenterY = 13.0F * h / 48.0F;
+        mRadius = 4.0F * w / 9.0F + mResources.getDimensionPixelSize(R.dimen.radius_offset);
     }
 
     @Override
