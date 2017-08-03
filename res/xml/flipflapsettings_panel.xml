@@ -34,6 +34,12 @@
             android:defaultValue="false"
             android:title="@string/use_high_touch_sensitivity_title"
             android:summary="@string/use_high_touch_sensitivity_summary" />
+
+        <SwitchPreference
+            android:key="prox_wake_disable"
+            android:defaultValue="false"
+            android:title="@string/prox_wake_disable_title"
+            android:summary="@string/prox_wake_disable_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory
