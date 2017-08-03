@@ -79,6 +79,7 @@ public class FlipFlapView extends FrameLayout {
     private boolean mPassToSecurity;
 
     private int mUserHighTouchState;
+    private int mUserProxWakeState;
 
     /* Required to only read the setting when it's already restored, else when closing the cover
     within the timeout (1.5s), it would read "true" (because we set it) and always restore that */
@@ -104,6 +105,8 @@ public class FlipFlapView extends FrameLayout {
 
         changeSecurityViewState();
         checkHighTouchSensitivity();
+        disableProxWake();
+
     }
 
     protected boolean canUseProximitySensor() {
@@ -204,6 +207,7 @@ public class FlipFlapView extends FrameLayout {
         getContext().unregisterReceiver(mReceiver);
         restoreSecurityViewState();
         restoreHighTouchSensitivity();
+        restoreProxWake();
 
         if (supportsNotifications()) {
             try {
@@ -439,6 +443,22 @@ public class FlipFlapView extends FrameLayout {
 
     private boolean shouldUseHighTouchSensitivity() {
         return FlipFlapUtils.getPreferences(mContext).getBoolean(KEY_TOUCH_SENSITIVITY, false);
+    }
+
+    private void disableProxWake() {
+        if (FlipFlapUtils.getProxWakeDisable(mContext)) {
+            mUserProxWakeState = CMSettings.System.getInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 0);
+            CMSettings.System.putInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 0);
+        }
+    }
+
+    private void restoreProxWake() {
+        if (FlipFlapUtils.getProxWakeDisable(mContext)) {
+            CMSettings.System.putInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, mUserProxWakeState);
+        }
     }
 
     private int getUserId() {

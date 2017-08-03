@@ -64,6 +64,10 @@ public class FlipFlapUtils {
         return context.getResources().getInteger(R.integer.config_deviceCoverType);
     }
 
+    public static boolean getProxWakeDisable(Context context) {
+        return context.getResources().getBoolean(R.bool.config_needsProxWakeDisable);
+    }
+
     public static boolean showBatteryStatus(Context context) {
         return getPreferences(context).getBoolean(KEY_BATTERY_INDICATION, true);
     }

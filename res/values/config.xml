@@ -29,4 +29,7 @@
      For example, a device with Asus Circle Cover would set 2 -->
     <integer name="config_deviceCoverType">0</integer>
 
+    <!-- Set to true for devices which have covers that block
+     proximity sensor. This will disable prox wake check while cover is closed -->
+    <bool name="config_needsProxWakeDisable">false</bool>
 </resources>
