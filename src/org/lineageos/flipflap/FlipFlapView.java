@@ -61,6 +61,7 @@ public class FlipFlapView extends FrameLayout {
     private static final String TAG = "FlipFlapView";
     private static final String KEY_PASS_TO_SECURITY = "pass_to_security_view";
     private static final String KEY_TOUCH_SENSITIVITY = "use_high_touch_sensitivity";
+    private static final String KEY_PROX_WAKE_DISABLE = "prox_wake_disable";
 
     private static final int COVER_CLOSED_MSG = 0;
     private static final int RESTORE_SECURITY_VIEW_STATE = 1;
@@ -79,6 +80,7 @@ public class FlipFlapView extends FrameLayout {
     private boolean mPassToSecurity;
 
     private int mUserHighTouchState;
+    private int mUserProxWakeState;
 
     /* Required to only read the setting when it's already restored, else when closing the cover
     within the timeout (1.5s), it would read "true" (because we set it) and always restore that */
@@ -104,6 +106,8 @@ public class FlipFlapView extends FrameLayout {
 
         changeSecurityViewState();
         checkHighTouchSensitivity();
+        disableProxWake();
+
     }
 
     protected boolean canUseProximitySensor() {
@@ -204,6 +208,7 @@ public class FlipFlapView extends FrameLayout {
         getContext().unregisterReceiver(mReceiver);
         restoreSecurityViewState();
         restoreHighTouchSensitivity();
+        restoreProxWake();
 
         if (supportsNotifications()) {
             try {
@@ -441,6 +446,25 @@ public class FlipFlapView extends FrameLayout {
         return FlipFlapUtils.getPreferences(mContext).getBoolean(KEY_TOUCH_SENSITIVITY, false);
     }
 
+    private void disableProxWake() {
+        if (shouldDisableProxWake()) {
+            mUserProxWakeState = CMSettings.System.getInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 0);
+            CMSettings.System.putInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 0);
+        }
+    }
+
+    private void restoreProxWake() {
+        if (shouldDisableProxWake()) {
+            CMSettings.System.putInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, mUserProxWakeState);
+        }
+    }
+
+    private boolean shouldDisableProxWake() {
+        return FlipFlapUtils.getPreferences(mContext).getBoolean(KEY_PROX_WAKE_DISABLE, false);
+    }
     private int getUserId() {
         return UserHandle.getUserId(Process.myUid());
     }
