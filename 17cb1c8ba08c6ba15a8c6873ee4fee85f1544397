@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac90ff4b_10423a9f",
+        "filename": "res/values/config.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-08-05T18:08:20Z",
+      "side": 0,
+      "message": "Unnecessary change.",
+      "revId": "17cb1c8ba08c6ba15a8c6873ee4fee85f1544397",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

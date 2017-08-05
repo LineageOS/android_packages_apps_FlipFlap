@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10847b1b_0185e8c8",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-08-05T18:08:20Z",
+      "side": 1,
+      "message": "This looks like a setting that lets you set a system setting. Wouldn\u0027t it just be better to set the system setting? This doesn\u0027t seem like the right place to allow this.",
+      "revId": "1265c10adf729e85fa6180bf6f9d1b5013e4647a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b9dfae6_f9691457",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-08-05T18:08:20Z",
+      "side": 1,
+      "message": "newline after this line",
+      "revId": "1265c10adf729e85fa6180bf6f9d1b5013e4647a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
