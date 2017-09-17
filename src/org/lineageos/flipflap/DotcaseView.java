@@ -399,11 +399,16 @@ public class DotcaseView extends FlipFlapView {
     }
 
     private void dotcaseDrawPixel(int x, int y, Paint paint, Canvas canvas) {
-        canvas.drawRoundRect((x * DotcaseConstants.DOT_RATIO + 3),
-                            (y * DotcaseConstants.DOT_RATIO + 3),
-                            ((x + 1) * DotcaseConstants.DOT_RATIO - 3),
-                            ((y + 1) * DotcaseConstants.DOT_RATIO - 3),
-                            20, 20, paint);
+        // Get hardware dependant constants from config file
+        int xOffset = FlipFlapUtils.getXOffset(mContext);
+        int yOffset = FlipFlapUtils.getYOffset(mContext);
+        int xDotRatio = FlipFlapUtils.getXDotRatio(mContext);
+        int yDotRatio = FlipFlapUtils.getYDotRatio(mContext);
+        canvas.drawRoundRect((x * xDotRatio + 3 + xOffset),
+                            (y * yDotRatio + 3 + yOffset),
+                            ((x + 1) * xDotRatio - 3 + xOffset),
+                            ((y + 1) * yDotRatio - 3 + yOffset),
+                            xDotRatio / 2, yDotRatio / 2, paint);
     }
 
     private void dotcaseDrawRect(int left, int top, int right,
