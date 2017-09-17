@@ -64,6 +64,10 @@ public class FlipFlapUtils {
         return context.getResources().getInteger(R.integer.config_deviceCoverType);
     }
 
+    public static int getClockVOffset(Context context) {
+        return context.getResources().getInteger(R.integer.config_clockVerticalOffset);
+    }
+
     public static boolean showBatteryStatus(Context context) {
         return getPreferences(context).getBoolean(KEY_BATTERY_INDICATION, true);
     }

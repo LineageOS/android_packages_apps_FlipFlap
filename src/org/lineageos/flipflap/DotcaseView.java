@@ -373,6 +373,9 @@ public class DotcaseView extends FlipFlapView {
         timeObject time = getTimeObject();
         int starter;
 
+        // Offset to place time up to magnet to full visibility
+        int vOffset = FlipFlapUtils.getClockVOffset(mContext);
+
         if (time.hour < 10) {
             starter = 0;
         } else {
@@ -381,21 +384,21 @@ public class DotcaseView extends FlipFlapView {
 
         if (!time.is24Hour) {
             if (time.am) {
-                dotcaseDrawSprite(DotcaseConstants.amSprite, 3, 18, canvas);
+                dotcaseDrawSprite(DotcaseConstants.amSprite, 3, 18 - vOffset, canvas);
             } else {
-                dotcaseDrawSprite(DotcaseConstants.pmSprite, 3, 18, canvas);
+                dotcaseDrawSprite(DotcaseConstants.pmSprite, 3, 18 - vOffset, canvas);
             }
         }
 
-        dotcaseDrawSprite(DotcaseConstants.timeColon, starter + 10, 5 + 4, canvas);
+        dotcaseDrawSprite(DotcaseConstants.timeColon, starter + 10, 5 + 4 - vOffset, canvas);
         dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(0)),
-                starter, 5, canvas);
+                starter, 5 - vOffset, canvas);
         dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(1)),
-                starter + 5, 5, canvas);
+                starter + 5, 5 - vOffset, canvas);
         dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(2)),
-                starter + 12, 5, canvas);
+                starter + 12, 5 - vOffset, canvas);
         dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(3)),
-                starter + 17, 5, canvas);
+                starter + 17, 5 - vOffset, canvas);
     }
 
     private void dotcaseDrawPixel(int x, int y, Paint paint, Canvas canvas) {
