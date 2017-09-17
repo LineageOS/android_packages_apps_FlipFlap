@@ -64,6 +64,22 @@ public class FlipFlapUtils {
         return context.getResources().getInteger(R.integer.config_deviceCoverType);
     }
 
+    public static int getXDotRatio(Context context) {
+        return context.getResources().getInteger(R.integer.config_XDotRatio);
+    }
+
+    public static int getXOffset(Context context) {
+        return context.getResources().getInteger(R.integer.config_XOffset);
+    }
+
+    public static int getYDotRatio(Context context) {
+        return context.getResources().getInteger(R.integer.config_YDotRatio);
+    }
+
+    public static int getYOffset(Context context) {
+        return context.getResources().getInteger(R.integer.config_YOffset);
+    }
+
     public static boolean showBatteryStatus(Context context) {
         return getPreferences(context).getBoolean(KEY_BATTERY_INDICATION, true);
     }

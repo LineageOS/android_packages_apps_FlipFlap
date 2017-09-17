@@ -21,12 +21,20 @@
 
     <!-- Define Device Lid Style
 
-     1 HTC Style Dotcase
+     1 HTC/Xiaomi Style Dotcase
      2 Asus/LG Style Circle Window Cover
      3 Rectangular window Cover
      4 Iceview style case where the entire screen is visible
 
      For example, a device with Asus Circle Cover would set 2 -->
-    <integer name="config_deviceCoverType">0</integer>
+    <integer name="config_deviceCoverType">1</integer>
+    <!-- Horizintal dot rate -->
+    <integer name="config_XDotRatio">40</integer>
+    <!-- Horizintal offset -->
+    <integer name="config_XOffset">0</integer>
+    <!-- Vertical dot rate -->
+    <integer name="config_YDotRatio">40</integer>
+    <!-- Vertical offset -->
+    <integer name="config_YOffset">0</integer>
 
 </resources>

@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DotcaseConstants {
-    static final int DOT_RATIO = 40;
 
     /**
      * Notification types
