@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "f6e828a2_84afa3bd",
+        "filename": "src/org/lineageos/flipflap/DotcaseView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 18219
+      },
+      "writtenOn": "2017-09-19T17:24:46Z",
+      "side": 1,
+      "message": "I think it in style of original code. in my opinion... May be I am wrong.",
+      "parentUuid": "a99f6ffd_549c7b18",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 61
+      },
+      "revId": "6273664183565b585c608255a7d4cb2fdd8199d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4896681b_71dfc558",
         "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
         "patchSetId": 6
