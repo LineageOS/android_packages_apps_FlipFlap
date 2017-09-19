@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d5aedcc_a2cc609e",
+        "filename": "res/values/config.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-09-19T15:34:13Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "6273664183565b585c608255a7d4cb2fdd8199d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a99f6ffd_549c7b18",
+        "filename": "src/org/lineageos/flipflap/DotcaseView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-09-19T15:34:13Z",
+      "side": 1,
+      "message": "It might be better to load the values once and reuse the variables",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 61
+      },
+      "revId": "6273664183565b585c608255a7d4cb2fdd8199d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
