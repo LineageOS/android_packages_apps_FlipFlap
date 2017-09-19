@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b91ba78a_723a9a69",
+        "filename": "res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-09-19T19:56:17Z",
+      "side": 1,
+      "message": "Spelling",
+      "revId": "0502c9b8899cf4751cb341568b3549233d6d9cb8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af4f166b_16b119fa",
+        "filename": "res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-09-19T19:56:17Z",
+      "side": 1,
+      "message": "and again",
+      "revId": "0502c9b8899cf4751cb341568b3549233d6d9cb8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29e9dd98_583d0e23",
+        "filename": "src/org/lineageos/flipflap/DotcaseView.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 16082
+      },
+      "writtenOn": "2017-09-19T19:56:17Z",
+      "side": 1,
+      "message": "dependEnt",
+      "revId": "0502c9b8899cf4751cb341568b3549233d6d9cb8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
