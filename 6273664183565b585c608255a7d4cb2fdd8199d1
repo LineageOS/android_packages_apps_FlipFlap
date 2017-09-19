@@ -39,6 +39,23 @@
       "revId": "6273664183565b585c608255a7d4cb2fdd8199d1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4896681b_71dfc558",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2017-09-19T17:01:08Z",
+      "side": 1,
+      "message": "Given those methods are only used in DotcaseView, it\u0027s probably better to just inline them there. This utils class should only host shared stuff.",
+      "revId": "6273664183565b585c608255a7d4cb2fdd8199d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
