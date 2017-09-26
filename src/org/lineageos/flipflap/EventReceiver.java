@@ -37,12 +37,12 @@ public class EventReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (cyanogenmod.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
+        if (lineageos.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
             PowerManager powerManager = (PowerManager) context.getSystemService(
                     Context.POWER_SERVICE);
             BatteryManager batMan = (BatteryManager) context.getSystemService(
                     Context.BATTERY_SERVICE);
-            int lidState = intent.getIntExtra(cyanogenmod.content.Intent.EXTRA_LID_STATE, -1);
+            int lidState = intent.getIntExtra(lineageos.content.Intent.EXTRA_LID_STATE, -1);
             Log.d(TAG, "Got lid state change event, new state " + lidState);
 
             int timeout = FlipFlapUtils.getTimeout(context, batMan.isCharging());
