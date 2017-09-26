@@ -26,7 +26,7 @@ import android.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 
-import cyanogenmod.hardware.CMHardwareManager;
+import lineageos.hardware.LineageHardwareManager;
 
 public class FlipFlapUtils {
 
@@ -86,8 +86,8 @@ public class FlipFlapUtils {
     }
 
     public static boolean getHighTouchSensitivitySupported(Context context) {
-        final CMHardwareManager hardware = CMHardwareManager.getInstance(context);
-        return hardware.isSupported(CMHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY);
+        final LineageHardwareManager hardware = LineageHardwareManager.getInstance(context);
+        return hardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY);
     }
 
 }

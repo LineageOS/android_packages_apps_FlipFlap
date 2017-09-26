@@ -29,7 +29,7 @@
 
         <receiver android:name=".EventReceiver">
             <intent-filter>
-                <action android:name="cyanogenmod.intent.action.LID_STATE_CHANGED" />
+                <action android:name="lineageos.intent.action.LID_STATE_CHANGED" />
             </intent-filter>
         </receiver>
 

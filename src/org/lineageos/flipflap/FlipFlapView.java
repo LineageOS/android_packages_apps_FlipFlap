@@ -54,8 +54,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.cyanogenmod.internal.util.CmLockPatternUtils;
-import cyanogenmod.providers.CMSettings;
+import org.lineageos.internal.util.LineageLockPatternUtils;
+import lineageos.providers.LineageSettings;
 
 public class FlipFlapView extends FrameLayout {
     private static final String TAG = "FlipFlapView";
@@ -410,30 +410,30 @@ public class FlipFlapView extends FrameLayout {
     }
 
     private boolean shouldPassToSecurityView() {
-        CmLockPatternUtils cml = new CmLockPatternUtils(mContext);
-        return cml.shouldPassToSecurityView(getUserId());
+        LineageLockPatternUtils llpu = new LineageLockPatternUtils(mContext);
+        return llpu.shouldPassToSecurityView(getUserId());
     }
 
     private void setPassToSecurityView(boolean enabled) {
-        CmLockPatternUtils cml = new CmLockPatternUtils(mContext);
-        cml.setPassToSecurityView(enabled, getUserId());
+        LineageLockPatternUtils llpu = new LineageLockPatternUtils(mContext);
+        llpu.setPassToSecurityView(enabled, getUserId());
     }
 
     private void checkHighTouchSensitivity() {
         if (shouldUseHighTouchSensitivity() &&
                 FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
-            mUserHighTouchState = CMSettings.System.getInt(mContext.getContentResolver(),
-                    CMSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 0);
-            CMSettings.System.putInt(mContext.getContentResolver(),
-                    CMSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 1);
+            mUserHighTouchState = LineageSettings.System.getInt(mContext.getContentResolver(),
+                    LineageSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 0);
+            LineageSettings.System.putInt(mContext.getContentResolver(),
+                    LineageSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 1);
         }
     }
 
     private void restoreHighTouchSensitivity() {
         if (shouldUseHighTouchSensitivity() &&
                 FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
-            CMSettings.System.putInt(mContext.getContentResolver(),
-                    CMSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, mUserHighTouchState);
+            LineageSettings.System.putInt(mContext.getContentResolver(),
+                    LineageSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, mUserHighTouchState);
         }
     }
 
