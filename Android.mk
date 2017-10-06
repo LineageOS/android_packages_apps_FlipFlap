@@ -33,8 +33,6 @@ LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.preference
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.recyclerview
 
-include frameworks/base/packages/SettingsLib/common.mk
-
 include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
