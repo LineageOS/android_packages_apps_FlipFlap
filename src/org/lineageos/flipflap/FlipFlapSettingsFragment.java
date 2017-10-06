@@ -20,6 +20,7 @@
 
 package org.lineageos.flipflap;
 
+import android.app.ActionBar;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -31,6 +32,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -83,6 +85,8 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.flipflapsettings_panel);
+        final ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_PLUGGED);
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
@@ -125,6 +129,15 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
                 PackageManager.DONT_KILL_APP);
 
         updateEnableStates(enabled);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+            return true;
+        }
+        return false;
     }
 
     private void setupTimeoutPreference(String key) {

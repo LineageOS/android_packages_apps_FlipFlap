@@ -133,8 +133,14 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="FlipFlapSettingsTheme" parent="@android:style/Theme.Material.Settings">
-        <item name="preferenceTheme">@android:style/Theme.Material.Settings</item>
+    <style name="FlipFlapSettingsTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="preferenceTheme">@style/FlipFlapSettingsTheme.PreferenceTheme</item>
+    </style>
+
+    <style name="FlipFlapSettingsTheme.PreferenceTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="allowDividerAbove">false</item>
+        <item name="allowDividerBelow">false</item>
+        <item name="singleLineTitle">false</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">

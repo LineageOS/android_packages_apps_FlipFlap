@@ -21,15 +21,14 @@
 package org.lineageos.flipflap;
 
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 
-import com.android.settingslib.drawer.SettingsDrawerActivity;
-
-public class FlipFlapSettingsActivity extends SettingsDrawerActivity {
+public class FlipFlapSettingsActivity extends PreferenceActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame,
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new FlipFlapSettingsFragment()).commit();
     }
 }
