@@ -32,6 +32,7 @@
 
     <!-- Strings for the Settings -->
     <string name="settings_name">Flip cover</string>
+    <string name="settings_summary">Flip cover settings</string>
 
     <string name="category_behaviour">Behaviour</string>
     <string name="pass_to_security_view_title">Directly go to password entry</string>
