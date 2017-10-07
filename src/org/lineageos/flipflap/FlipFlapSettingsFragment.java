@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import org.lineageos.flipflap.R;
 
@@ -47,6 +48,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
     private final String KEY_TOUCH_SENSITIVITY = "use_high_touch_sensitivity";
 
     private Switch mSwitch;
+    private TextView mTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +71,8 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
                 mSwitch.setChecked(!mSwitch.isChecked());
             }
         });
+
+        mTextView = (TextView) view.findViewById(R.id.switch_text);
 
         mSwitch = (Switch) switchBar.findViewById(android.R.id.switch_widget);
         mSwitch.setChecked(isEventReceiverEnabled());
@@ -135,6 +139,9 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         for (int i = 0; i < count; i++) {
             ps.getPreference(i).setEnabled(masterSwitchEnabled);
         }
+
+        mTextView.setText(getString(masterSwitchEnabled ?
+                R.string.switch_bar_on : R.string.switch_bar_off));
     }
 
     private boolean isEventReceiverEnabled() {

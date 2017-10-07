@@ -21,7 +21,7 @@
     android:clickable="true"
     android:orientation="horizontal">
 
-    <TextView
+    <TextView android:id="@+id/switch_text"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
