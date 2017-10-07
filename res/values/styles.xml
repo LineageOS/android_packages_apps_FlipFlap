@@ -18,7 +18,7 @@
 
 -->
 
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Base application theme. -->
     <style name="FlipFlapTheme" parent="android:Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@android:color/black</item>
@@ -100,27 +100,6 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.Main" parent="@android:style/Theme.Material.Light.DarkActionBar">
-        <!-- Main theme colors -->
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-        <!-- One can also set colorControlNormal, colorControlActivated
-             colorControlHighlight, and colorSwitchThumbNormal. -->
-
-        <!-- App behaviour -->
-        <item name="android:fadeScrollbars">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
-
-    </style>
-
-    <style name="Theme.AlertDialog" parent="android:Theme.Material.Light.Dialog.Alert">
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-    </style>
-
     <style name="iceview_notification_big">
         <item name="android:textSize">@dimen/iceview_notification_big_text_size</item>
         <item name="android:textStyle">bold</item>
@@ -134,16 +113,41 @@
     </style>
 
     <style name="FlipFlapSettingsTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="dialogPreferenceStyle">@style/FlipFlapSettingsTheme.DialogPreferenceStyle</item>
+        <item name="preferenceCategoryStyle">@style/FlipFlapSettingsTheme.PreferenceCategoryStyle</item>
+        <item name="preferenceFragmentStyle">@style/FlipFlapSettingsTheme.PreferenceFragmentStyle</item>
+        <item name="preferenceStyle">@style/FlipFlapSettingsTheme.PreferenceStyle</item>
         <item name="preferenceTheme">@style/FlipFlapSettingsTheme.PreferenceTheme</item>
+        <item name="switchPreferenceStyle">@style/FlipFlapSettingsTheme.SwitchPreferenceStyle</item>
     </style>
 
-    <style name="FlipFlapSettingsTheme.PreferenceTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+    <style name="FlipFlapSettingsTheme.DialogPreferenceStyle" parent="@style/FlipFlapSettingsTheme.PreferenceStyle">
+    </style>
+
+    <style name="FlipFlapSettingsTheme.PreferenceCategoryStyle" parent="@*android:style/Preference.DeviceDefault.Category">
+        <item name="allowDividerAbove">true</item>
+        <item name="allowDividerBelow">true</item>
+        <item name="android:layout">@layout/preference_category_material_settings</item>
+    </style>
+
+    <style name="FlipFlapSettingsTheme.PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment.Material">
+        <item name="allowDividerAfterLastItem">false</item>
+    </style>
+
+    <style name="FlipFlapSettingsTheme.PreferenceStyle" parent="@*android:style/Preference.DeviceDefault">
         <item name="allowDividerAbove">false</item>
-        <item name="allowDividerBelow">false</item>
+        <item name="allowDividerBelow">true</item>
         <item name="singleLineTitle">false</item>
+        <item name="android:layout">@layout/preference_material_settings</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">
-        <item name="android:colorAccent">@color/switch_accent_color</item>
+    <style name="FlipFlapSettingsTheme.PreferenceTheme">
+    </style>
+
+    <style name="FlipFlapSettingsTheme.SwitchPreferenceStyle" parent="@style/FlipFlapSettingsTheme.PreferenceStyle">
+        <item name="widgetLayout">@*android:layout/preference_widget_switch</item>
+    </style>
+
+    <style name="FlipFlapSettingsTheme.SwitchBar" parent="@android:style/ThemeOverlay.Material.ActionBar">
     </style>
 </resources>
