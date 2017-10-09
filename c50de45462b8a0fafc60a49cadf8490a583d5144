@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fd51b69_2b696bb4",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-09T06:25:53Z",
+      "side": 1,
+      "message": "This one is needed for sure, otherwise preference categories are misaligned.",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 88
+      },
+      "revId": "c50de45462b8a0fafc60a49cadf8490a583d5144",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70c28404_d2421380",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-09T06:25:53Z",
+      "side": 1,
+      "message": "This layout doesn\u0027t seem to be needed at all, at least in our case.",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 79
+      },
+      "revId": "c50de45462b8a0fafc60a49cadf8490a583d5144",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8906e653_ec225efa",
+        "filename": "res/values/styles.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-09T06:25:53Z",
+      "side": 1,
+      "message": "This is actually what does the trick regarding the alignment of the preferences.",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 148,
+        "endChar": 58
+      },
+      "revId": "c50de45462b8a0fafc60a49cadf8490a583d5144",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
