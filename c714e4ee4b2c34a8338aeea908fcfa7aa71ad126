@@ -22,6 +22,30 @@
       "revId": "c714e4ee4b2c34a8338aeea908fcfa7aa71ad126",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61e47cc6_bec1a9b1",
+        "filename": "res/values/colors.xml",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6753
+      },
+      "writtenOn": "2017-10-13T01:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d3dec4_c4a712d9",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 45
+      },
+      "revId": "c714e4ee4b2c34a8338aeea908fcfa7aa71ad126",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
