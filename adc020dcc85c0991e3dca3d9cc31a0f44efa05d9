@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "377e11f3_948afa7a",
+        "filename": "src/org/lineageos/flipflap/FlipFlapView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2017-10-13T10:49:26Z",
+      "side": 0,
+      "message": "You can probably simply replace these with:\n\n    private boolean shouldPassToSecurityView() {\n        return getBoolean(LineageSettings.Secure.LOCK_PASS_TO_SECURITY_VIEW, false, getUserId());\n    }\n\n    public void setPassToSecurityView(boolean enabled) {\n        setBoolean(LineageSettings.Secure.LOCK_PASS_TO_SECURITY_VIEW, enabled, getUserId());\n    }",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 5
+      },
+      "revId": "adc020dcc85c0991e3dca3d9cc31a0f44efa05d9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
