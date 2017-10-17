@@ -16,9 +16,7 @@
 
     <supports-screens android:anyDensity="true" />
 
-    <uses-sdk
-        android:minSdkVersion="23"
-        android:targetSdkVersion="23" />
+    <uses-sdk android:minSdkVersion="23" />
 
     <application
         android:allowBackup="true"
