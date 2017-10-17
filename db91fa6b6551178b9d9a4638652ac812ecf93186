@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c797fb34_899bfd9a",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-17T08:07:51Z",
+      "side": 1,
+      "message": "Should we simply omit this from the manifest in order to always target the latest SDK version?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "db91fa6b6551178b9d9a4638652ac812ecf93186",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
