@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83d87281_0b1f445e",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-10-22T17:57:14Z",
+      "side": 0,
+      "message": "I guess according to Joey\u0027s comments, we should remove targetSdkVersion only.",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "adc020dcc85c0991e3dca3d9cc31a0f44efa05d9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
