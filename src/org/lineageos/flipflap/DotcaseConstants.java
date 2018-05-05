@@ -52,7 +52,10 @@ public class DotcaseConstants {
         LMMS,
         INSTAGRAM,
         WHATSAPP,
-        TAPATALK
+        TAPATALK,
+        SIGNAL,
+        LIBRENEWS,
+        CONVERSATIONS,
     }
 
     /**
@@ -86,6 +89,8 @@ public class DotcaseConstants {
         0xff935b48, // Instagram Brown
         0xff35b024, // Whatsapp Green
         0xfff86901, // Tapatalk Orange
+        0xff2090ea, // Signal Blue
+        0xff259b24, // Conversations Green
     };
 
     static int getColorFromNumber(final int color) {
@@ -151,6 +156,10 @@ public class DotcaseConstants {
         notificationMap.put("com.quoord.tapatalkpro.activity", Notification.TAPATALK);
         notificationMap.put("com.whatsapp", Notification.WHATSAPP);
         notificationMap.put("com.google.android.apps.inbox", Notification.INBOX);
+        notificationMap.put("org.thoughtcrime.securesms", Notification.SIGNAL);
+        notificationMap.put("app.librenews.io.librenews", Notification.LIBRENEWS);
+        notificationMap.put("eu.siacs.conversations", Notification.CONVERSATIONS);
+        notificationMap.put("eu.siacs.conversations.legacy", Notification.CONVERSATIONS);
     }
 
     /**
@@ -357,6 +366,36 @@ public class DotcaseConstants {
         { 0, 25, 25, 25, 25,  0,  0},
         {25, 25,  0,  0,  0,  0,  0}};
 
+    static final int[][] signalSprite = {
+        { 0, 26, 26, 26, 26, 26,  0},
+        {26, 26, 26,  1, 26, 26, 26},
+        {26, 26,  1,  1,  1, 26, 26},
+        {26,  1,  1,  1,  1,  1, 26},
+        {26, 26,  1,  1,  1, 26, 26},
+        {26, 26, 26,  1, 26, 26, 26},
+        {26, 26,  1, 26, 26, 26, 26},
+        { 0, 26, 26, 26, 26, 26,  0}};
+
+    static final int[][] librenewsSprite = {
+        { 0,  0,  0,  0,  0,  0,  0},
+        { 0,  0,  0,  0,  0,  0,  0},
+        { 0,  0,  1,  1,  1,  0,  0},
+        { 0,  1,  1,  0,  1,  1,  0},
+        { 1,  1,  0,  1,  0,  1,  1},
+        { 0,  1,  1,  0,  1,  1,  0},
+        { 0,  0,  1,  1,  1,  0,  0},
+        { 0,  0,  0,  0,  0,  0,  0}};
+
+    static final int[][] conversationsSprite = {
+        { 0,  0,  0, 27,  0,  0,  0},
+        { 0,  0, 27, 27, 27,  0,  0},
+        { 0, 27, 27, 27, 27, 27,  0},
+        {27,  1, 27,  1, 27,  1, 27},
+        { 0, 27, 27, 27, 27, 27,  0},
+        { 0,  0, 27, 27, 27,  0,  0},
+        { 0,  0,  0, 27, 27,  0,  0},
+        { 0,  0,  0,  0,  0, 27,  0}};
+
     static int[][] getNotificationSprite(Notification notification) {
         switch (notification) {
             case DOTS:
@@ -399,6 +438,12 @@ public class DotcaseConstants {
                 return whatsappSprite;
             case TAPATALK:
                 return tapatalkSprite;
+            case SIGNAL:
+                return signalSprite;
+            case LIBRENEWS:
+                return librenewsSprite;
+            case CONVERSATIONS:
+                return conversationsSprite;
             default:
                 return null;
         }
