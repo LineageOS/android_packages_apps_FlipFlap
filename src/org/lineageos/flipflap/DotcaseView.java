@@ -161,6 +161,9 @@ public class DotcaseView extends FlipFlapView {
         for (StatusBarNotification sbn : notifications) {
             Notification notification = DotcaseConstants.notificationMap.get(sbn.getPackageName());
             if (notification != null && !mNotifications.contains(notification)) {
+                if (sbn.getNotification().priority < android.app.Notification.PRIORITY_DEFAULT) {
+                    continue;
+                }
                 mNotifications.add(notification);
                 if (mNotifications.size() == 5) {
                     break;
