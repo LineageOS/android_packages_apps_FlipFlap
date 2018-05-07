@@ -16,6 +16,24 @@
       "revId": "a3647f56d1af6f8329fee378045538ff87404601",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "119a024b_076f2076",
+        "filename": "src/org/lineageos/flipflap/DotcaseConstants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 19199
+      },
+      "writtenOn": "2018-05-07T16:03:11Z",
+      "side": 1,
+      "message": "Needed no, but also not wrong (and cleaner imho). Other parts have it too, like the paintColors array below.",
+      "parentUuid": "4265c540_ec8b87c4",
+      "revId": "a3647f56d1af6f8329fee378045538ff87404601",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
