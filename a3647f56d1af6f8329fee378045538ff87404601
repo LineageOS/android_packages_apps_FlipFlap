@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4265c540_ec8b87c4",
+        "filename": "src/org/lineageos/flipflap/DotcaseConstants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 16208
+      },
+      "writtenOn": "2018-05-07T12:31:11Z",
+      "side": 1,
+      "message": "It is not needed to have a comma here for enum IIRC.",
+      "revId": "a3647f56d1af6f8329fee378045538ff87404601",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
