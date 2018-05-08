@@ -21,4 +21,11 @@
 <resources>
   <!-- String matching the lock screen format for displaying the date. -->
   <!-- Strings for the Settings -->
+  <string name="timeout_entry_immediately">Immediatamente</string>
+  <string name="timeout_entry_5s">5 segundos</string>
+  <string name="timeout_entry_10s">10 segundos</string>
+  <string name="timeout_entry_30s">30 segundos</string>
+  <string name="timeout_entry_1min">1 minutu</string>
+  <string name="timeout_entry_5min">5 minutos</string>
+  <string name="timeout_entry_never">Mai</string>
 </resources>

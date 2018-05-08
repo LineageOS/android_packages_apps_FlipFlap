@@ -32,6 +32,7 @@
   <string name="pass_to_security_view_title">Gå direkte til angivelse av passord</string>
   <string name="pass_to_security_view_summary">Når du åpner dekselet går telefonen direkte til angivelse av passord</string>
   <string name="use_high_touch_sensitivity_title">Høy berøringsskjerm-sensitivitet</string>
+  <string name="use_high_touch_sensitivity_summary">Øk berøringssensitiviteten mens etuiet er lukket</string>
   <string name="category_design">Design</string>
   <string name="switch_charging_status_title">Vis ladestatus</string>
   <string name="switch_charging_status_summary">Endre farge avhengig av den gjeldende batteriladningen</string>
