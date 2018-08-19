@@ -30,10 +30,11 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.Log;
-import android.view.WindowManagerPolicy.WindowManagerFuncs;
 
 public class EventReceiver extends BroadcastReceiver {
     static final String TAG = "FlipFlap";
+
+    private final int LID_CLOSED = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -47,7 +48,7 @@ public class EventReceiver extends BroadcastReceiver {
 
             int timeout = FlipFlapUtils.getTimeout(context, batMan.isCharging());
             Intent serviceIntent = new Intent(context, FlipFlapService.class);
-            if (lidState == WindowManagerFuncs.LID_CLOSED) {
+            if (lidState == LID_CLOSED) {
                 activateSettings(context);
                 if (timeout != 0) {
                     context.startServiceAsUser(serviceIntent, UserHandle.CURRENT);
