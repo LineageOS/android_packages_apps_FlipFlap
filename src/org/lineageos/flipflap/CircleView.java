@@ -21,9 +21,6 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -145,12 +142,12 @@ public class CircleView extends FlipFlapView {
             }
         } else if (mAlarmActive) {
             mDatePanel.setVisibility(View.VISIBLE);
-            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.updateView();
             mAlarmPanel.setVisibility(View.VISIBLE);
             mPhonePanel.setVisibility(View.GONE);
         } else {
             mDatePanel.setVisibility(View.VISIBLE);
-            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.updateView();
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.GONE);
         }

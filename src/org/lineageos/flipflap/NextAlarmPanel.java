@@ -43,6 +43,7 @@ public class NextAlarmPanel extends LinearLayout {
     private AlarmManager mAlarmManager;
     private ImageView mAlarmIcon;
     private TextView mAlarmText;
+    private boolean mAlarmPresent = false;
 
     private boolean mReceiverRegistered;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -101,8 +102,8 @@ public class NextAlarmPanel extends LinearLayout {
     private void refreshAlarmStatus() {
         String nextAlarm = getNextAlarm();
         mAlarmText.setText(nextAlarm);
-        setVisibility(TextUtils.isEmpty(nextAlarm)
-                ? View.GONE : View.VISIBLE);
+        mAlarmPresent = !TextUtils.isEmpty(nextAlarm);
+        updateView();
     }
 
     private String getNextAlarm() {
@@ -114,5 +115,9 @@ public class NextAlarmPanel extends LinearLayout {
         }
 
         return null;
+    }
+
+    public void updateView() {
+        setVisibility(mAlarmPresent ? View.VISIBLE : View.GONE);
     }
 }
