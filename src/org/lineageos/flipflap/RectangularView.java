@@ -20,11 +20,10 @@
 
 package org.lineageos.flipflap;
 
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.provider.ContactsContract;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -136,16 +135,17 @@ public class RectangularView extends FlipFlapView {
     }
 
     private void updateViewVisibility() {
+        String nextAlarm = mNextAlarmPanel.getNextAlarm();
+
         if (mRinging || mCallActive) {
             if (mNeedsSmallView) {
                 mClockPanel.setVisibility(View.GONE);
                 mDatePanel.setVisibility(View.GONE);
-                mNextAlarmPanel.setVisibility(View.GONE);
             } else {
                 mClockPanel.setVisibility(View.VISIBLE);
                 mDatePanel.setVisibility(View.VISIBLE);
-                mNextAlarmPanel.setVisibility(View.VISIBLE);
             }
+            mNextAlarmPanel.setVisibility(View.GONE);
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.VISIBLE);
             if (mRinging) {
@@ -165,14 +165,15 @@ public class RectangularView extends FlipFlapView {
             } else {
                 mClockPanel.setVisibility(View.VISIBLE);
                 mDatePanel.setVisibility(View.VISIBLE);
-                mNextAlarmPanel.setVisibility(View.VISIBLE);
+                mNextAlarmPanel.setVisibility(TextUtils.isEmpty(nextAlarm)
+                    ? View.GONE : View.VISIBLE);
             }
             mAlarmPanel.setVisibility(View.VISIBLE);
             mPhonePanel.setVisibility(View.GONE);
         } else {
             mClockPanel.setVisibility(View.VISIBLE);
             mDatePanel.setVisibility(View.VISIBLE);
-            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.setVisibility(TextUtils.isEmpty(nextAlarm) ? View.GONE : View.VISIBLE);
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.GONE);
         }
