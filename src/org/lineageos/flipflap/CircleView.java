@@ -20,13 +20,13 @@
 
 package org.lineageos.flipflap;
 
+import android.app.AlarmManager;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.provider.ContactsContract;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 public class CircleView extends FlipFlapView {
     private static final String TAG = "CircleView";
@@ -127,6 +127,7 @@ public class CircleView extends FlipFlapView {
     }
 
     private void updateViewVisibility() {
+        String nextAlarm = mNextAlarmPanel.getNextAlarm();
         mClockPanel.setVisibility(View.VISIBLE);
 
         if (mRinging || mCallActive) {
@@ -145,12 +146,12 @@ public class CircleView extends FlipFlapView {
             }
         } else if (mAlarmActive) {
             mDatePanel.setVisibility(View.VISIBLE);
-            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.setVisibility(TextUtils.isEmpty(nextAlarm) ? View.GONE : View.VISIBLE);
             mAlarmPanel.setVisibility(View.VISIBLE);
             mPhonePanel.setVisibility(View.GONE);
         } else {
             mDatePanel.setVisibility(View.VISIBLE);
-            mNextAlarmPanel.setVisibility(View.VISIBLE);
+            mNextAlarmPanel.setVisibility(TextUtils.isEmpty(nextAlarm) ? View.GONE : View.VISIBLE);
             mAlarmPanel.setVisibility(View.GONE);
             mPhonePanel.setVisibility(View.GONE);
         }

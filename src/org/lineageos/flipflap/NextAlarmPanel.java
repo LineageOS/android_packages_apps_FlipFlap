@@ -43,6 +43,7 @@ public class NextAlarmPanel extends LinearLayout {
     private AlarmManager mAlarmManager;
     private ImageView mAlarmIcon;
     private TextView mAlarmText;
+    private boolean mAlarmPresent = false;
 
     private boolean mReceiverRegistered;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -101,11 +102,9 @@ public class NextAlarmPanel extends LinearLayout {
     private void refreshAlarmStatus() {
         String nextAlarm = getNextAlarm();
         mAlarmText.setText(nextAlarm);
-        setVisibility(TextUtils.isEmpty(nextAlarm)
-                ? View.GONE : View.VISIBLE);
     }
 
-    private String getNextAlarm() {
+    public String getNextAlarm() {
         AlarmManager.AlarmClockInfo nextAlarmClock = mAlarmManager.getNextAlarmClock();
         if (nextAlarmClock != null) {
             String skeleton = DateFormat.is24HourFormat(mContext) ? "EHm" : "Ehma";
@@ -115,4 +114,5 @@ public class NextAlarmPanel extends LinearLayout {
 
         return null;
     }
+
 }
