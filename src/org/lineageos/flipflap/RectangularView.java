@@ -130,8 +130,8 @@ public class RectangularView extends FlipFlapView {
         super.updateCallState(callState);
         mRinging = callState.isRinging();
         mCallActive = callState.isActive();
-        mIncomingCallName.setText (mRinging ? callState.getName() : null);
-        mIncomingCallNumber.setText(mRinging ? callState.getNumber() : null);
+        mIncomingCallName.setText (mCallActive ? callState.getName() : null);
+        mIncomingCallNumber.setText(mCallActive ? callState.getNumber() : null);
         updateViewVisibility();
     }
 
