@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69297384_bf82cc71",
+        "filename": "src/org/lineageos/flipflap/CircleView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-18T23:02:51Z",
+      "side": 1,
+      "message": "Remove.",
+      "revId": "de67071fe112b2f02fa3c39913a5e440c8e2064d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a528a4c0_b53b807e",
+        "filename": "src/org/lineageos/flipflap/NextAlarmPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-18T23:02:51Z",
+      "side": 1,
+      "message": "Remove.",
+      "revId": "de67071fe112b2f02fa3c39913a5e440c8e2064d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
