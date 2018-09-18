@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcf6c7cf_2d9d683a",
+        "filename": "src/org/lineageos/flipflap/CircleView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-18T23:10:04Z",
+      "side": 1,
+      "message": "Unused import?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "d4b7960f44854a97a259690ef78e2f9328cf58c4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51b91614_a0a471e7",
+        "filename": "src/org/lineageos/flipflap/NextAlarmPanel.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-18T23:10:04Z",
+      "side": 1,
+      "message": "Unused?",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "d4b7960f44854a97a259690ef78e2f9328cf58c4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6fafd62_7e1fc2b7",
+        "filename": "src/org/lineageos/flipflap/RectangularView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-18T23:10:04Z",
+      "side": 1,
+      "message": "Unused import?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "d4b7960f44854a97a259690ef78e2f9328cf58c4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
