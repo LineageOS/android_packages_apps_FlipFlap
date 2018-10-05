@@ -39,6 +39,8 @@
     <string name="pass_to_security_view_summary">Opening the case directly shows lock screen</string>
     <string name="use_high_touch_sensitivity_title">High touch sensitivity</string>
     <string name="use_high_touch_sensitivity_summary">Increase touch sensitivity while cover is closed</string>
+    <string name="increase_brightness_title">Increase brightness</string>
+    <string name="increase_brightness_summary">Increase screen brightness while cover is closed</string>
 
     <string name="category_design">Design</string>
     <string name="switch_charging_status_title">Show charging status</string>
