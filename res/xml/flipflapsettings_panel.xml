@@ -34,6 +34,12 @@
             android:defaultValue="false"
             android:title="@string/use_high_touch_sensitivity_title"
             android:summary="@string/use_high_touch_sensitivity_summary" />
+
+        <SwitchPreference
+            android:key="increase_brightness"
+            android:defaultValue="true"
+            android:title="@string/increase_brightness_title"
+            android:summary="@string/increase_brightness_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory
