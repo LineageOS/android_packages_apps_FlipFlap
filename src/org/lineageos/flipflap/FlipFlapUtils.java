@@ -54,6 +54,7 @@ public class FlipFlapUtils {
     static final String KEY_TIMEOUT_UNPLUGGED = "timeout_unplugged";
     static final String KEY_TIMEOUT_PLUGGED = "timeout_plugged";
     static final String KEY_BATTERY_INDICATION = "battery_indication";
+    static final String KEY_INCREASE_BRIGHTNESS = "increase_brightness";
 
     private static final int[] COVER_TYPES_WITH_CHARGING_INDICATION = new int[] {
             COVER_STYLE_CIRCLE,
@@ -90,4 +91,7 @@ public class FlipFlapUtils {
         return hardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY);
     }
 
+    public static boolean shouldIncreaseBrightness(Context context) {
+        return getPreferences(context).getBoolean(KEY_INCREASE_BRIGHTNESS, true);
+    }
 }
