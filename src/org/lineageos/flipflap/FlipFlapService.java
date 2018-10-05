@@ -78,7 +78,9 @@ public class FlipFlapService extends Service {
             } else {
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                         WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
-                params.screenBrightness = mCoverView.getScreenBrightness();
+                if (FlipFlapUtils.shouldIncreaseBrightness(getApplicationContext())) {
+                    params.screenBrightness = mCoverView.getScreenBrightness();
+                }
                 params.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
                 mWm.addView(mCoverView, params);
             }

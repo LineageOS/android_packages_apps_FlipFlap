@@ -90,4 +90,7 @@ public class FlipFlapUtils {
         return hardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY);
     }
 
+    public static boolean shouldIncreaseBrightness(Context context) {
+        return getPreferences(context).getBoolean("increase_brightness", true);
+    }
 }
