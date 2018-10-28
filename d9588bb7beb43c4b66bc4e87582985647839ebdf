@@ -22,6 +22,30 @@
       "revId": "d9588bb7beb43c4b66bc4e87582985647839ebdf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "691471b0_6686ed21",
+        "filename": "src/org/lineageos/flipflap/FlipFlapUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 20248
+      },
+      "writtenOn": "2018-10-28T09:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e73707e_f00b8947",
+      "range": {
+        "startLine": 94,
+        "startChar": 50,
+        "endLine": 94,
+        "endChar": 71
+      },
+      "revId": "d9588bb7beb43c4b66bc4e87582985647839ebdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
