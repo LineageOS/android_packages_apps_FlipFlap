@@ -52,8 +52,8 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
     private final String KEY_DESIGN_CATEGORY = "category_design";
     private final String KEY_TOUCH_SENSITIVITY = "use_high_touch_sensitivity";
 
-    private Switch mSwitch;
     private TextView mTextView;
+    private View mSwitchBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,20 +69,19 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final View switchBar = view.findViewById(R.id.switch_bar);
-        switchBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSwitch.setChecked(!mSwitch.isChecked());
-            }
+        mTextView = view.findViewById(R.id.switch_text);
+        mTextView.setText(getString(isEventReceiverEnabled() ?
+                R.string.switch_bar_on : R.string.switch_bar_off));
+
+        mSwitchBar = view.findViewById(R.id.switch_bar);
+        Switch switchWidget = mSwitchBar.findViewById(android.R.id.switch_widget);
+        switchWidget.setChecked(isEventReceiverEnabled());
+        switchWidget.setOnCheckedChangeListener(this);
+        mSwitchBar.setActivated(isEventReceiverEnabled());
+        mSwitchBar.setOnClickListener(v -> {
+            switchWidget.setChecked(!switchWidget.isChecked());
+            mSwitchBar.setActivated(switchWidget.isChecked());
         });
-
-        mTextView = (TextView) view.findViewById(R.id.switch_text);
-
-        mSwitch = (Switch) switchBar.findViewById(android.R.id.switch_widget);
-        mSwitch.setChecked(isEventReceiverEnabled());
-        mSwitch.setOnCheckedChangeListener(this);
-        updateEnableStates(mSwitch.isChecked());
     }
 
     @Override
@@ -164,6 +163,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
 
         mTextView.setText(getString(masterSwitchEnabled ?
                 R.string.switch_bar_on : R.string.switch_bar_off));
+        mSwitchBar.setActivated(masterSwitchEnabled);
     }
 
     private boolean isEventReceiverEnabled() {
