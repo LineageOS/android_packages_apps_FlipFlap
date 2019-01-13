@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (C) 2017-2019 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -419,7 +419,7 @@ public class FlipFlapView extends FrameLayout {
 
     private void checkHighTouchSensitivity() {
         if (shouldUseHighTouchSensitivity() &&
-                FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
+                FlipFlapUtils.getHighTouchSensitivitySupported()) {
             mUserHighTouchState = LineageSettings.System.getInt(mContext.getContentResolver(),
                     LineageSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 0);
             LineageSettings.System.putInt(mContext.getContentResolver(),
@@ -429,7 +429,7 @@ public class FlipFlapView extends FrameLayout {
 
     private void restoreHighTouchSensitivity() {
         if (shouldUseHighTouchSensitivity() &&
-                FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
+                FlipFlapUtils.getHighTouchSensitivitySupported()) {
             LineageSettings.System.putInt(mContext.getContentResolver(),
                     LineageSettings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, mUserHighTouchState);
         }

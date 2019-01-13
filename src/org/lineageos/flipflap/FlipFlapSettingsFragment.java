@@ -103,7 +103,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         if (!FlipFlapUtils.showsChargingStatus(cover)) {
             getPreferenceScreen().removePreference(designCategory);
         }
-        if (!FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
+        if (!FlipFlapUtils.getHighTouchSensitivitySupported()) {
             behaviourCategory.removePreference(touchSensitivityPref);
         }
     }
