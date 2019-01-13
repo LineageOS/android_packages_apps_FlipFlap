@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (C) 2017-2019 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,14 @@ package org.lineageos.flipflap;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 
-import lineageos.hardware.LineageHardwareManager;
+import vendor.lineage.touch.V1_0.IGloveMode;
+
+import java.util.NoSuchElementException;
 
 public class FlipFlapUtils {
 
@@ -86,8 +89,12 @@ public class FlipFlapUtils {
     }
 
     public static boolean getHighTouchSensitivitySupported(Context context) {
-        final LineageHardwareManager hardware = LineageHardwareManager.getInstance(context);
-        return hardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY);
+        try {
+            IGloveMode gloveMode = IGloveMode.getService(true /* retry */);
+            return true;
+        } catch (NoSuchElementException | RemoteException e) {
+            return false;
+        }
     }
 
 }
