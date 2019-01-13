@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (C) 2017-2019 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         if (!FlipFlapUtils.showsChargingStatus(cover)) {
             ps.removePreference(ps.findPreference(KEY_DESIGN_CATEGORY));
         }
-        if (!FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
+        if (!FlipFlapUtils.getHighTouchSensitivitySupported()) {
             ps.removePreference(ps.findPreference(KEY_TOUCH_SENSITIVITY));
         }
     }
