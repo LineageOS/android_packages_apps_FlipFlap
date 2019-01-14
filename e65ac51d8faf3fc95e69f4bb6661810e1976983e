@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f38f932_9d9ad59b",
+        "filename": "src/org/lineageos/flipflap/FlipFlapSettingsFragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-01-14T15:18:16Z",
+      "side": 1,
+      "message": "I think I should give this a better naming.",
+      "range": {
+        "startLine": 99,
+        "startChar": 19,
+        "endLine": 99,
+        "endChar": 36
+      },
+      "revId": "e65ac51d8faf3fc95e69f4bb6661810e1976983e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
