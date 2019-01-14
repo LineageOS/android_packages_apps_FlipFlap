@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (C) 2017-2019 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v14.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +48,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
 
     public final String TAG = "FlipFlapSettings";
 
+    private final String KEY_BEHAVIOUR_CATEGORY = "category_behaviour";
     private final String KEY_DESIGN_CATEGORY = "category_design";
     private final String KEY_TOUCH_SENSITIVITY = "use_high_touch_sensitivity";
 
@@ -88,16 +91,22 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        PreferenceCategory behaviourCategory =
+                (PreferenceCategory) getPreferenceScreen().findPreference(KEY_BEHAVIOUR_CATEGORY);
+        PreferenceCategory designCategory =
+                (PreferenceCategory) getPreferenceScreen().findPreference(KEY_DESIGN_CATEGORY);
+
+        Preference touchSensitivityPref = (SwitchPreference) findPreference(KEY_TOUCH_SENSITIVITY);
+
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_PLUGGED);
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
 
         int cover = FlipFlapUtils.getCoverStyle(getActivity());
-        PreferenceScreen ps = getPreferenceScreen();
         if (!FlipFlapUtils.showsChargingStatus(cover)) {
-            ps.removePreference(ps.findPreference(KEY_DESIGN_CATEGORY));
+            getPreferenceScreen().removePreference(designCategory);
         }
         if (!FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
-            ps.removePreference(ps.findPreference(KEY_TOUCH_SENSITIVITY));
+            behaviourCategory.removePreference(touchSensitivityPref);
         }
     }
 
