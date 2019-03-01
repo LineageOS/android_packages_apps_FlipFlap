@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Smart cover detectée</string>
     <string name="alarm_label">ALARME</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">RÉPONDRE</string>
     <string name="ignore_call">IGNORER</string>
     <string name="end_call">RACCROCHER</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Verrouillage intelligent</string>
     <string name="settings_summary">Contrôler le comportement des accessoires</string>
     <string name="category_behaviour">Comportement</string>

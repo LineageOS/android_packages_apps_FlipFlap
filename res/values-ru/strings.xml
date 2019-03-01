@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Обнаружена смарт-обложка</string>
     <string name="alarm_label">БУДИЛЬНИК</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ОТВЕТИТЬ</string>
     <string name="ignore_call">ОТКЛОНИТЬ</string>
     <string name="end_call">ЗАВЕРШИТЬ</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Умный чехол</string>
     <string name="settings_summary">Настройка работы аксессуара</string>
     <string name="category_behaviour">Поведение</string>

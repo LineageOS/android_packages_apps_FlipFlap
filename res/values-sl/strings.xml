@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Zaznan pametni ovitek</string>
     <string name="alarm_label">BUDILKA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d. MMMM</string>
     <string name="answer_call">ODGOVORI</string>
     <string name="ignore_call">PREZRI</string>
     <string name="end_call">KONČAJ KLIC</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Pametni ovitek</string>
     <string name="settings_summary">Nadzorujte vedenje vaše dodatne opreme</string>
     <string name="category_behaviour">Vedenje</string>

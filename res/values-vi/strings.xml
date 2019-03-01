@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Nắp đậy thông minh đã được phát hiện</string>
     <string name="alarm_label">BÁO THỨC</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">TRẢ LỜI</string>
     <string name="ignore_call">BỎ QUA</string>
     <string name="end_call">KẾT THÚC CUỘC GỌI</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Vỏ bảo vệ thông minh</string>
     <string name="settings_summary">Kiểm soát hành vi phụ kiện của bạn</string>
     <string name="category_behaviour">Hành vi</string>

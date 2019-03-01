@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">스마트 커버 감지됨</string>
     <string name="alarm_label">알람</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">MMMM d EEE</string>
     <string name="answer_call">응답</string>
     <string name="ignore_call">무시</string>
     <string name="end_call">통화 종료</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">스마트 커버</string>
     <string name="settings_summary">액세서리의 동작 제어</string>
     <string name="category_behaviour">동작</string>

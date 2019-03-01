@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Cubierta inteligente detectada</string>
     <string name="alarm_label">ALARMA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">RESPONDER</string>
     <string name="ignore_call">IGNORAR</string>
     <string name="end_call">TERMINAR LLAMADA</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Comportamiento</string>
     <string name="pass_to_security_view_title">Introducir directamente la contraseña</string>
     <string name="pass_to_security_view_summary">Mostrar la pantalla de bloqueo al retirar la cubierta</string>

@@ -20,12 +20,10 @@
 -->
 <resources>
     <string name="alarm_label">ALARM</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">SVARA</string>
     <string name="ignore_call">IGNORERA</string>
     <string name="end_call">AVSLUTA SAMTAL</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Smartskal</string>
     <string name="settings_summary">Styr hur ditt smartskal beter sig</string>
     <string name="category_behaviour">Beteende</string>

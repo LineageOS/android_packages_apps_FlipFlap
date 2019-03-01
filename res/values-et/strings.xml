@@ -19,6 +19,5 @@
 
 -->
 <resources>
-    <!-- String matching the lock screen format for displaying the date. -->
-    <!-- Strings for the Settings -->
+    <string name="abbrev_wday_month_day_no_year">EEE, d. MMMM</string>
 </resources>

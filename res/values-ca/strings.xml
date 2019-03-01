@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Tapa intel·ligent detectada</string>
     <string name="alarm_label">ALARMA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">CONTESTA</string>
     <string name="ignore_call">IGNORA</string>
     <string name="end_call">PENJA LA TRUCADA</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Tapa intel·ligent</string>
     <string name="settings_summary">Controla el comportament del teu accessori</string>
     <string name="category_behaviour">Comportament</string>

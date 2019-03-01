@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Funda inteligente detectada</string>
     <string name="alarm_label">ALARMA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">RESPONDER</string>
     <string name="ignore_call">IGNORAR</string>
     <string name="end_call">TERMINAR LLAMADA</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Funda inteligente</string>
     <string name="settings_summary">Controlar el comportamiento del accesorio</string>
     <string name="category_behaviour">Comportamiento</string>
