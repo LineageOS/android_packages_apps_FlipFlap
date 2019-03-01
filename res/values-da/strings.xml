@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Smart cover registreret</string>
     <string name="alarm_label">ALARM</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">BESVAR</string>
     <string name="ignore_call">IGNORER</string>
     <string name="end_call">AFSLUT OPKALD</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Adfærd</string>
     <string name="pass_to_security_view_title">Gå direkte til indtastning af adgangskode</string>
     <string name="pass_to_security_view_summary">Åbning af coveret viser skærmlåsen direkte</string>

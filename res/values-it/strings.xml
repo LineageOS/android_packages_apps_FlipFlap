@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Trovata SmartCover</string>
     <string name="alarm_label">SVEGLIA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, dd MMMM</string>
     <string name="answer_call">RISPONDI</string>
     <string name="ignore_call">IGNORA</string>
     <string name="end_call">TERMINA CHIAMATA</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Smart cover</string>
     <string name="settings_summary">Controlla il comportamento dell\'accessorio</string>
     <string name="category_behaviour">Comportamento</string>

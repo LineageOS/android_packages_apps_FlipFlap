@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Smart tok észlelve</string>
     <string name="alarm_label">ÉBRESZTŐ</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">MMMM d., EEE</string>
     <string name="answer_call">VÁLASZ</string>
     <string name="ignore_call">FIGYELMEN KÍVÜL HAGY</string>
     <string name="end_call">HÍVÁS BEFEJEZÉSE</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Viselkedés</string>
     <string name="pass_to_security_view_title">Közvetlen jelszó megadás megjelenítése</string>
     <string name="pass_to_security_view_summary">Fedél felnyitása után közvetlenül a zárképernyő jelenik meg</string>

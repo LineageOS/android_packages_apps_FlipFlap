@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">スマートカバーを検出しました</string>
     <string name="alarm_label">アラーム</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">MMMM d (EEE)</string>
     <string name="answer_call">応答</string>
     <string name="ignore_call">無視</string>
     <string name="end_call">通話終了</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">スマートカバー</string>
     <string name="settings_summary">アクセサリーの動作を設定します</string>
     <string name="category_behaviour">動作</string>

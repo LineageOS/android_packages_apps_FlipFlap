@@ -22,12 +22,10 @@
     <string name="app_name">Preklápačky</string>
     <string name="notification_title">Zistený Inteligentný kryt</string>
     <string name="alarm_label">BUDÍK</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d. MMMM</string>
     <string name="answer_call">ODPOVEDAŤ</string>
     <string name="ignore_call">IGNOROVAŤ</string>
     <string name="end_call">UKONČIŤ HOVOR</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Inteligentný obal</string>
     <string name="settings_summary">Ovládajte správanie príslušenstva</string>
     <string name="category_behaviour">Správanie</string>

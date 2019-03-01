@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Capa inteligente detetada</string>
     <string name="alarm_label">ALARME</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ATENDER</string>
     <string name="ignore_call">IGNORAR</string>
     <string name="end_call">TERMINAR CHAMADA</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Capa inteligente</string>
     <string name="settings_summary">Controle o comportamento do acessório</string>
     <string name="category_behaviour">Comportamento</string>

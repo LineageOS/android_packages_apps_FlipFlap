@@ -22,12 +22,10 @@
     <string name="app_name">כיסוי חכם</string>
     <string name="notification_title">כיסוי חכם זוהה</string>
     <string name="alarm_label">שעון מעורר</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">ענה</string>
     <string name="ignore_call">התעלם</string>
     <string name="end_call">סיים שיחה</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">כיסוי חכם</string>
     <string name="settings_summary">שלוט בהתנהגות האביזרים שלך</string>
     <string name="category_behaviour">התנהגות</string>

@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Husă inteligentă detectată</string>
     <string name="alarm_label">ALARMĂ</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">RĂSPUNDEȚI</string>
     <string name="ignore_call">IGNORAȚI</string>
     <string name="end_call">ÎNCHIDEȚI APELUL</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Copertă inteligentă</string>
     <string name="settings_summary">Controlați comportamentul accesoriilor dvs.</string>
     <string name="category_behaviour">Comportament</string>

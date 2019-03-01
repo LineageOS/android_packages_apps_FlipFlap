@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Виявлено смарт чохол</string>
     <string name="alarm_label">БУДИЛЬНИК</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ВІДПОВІСТИ</string>
     <string name="ignore_call">ВІДХИЛИТИ</string>
     <string name="end_call">Завершити</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Поведінка</string>
     <string name="pass_to_security_view_title">Відразу пропонувати введення паролю</string>
     <string name="pass_to_security_view_summary">Відкриття чохла показує екран розблокування</string>

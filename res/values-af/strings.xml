@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Slim-omhulsel opgespoor</string>
     <string name="alarm_label">Wekker</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ANTWOORT</string>
     <string name="ignore_call">IGNOREER</string>
     <string name="end_call">BEEÏNDIG OPROEP</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Gedrag</string>
     <string name="pass_to_security_view_title">Gaan direk na wagwoordinvoer</string>
     <string name="pass_to_security_view_summary">Oopmaak van die omhulsel toon direk die sluit skerm</string>

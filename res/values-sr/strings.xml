@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Откривена је паметна футрола</string>
     <string name="alarm_label">АЛАРМ</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ОДГОВОРИ</string>
     <string name="ignore_call">ЗАНЕМАРИ</string>
     <string name="end_call">ЗАВРШИ ПОЗИВ</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Паметни омотач</string>
     <string name="settings_summary">Контролиши понашање додатака</string>
     <string name="category_behaviour">Понашање</string>

@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">已檢測到智慧掀蓋</string>
     <string name="alarm_label">鬧鈴</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">接聽</string>
     <string name="ignore_call">忽略</string>
     <string name="end_call">結束通話</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">智慧掀蓋</string>
     <string name="settings_summary">控制您的附件行為</string>
     <string name="category_behaviour">行為</string>

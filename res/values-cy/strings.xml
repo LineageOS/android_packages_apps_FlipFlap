@@ -19,8 +19,6 @@
 
 -->
 <resources>
-    <!-- String matching the lock screen format for displaying the date. -->
-    <!-- Strings for the Settings -->
     <string name="settings_name">Gorchudd clyfar</string>
     <string name="settings_summary">Rheola ymddygiad dy ategolyn</string>
     <string name="timeout_plugged_title">Wrth wefru</string>

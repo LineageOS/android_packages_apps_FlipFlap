@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">تم الكشف عن غطاء ذكي</string>
     <string name="alarm_label">المنبه</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">رد</string>
     <string name="ignore_call">تجاهل</string>
     <string name="end_call">إنهاء المكالمة</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">الغطاء الذكي</string>
     <string name="settings_summary">التحكم في سلوك الجهاز الملحق</string>
     <string name="category_behaviour">السلوك</string>

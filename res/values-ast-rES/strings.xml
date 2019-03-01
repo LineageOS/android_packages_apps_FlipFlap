@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Deteutóse una carcaxa intelixente</string>
     <string name="alarm_label">ALARMA</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d \'de\' MMMM</string>
     <string name="answer_call">CONTESTAR</string>
     <string name="ignore_call">INORAR</string>
     <string name="end_call">FINAR LLAMADA</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Carcaxa intelixente</string>
     <string name="settings_summary">Controla\'l comportamientu del accesoriu</string>
     <string name="category_behaviour">Comportamientu</string>

@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Älykäs suojakuori tunnistettu</string>
     <string name="alarm_label">HÄLYTYS</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">VASTAA</string>
     <string name="ignore_call">OHITA</string>
     <string name="end_call">LOPETA PUHELU</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Smart cover</string>
     <string name="settings_summary">Ohjaa lisälaitteiden käyttäytymistä</string>
     <string name="category_behaviour">Käyttäytyminen</string>

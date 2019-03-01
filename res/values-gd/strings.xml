@@ -19,8 +19,6 @@
 
 -->
 <resources>
-    <!-- String matching the lock screen format for displaying the date. -->
-    <!-- Strings for the Settings -->
     <string name="settings_name">Còmhdachadh tapaidh</string>
     <string name="settings_summary">Stiùirich giùlan nan co-innealan agad</string>
 </resources>

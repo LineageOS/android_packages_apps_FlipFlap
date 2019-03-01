@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Разпознато е умно калъфче</string>
     <string name="alarm_label">АЛАРМА</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">ОТГОВОР</string>
     <string name="ignore_call">ИГНОРИРАЙ</string>
     <string name="end_call">ПРЕКРАТИ РАЗГОВОРА</string>
-    <!-- Strings for the Settings -->
     <string name="settings_name">Интелигентно покритие</string>
     <string name="settings_summary">Контролирайте поведението на вашите аксесоари</string>
     <string name="category_behaviour">Поведение</string>

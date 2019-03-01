@@ -22,12 +22,10 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Smart cover është dalluar</string>
     <string name="alarm_label">ALARM</string>
-    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">PËRGJIGJU</string>
     <string name="ignore_call">SHPËRFILL</string>
     <string name="end_call">MBYLLE</string>
-    <!-- Strings for the Settings -->
     <string name="category_behaviour">Reagimi</string>
     <string name="pass_to_security_view_title">Shko direkt tek futja e fjalëkalimit</string>
     <string name="pass_to_security_view_summary">Hapja e kapakut të çon direkt tek ekrani bllokues</string>
