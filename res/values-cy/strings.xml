@@ -19,9 +19,34 @@
 
 -->
 <resources>
+    <string name="app_name">FlipFlap</string>
+    <string name="notification_title">Synhwyrwyd gorchudd clyfar</string>
+    <string name="alarm_label">LARWM</string>
+    <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
+    <string name="answer_call">ATEB</string>
+    <string name="ignore_call">ANWYBYDDU</string>
+    <string name="end_call">GORFFEN GALWAD</string>
     <string name="settings_name">Gorchudd clyfar</string>
     <string name="settings_summary">Rheola ymddygiad dy ategolyn</string>
+    <string name="category_behaviour">Ymddygiad</string>
+    <string name="pass_to_security_view_title">Mynd yn syth i gyflwyno\'r cyfrinair</string>
+    <string name="pass_to_security_view_summary">Mae agor y cas yn dangos y sgrin cloi yn syth</string>
+    <string name="use_high_touch_sensitivity_title">Sensitifrwydd cyffwrdd uchel</string>
+    <string name="use_high_touch_sensitivity_summary">Cynyddu sensitifrwydd y sgrin gyffwrdd tra bod y gorchudd ar gau</string>
+    <string name="category_design">Dyluniad</string>
+    <string name="switch_charging_status_title">Dangos statws gwefru</string>
+    <string name="switch_charging_status_summary">Newid lliw yn ôl lefel y batri</string>
+    <string name="category_timeouts">Terfynau amser</string>
     <string name="timeout_plugged_title">Wrth wefru</string>
+    <string name="timeout_unplugged_title">Datgysylltwyd</string>
+    <string name="timeout_summary">Dangos ap y gorchudd am %s ar ôl cau\'r caead</string>
+    <string name="timeout_summary_never">Ar ôl cau\'r caead, bydd ap y gorchudd yn aros ymlaen o hyd</string>
+    <string name="timeout_summary_immediately">Caiff y sgrin ei throi i ffwrdd wrth gau\'r gorchudd</string>
+    <string name="timeout_entry_immediately">Ar unwaith</string>
+    <string name="timeout_entry_5s">5 eiliad</string>
     <string name="timeout_entry_10s">10 eiliad</string>
+    <string name="timeout_entry_30s">30 eiliad</string>
     <string name="timeout_entry_1min">1 munud</string>
+    <string name="timeout_entry_5min">5 munud</string>
+    <string name="timeout_entry_never">Byth</string>
 </resources>

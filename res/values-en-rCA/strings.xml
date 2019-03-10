@@ -19,11 +19,15 @@
 
 -->
 <resources>
+    <string name="app_name">FlipFlap</string>
+    <string name="notification_title">Smart cover detected</string>
     <string name="alarm_label">ALARM</string>
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">ANSWER</string>
     <string name="ignore_call">IGNORE</string>
     <string name="end_call">END CALL</string>
+    <string name="settings_name">Smart cover</string>
+    <string name="settings_summary">Control your accessory behaviour</string>
     <string name="category_behaviour">Behaviour</string>
     <string name="pass_to_security_view_title">Directly go to password entry</string>
     <string name="pass_to_security_view_summary">Opening the case directly shows lock screen</string>
