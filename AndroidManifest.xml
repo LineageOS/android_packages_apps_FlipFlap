@@ -25,7 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.DeviceDefault.Settings">
+        android:theme="@style/Theme.Main">
 
         <receiver android:name=".EventReceiver">
             <intent-filter>
@@ -41,7 +41,6 @@
             android:name=".FlipFlapSettingsActivity"
             android:label="@string/settings_name"
             android:icon="@drawable/ic_settings_flipflap"
-            android:theme="@style/FlipFlapSettingsTheme"
             android:enabled="false">
 
             <intent-filter>
