@@ -34,7 +34,7 @@
     <string name="use_high_touch_sensitivity_summary">Povečaj občutljivost dotika, ko je ovitek zaprt</string>
     <string name="category_design">Oblikovanje</string>
     <string name="switch_charging_status_title">Prikaži stanje polnjenja</string>
-    <string name="switch_charging_status_summary">Spremeni barvo glede na trenutno napajanje akumulatorja</string>
+    <string name="switch_charging_status_summary">Spremeni barvo glede na trenutno napajanje baterije</string>
     <string name="category_timeouts">Časovne omejitve</string>
     <string name="timeout_plugged_title">Med polnjenjem</string>
     <string name="timeout_unplugged_title">Odklopljeno</string>
