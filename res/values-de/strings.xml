@@ -26,7 +26,7 @@
     <string name="ignore_call">IGNORIEREN</string>
     <string name="end_call">ANRUF BEENDEN</string>
     <string name="settings_name">Smart-Cover</string>
-    <string name="settings_summary">Legen Sie das Verhalten des Zubehörs fest</string>
+    <string name="settings_summary">Lege das Verhalten des Zubehörs fest</string>
     <string name="category_behaviour">Verhalten</string>
     <string name="pass_to_security_view_title">Direkt zur Passwortabfrage gehen</string>
     <string name="pass_to_security_view_summary">Das Öffnen der Hülle zeigt direkt den Sperrbildschirm</string>
