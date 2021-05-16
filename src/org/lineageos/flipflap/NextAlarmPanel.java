@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,12 +37,11 @@ public class NextAlarmPanel extends LinearLayout {
 
     private final Context mContext;
 
-    private AlarmManager mAlarmManager;
-    private ImageView mAlarmIcon;
+    private final AlarmManager mAlarmManager;
     private TextView mAlarmText;
 
     private boolean mReceiverRegistered;
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -85,15 +83,14 @@ public class NextAlarmPanel extends LinearLayout {
         super(context, attrs, defStyleAttr);
 
         mContext = context;
-        mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        mAlarmManager = mContext.getSystemService(AlarmManager.class);
     }
 
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
 
-        mAlarmIcon = (ImageView) findViewById(R.id.alarm_icon);
-        mAlarmText = (TextView) findViewById(R.id.next_alarm_regular);
+        mAlarmText = findViewById(R.id.next_alarm_regular);
     }
 
     private void refreshAlarmStatus() {

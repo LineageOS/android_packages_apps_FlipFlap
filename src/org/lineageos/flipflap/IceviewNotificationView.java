@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,6 @@ import android.widget.TextView;
 public class IceviewNotificationView extends LinearLayout {
     private static final String TAG = "IceviewNotificationView";
 
-    private Notification mNotification;
-
     public IceviewNotificationView(Context context) {
         this(context, null);
     }
@@ -43,16 +41,14 @@ public class IceviewNotificationView extends LinearLayout {
     }
 
     public void setNotification(Notification notification) {
-        mNotification = notification;
-
         Icon largeIcon = notification.getLargeIcon();
         Icon icon = largeIcon != null ? largeIcon : notification.getSmallIcon();
         String titleString = notification.extras.getString(Notification.EXTRA_TITLE);
         String textString = notification.extras.getString(Notification.EXTRA_TEXT);
 
-        ImageView iconView = (ImageView) findViewById(R.id.iceview_notification_icon);
-        TextView titleView = (TextView) findViewById(R.id.iceview_notification_title);
-        TextView descView = (TextView) findViewById(R.id.iceview_notification_description);
+        ImageView iconView = findViewById(R.id.iceview_notification_icon);
+        TextView titleView = findViewById(R.id.iceview_notification_title);
+        TextView descView = findViewById(R.id.iceview_notification_description);
 
         titleView.setText(titleString);
         descView.setText(textString);

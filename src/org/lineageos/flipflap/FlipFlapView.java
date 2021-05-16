@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,14 +63,14 @@ public class FlipFlapView extends FrameLayout {
     private static final int COVER_CLOSED_MSG = 0;
     private static final int RESTORE_SECURITY_VIEW_STATE = 1;
 
-    private Context mContext;
+    private final Context mContext;
+    private final GestureDetector mDetector;
+    private final PowerManager mPowerManager;
+    private final PowerManager.WakeLock mWakeLock;
+    private final SensorManager mSensorManager;
+    private final TelecomManager mTelecomManager;
+    private final TelephonyManager mTelephonyManager;
     private CallState mCallState;
-    private GestureDetector mDetector;
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
-    private SensorManager mSensorManager;
-    private TelecomManager mTelecomManager;
-    private TelephonyManager mTelephonyManager;
     private boolean mAlarmActive;
     private boolean mProximityNear;
     private boolean mNotificationListenerRegistered;
@@ -92,10 +92,10 @@ public class FlipFlapView extends FrameLayout {
                 View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         mDetector = new GestureDetector(context, mGestureListener);
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mPowerManager = context.getSystemService(PowerManager.class);
+        mSensorManager = context.getSystemService(SensorManager.class);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
 
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.setReferenceCounted(false);
@@ -287,7 +287,7 @@ public class FlipFlapView extends FrameLayout {
                 String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                 mCallState = new CallState(getContext(),state, number);
                 updateCallState(mCallState);
-                if(mCallState.isRinging() && !mWakeLock.isHeld()) {
+                if (mCallState.isRinging() && !mWakeLock.isHeld()) {
                     mWakeLock.acquire();
                 } else {
                     if(!mCallState.isRinging() && mWakeLock.isHeld()) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,6 @@ import android.widget.LinearLayout;
 public class ClockPanel extends LinearLayout {
     private static final String TAG = "ClockPanel";
 
-    private final Context mContext;
-
     public ClockPanel(Context context) {
         this(context, null);
     }
@@ -39,7 +37,5 @@ public class ClockPanel extends LinearLayout {
 
     public ClockPanel(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        mContext = context;
     }
 }
