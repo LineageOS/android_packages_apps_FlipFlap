@@ -30,6 +30,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -75,6 +76,7 @@ public class FlipFlapView extends FrameLayout {
     private boolean mProximityNear;
     private boolean mNotificationListenerRegistered;
     private boolean mPassToSecurity;
+    private boolean mIsCharging;
 
     private int mUserHighTouchState;
 
@@ -303,6 +305,10 @@ public class FlipFlapView extends FrameLayout {
                 mWakeLock.release();
             } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 postScreenOff();
+            } else if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+                mIsCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                        status == BatteryManager.BATTERY_STATUS_FULL;
             }
         }
     };
@@ -359,7 +365,7 @@ public class FlipFlapView extends FrameLayout {
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);
-        int timeout = FlipFlapUtils.getTimeout(mContext, false);
+        int timeout = FlipFlapUtils.getTimeout(mContext, mIsCharging);
         if (mPowerManager.isInteractive() && timeout != FlipFlapUtils.DELAYED_SCREEN_OFF_NEVER) {
             Message msg = Message.obtain();
             msg.what = COVER_CLOSED_MSG;
