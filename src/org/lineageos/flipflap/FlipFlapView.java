@@ -30,6 +30,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -63,6 +64,7 @@ public class FlipFlapView extends FrameLayout {
     private static final int COVER_CLOSED_MSG = 0;
     private static final int RESTORE_SECURITY_VIEW_STATE = 1;
 
+    private final BatteryManager mBatteryManager;
     private final Context mContext;
     private final GestureDetector mDetector;
     private final PowerManager mPowerManager;
@@ -92,6 +94,7 @@ public class FlipFlapView extends FrameLayout {
                 View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         mDetector = new GestureDetector(context, mGestureListener);
+        mBatteryManager = context.getSystemService(BatteryManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
         mSensorManager = context.getSystemService(SensorManager.class);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
@@ -359,7 +362,7 @@ public class FlipFlapView extends FrameLayout {
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);
-        int timeout = FlipFlapUtils.getTimeout(mContext, false);
+        int timeout = FlipFlapUtils.getTimeout(mContext, mBatteryManager.isCharging());
         if (mPowerManager.isInteractive() && timeout != FlipFlapUtils.DELAYED_SCREEN_OFF_NEVER) {
             Message msg = Message.obtain();
             msg.what = COVER_CLOSED_MSG;
