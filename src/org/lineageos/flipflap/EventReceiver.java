@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,10 +39,8 @@ public class EventReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (lineageos.content.Intent.ACTION_LID_STATE_CHANGED.equals(intent.getAction())) {
-            PowerManager powerManager = (PowerManager) context.getSystemService(
-                    Context.POWER_SERVICE);
-            BatteryManager batMan = (BatteryManager) context.getSystemService(
-                    Context.BATTERY_SERVICE);
+            PowerManager powerManager = context.getSystemService(PowerManager.class);
+            BatteryManager batMan = context.getSystemService(BatteryManager.class);
             int lidState = intent.getIntExtra(lineageos.content.Intent.EXTRA_LID_STATE, -1);
             Log.d(TAG, "Got lid state change event, new state " + lidState);
 

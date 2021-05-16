@@ -23,9 +23,9 @@ package org.lineageos.flipflap;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.provider.ContactsContract;
-import android.util.Log;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,67 +35,49 @@ import android.widget.TextView;
 public class CircleView extends FlipFlapView {
     private static final String TAG = "CircleView";
 
-    private ClockPanel mClockPanel;
-    private DatePanel mDatePanel;
-    private NextAlarmPanel mNextAlarmPanel;
-    private AlarmPanel mAlarmPanel;
-    private PhonePanel mPhonePanel;
-    private ImageButton mAlarmSnoozeButton;
-    private ImageButton mAlarmDismissButton;
-    private RelativeLayout mAnswerCallButton;
-    private RelativeLayout mIgnoreCallButton;
-    private Resources mResources;
-    private TextView mEndCallText;
-    private TextView mIncomingCallName;
-    private TextView mIncomingCallNumber;
+    private final ClockPanel mClockPanel;
+    private final DatePanel mDatePanel;
+    private final NextAlarmPanel mNextAlarmPanel;
+    private final AlarmPanel mAlarmPanel;
+    private final PhonePanel mPhonePanel;
+    private final ImageButton mAlarmSnoozeButton;
+    private final ImageButton mAlarmDismissButton;
+    private final RelativeLayout mAnswerCallButton;
+    private final RelativeLayout mIgnoreCallButton;
+    private final Resources mResources;
+    private final TextView mEndCallText;
+    private final TextView mIncomingCallName;
+    private final TextView mIncomingCallNumber;
     private boolean mRinging;
     private boolean mCallActive;
     private boolean mAlarmActive;
+    private boolean mForceRedraw;
+    private float mOriginalRadius;
 
     public CircleView(Context context) {
         super(context);
 
         inflate(context, R.layout.circle_view, this);
 
-        mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
+        mClockPanel = findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
-        mDatePanel = (DatePanel) findViewById(R.id.date_panel);
-        mNextAlarmPanel = (NextAlarmPanel) findViewById(R.id.next_alarm_panel);
-        mAlarmPanel = (AlarmPanel) findViewById(R.id.alarm_panel);
-        mPhonePanel = (PhonePanel) findViewById(R.id.phone_panel);
+        mDatePanel = findViewById(R.id.date_panel);
+        mNextAlarmPanel = findViewById(R.id.next_alarm_panel);
+        mAlarmPanel = findViewById(R.id.alarm_panel);
+        mPhonePanel = findViewById(R.id.phone_panel);
 
-        mIncomingCallName = (TextView) findViewById(R.id.incoming_call_name);
-        mIncomingCallNumber = (TextView) findViewById(R.id.incoming_call_number);
-        mAnswerCallButton = (RelativeLayout) findViewById(R.id.answer_button);
-        mIgnoreCallButton = (RelativeLayout) findViewById(R.id.ignore_button);
-        mEndCallText = (TextView) findViewById(R.id.ignore_text);
-        mAnswerCallButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                acceptRingingCall();
-            }
-        });
-        mIgnoreCallButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                endCall();
-            }
-        });
+        mIncomingCallName = findViewById(R.id.incoming_call_name);
+        mIncomingCallNumber = findViewById(R.id.incoming_call_number);
+        mAnswerCallButton = findViewById(R.id.answer_button);
+        mIgnoreCallButton = findViewById(R.id.ignore_button);
+        mEndCallText = findViewById(R.id.ignore_text);
+        mAnswerCallButton.setOnClickListener(view -> acceptRingingCall());
+        mIgnoreCallButton.setOnClickListener(view -> endCall());
 
-        mAlarmSnoozeButton = (ImageButton) findViewById(R.id.snooze_button);
-        mAlarmDismissButton = (ImageButton) findViewById(R.id.dismiss_button);
-        mAlarmSnoozeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                snoozeAlarm();
-            }
-        });
-        mAlarmDismissButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismissAlarm();
-            }
-        });
+        mAlarmSnoozeButton = findViewById(R.id.snooze_button);
+        mAlarmDismissButton = findViewById(R.id.dismiss_button);
+        mAlarmSnoozeButton.setOnClickListener(view -> snoozeAlarm());
+        mAlarmDismissButton.setOnClickListener(view -> dismissAlarm());
 
         mResources = context.getResources();
     }
