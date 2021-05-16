@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,14 @@
 package org.lineageos.flipflap;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +44,7 @@ public class CircleView extends FlipFlapView {
     private ImageButton mAlarmDismissButton;
     private RelativeLayout mAnswerCallButton;
     private RelativeLayout mIgnoreCallButton;
+    private Resources mResources;
     private TextView mEndCallText;
     private TextView mIncomingCallName;
     private TextView mIncomingCallNumber;
@@ -93,6 +96,8 @@ public class CircleView extends FlipFlapView {
                 dismissAlarm();
             }
         });
+
+        mResources = context.getResources();
     }
 
     @Override
@@ -120,6 +125,73 @@ public class CircleView extends FlipFlapView {
         mIncomingCallName.setText (mCallActive ? callState.getName() : null);
         mIncomingCallNumber.setText(mCallActive ? callState.getNumber() : null);
         updateViewVisibility();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mOriginalRadius = 4.0F * w / 9.0F;
+        mForceRedraw = true; // we need to draw once before we can apply any changes
+    }
+
+    private void recalculateLayout() {
+        float newRadius = mOriginalRadius + mResources.getDimensionPixelSize(R.dimen.radius_offset);
+        float ratio = newRadius / mOriginalRadius;
+        float density = mResources.getDisplayMetrics().density;
+
+        // Change size and move Clock Panel down
+        TextView theClock = mClockPanel.findViewById(R.id.the_clock);
+        changeLayout(mClockPanel, ratio, true, false, false, false, false);
+        changeTextSize(theClock, ratio, density);
+        // we intentionally skip date and next_alarm - these are already very small and should
+        // fit into all relevant circle sizes
+
+        // Change Alarm Panel
+        ImageView alertIcon = mAlarmPanel.findViewById(R.id.alarm_alert_icon);
+        TextView alertText = mAlarmPanel.findViewById(R.id.alarm_alert_text);
+        changeLayout(mAlarmSnoozeButton, ratio, false, true, false, true, true);
+        changeLayout(mAlarmDismissButton, ratio, false, false, true, true, true);
+        changeLayout(alertIcon, ratio, false, false, false, false, true);
+        changeTextSize(alertText, ratio, density);
+
+        // Phone panel
+        ImageView phoneIcon = mPhonePanel.findViewById(R.id.incoming_call_alert_icon);
+        ImageView answerIcon = mAnswerCallButton.findViewById(R.id.answer_icon);
+        TextView answerText = mAnswerCallButton.findViewById(R.id.answer_text);
+        ImageView ignoreIcon = mIgnoreCallButton.findViewById(R.id.ignore_icon);
+        TextView ignoreText = mIgnoreCallButton.findViewById(R.id.ignore_text);
+        changeTextSize(mIncomingCallName, ratio, density);
+        changeTextSize(mIncomingCallNumber, ratio, density);
+        changeLayout(phoneIcon, ratio, false, false, false, false, true);
+        changeLayout(mAnswerCallButton, ratio, false, true, false, false, false);
+        changeLayout(answerIcon, ratio, false, false, false, true, true);
+        changeTextSize(answerText, ratio, density);
+        changeLayout(mIgnoreCallButton, ratio, false, false, true, false, false);
+        changeLayout(ignoreIcon, ratio, false, false, false, true, true);
+        changeTextSize(ignoreText, ratio, density);
+    }
+
+    @Override
+    public void onDraw(Canvas canvas) {
+        if (mForceRedraw) {
+            mForceRedraw = false;
+            recalculateLayout();
+        }
+    }
+
+    private void changeLayout(View v, float ratio, boolean top, boolean left, boolean right,
+                              boolean width, boolean height) {
+        RelativeLayout.LayoutParams relParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+        if (top) relParams.topMargin = (int)(relParams.topMargin / ratio + 0.5f);
+        if (left) relParams.leftMargin = (int)(relParams.leftMargin / ratio + 0.5f);
+        if (right) relParams.rightMargin = (int)(relParams.rightMargin / ratio + 0.5f);
+        if (width) relParams.width = (int)(relParams.width * ratio + 0.5f);
+        if (height) relParams.height = (int)(relParams.height * ratio + 0.5f);
+        v.setLayoutParams(relParams);
+    }
+
+    private void changeTextSize(TextView v, float ratio, float density) {
+        v.setTextSize(v.getTextSize() / density * ratio);
     }
 
     private void updateViewVisibility() {
