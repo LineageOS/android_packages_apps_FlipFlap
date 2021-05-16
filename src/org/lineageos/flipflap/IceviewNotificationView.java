@@ -32,8 +32,6 @@ import android.widget.TextView;
 public class IceviewNotificationView extends LinearLayout {
     private static final String TAG = "IceviewNotificationView";
 
-    private Notification mNotification;
-
     public IceviewNotificationView(Context context) {
         this(context, null);
     }
@@ -43,8 +41,6 @@ public class IceviewNotificationView extends LinearLayout {
     }
 
     public void setNotification(Notification notification) {
-        mNotification = notification;
-
         Icon largeIcon = notification.getLargeIcon();
         Icon icon = largeIcon != null ? largeIcon : notification.getSmallIcon();
         String titleString = notification.extras.getString(Notification.EXTRA_TITLE);

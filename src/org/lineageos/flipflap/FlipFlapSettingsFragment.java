@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 The LineageOS Project
+ * Copyright (C) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,10 +22,8 @@ package org.lineageos.flipflap;
 
 import android.app.ActionBar;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -38,13 +36,13 @@ import android.widget.TextView;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.lineageos.flipflap.R;
 
-public class FlipFlapSettingsFragment extends PreferenceFragment
+public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
     public final String TAG = "FlipFlapSettings";
@@ -176,7 +174,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         pref.setSummary(timeOut < 0
                 ? R.string.timeout_summary_never
                 : timeOut == 0
-                    ? R.string.timeout_summary_immediately
-                    : R.string.timeout_summary);
+                ? R.string.timeout_summary_immediately
+                : R.string.timeout_summary);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,14 +21,15 @@
 package org.lineageos.flipflap;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
-public class FlipFlapSettingsActivity extends PreferenceActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class FlipFlapSettingsActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content,
                 new FlipFlapSettingsFragment()).commit();
     }
 }
