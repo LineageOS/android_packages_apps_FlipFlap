@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,14 +63,14 @@ public class FlipFlapView extends FrameLayout {
     private static final int COVER_CLOSED_MSG = 0;
     private static final int RESTORE_SECURITY_VIEW_STATE = 1;
 
-    private Context mContext;
+    private final Context mContext;
+    private final GestureDetector mDetector;
+    private final PowerManager mPowerManager;
+    private final PowerManager.WakeLock mWakeLock;
+    private final SensorManager mSensorManager;
+    private final TelecomManager mTelecomManager;
+    private final TelephonyManager mTelephonyManager;
     private CallState mCallState;
-    private GestureDetector mDetector;
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
-    private SensorManager mSensorManager;
-    private TelecomManager mTelecomManager;
-    private TelephonyManager mTelephonyManager;
     private boolean mAlarmActive;
     private boolean mProximityNear;
     private boolean mNotificationListenerRegistered;
@@ -92,10 +92,10 @@ public class FlipFlapView extends FrameLayout {
                 View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         mDetector = new GestureDetector(context, mGestureListener);
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mPowerManager = context.getSystemService(PowerManager.class);
+        mSensorManager = context.getSystemService(SensorManager.class);
         mTelecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
 
         mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.setReferenceCounted(false);
@@ -258,24 +258,24 @@ public class FlipFlapView extends FrameLayout {
 
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
             new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            if (mPowerManager.isInteractive() && !mAlarmActive) {
-                mPowerManager.goToSleep(SystemClock.uptimeMillis());
-            }
-            return true;
-        }
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    if (mPowerManager.isInteractive() && !mAlarmActive) {
+                        mPowerManager.goToSleep(SystemClock.uptimeMillis());
+                    }
+                    return true;
+                }
 
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent e) {
-            return true;
-        }
+                @Override
+                public boolean onDoubleTapEvent(MotionEvent e) {
+                    return true;
+                }
 
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            return true;
-        }
-    };
+                @Override
+                public boolean onSingleTapConfirmed(MotionEvent e) {
+                    return true;
+                }
+            };
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -287,7 +287,7 @@ public class FlipFlapView extends FrameLayout {
                 String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                 mCallState = new CallState(getContext(),state, number);
                 updateCallState(mCallState);
-                if(mCallState.isRinging() && !mWakeLock.isHeld()) {
+                if (mCallState.isRinging() && !mWakeLock.isHeld()) {
                     mWakeLock.acquire();
                 } else {
                     if(!mCallState.isRinging() && mWakeLock.isHeld()) {
@@ -309,53 +309,53 @@ public class FlipFlapView extends FrameLayout {
 
     private final NotificationListenerService mNotificationListener =
             new NotificationListenerService() {
-        private RankingMap mRankingMap;
-        private final Comparator<StatusBarNotification> mRankingComparator =
-                new Comparator<StatusBarNotification>() {
+                private RankingMap mRankingMap;
+                private final Comparator<StatusBarNotification> mRankingComparator =
+                        new Comparator<StatusBarNotification>() {
 
-            private final Ranking mLhsRanking = new Ranking();
-            private final Ranking mRhsRanking = new Ranking();
+                            private final Ranking mLhsRanking = new Ranking();
+                            private final Ranking mRhsRanking = new Ranking();
 
-            @Override
-            public int compare(StatusBarNotification lhs, StatusBarNotification rhs) {
-                mRankingMap.getRanking(lhs.getKey(), mLhsRanking);
-                mRankingMap.getRanking(rhs.getKey(), mRhsRanking);
-                return Integer.compare(mLhsRanking.getRank(), mRhsRanking.getRank());
-            }
-        };
+                            @Override
+                            public int compare(StatusBarNotification lhs, StatusBarNotification rhs) {
+                                mRankingMap.getRanking(lhs.getKey(), mLhsRanking);
+                                mRankingMap.getRanking(rhs.getKey(), mRhsRanking);
+                                return Integer.compare(mLhsRanking.getRank(), mRhsRanking.getRank());
+                            }
+                        };
 
-        @Override
-        public void onListenerConnected() {
-            handleNotificationUpdate(getCurrentRanking());
-        }
+                @Override
+                public void onListenerConnected() {
+                    handleNotificationUpdate(getCurrentRanking());
+                }
 
-        @Override
-        public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
-            handleNotificationUpdate(ranking);
-        }
+                @Override
+                public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
+                    handleNotificationUpdate(ranking);
+                }
 
-        @Override
-        public void onNotificationRemoved(StatusBarNotification sbn, RankingMap ranking) {
-            handleNotificationUpdate(ranking);
-        }
+                @Override
+                public void onNotificationRemoved(StatusBarNotification sbn, RankingMap ranking) {
+                    handleNotificationUpdate(ranking);
+                }
 
-        @Override
-        public void onNotificationRankingUpdate(RankingMap ranking) {
-            handleNotificationUpdate(ranking);
-        }
+                @Override
+                public void onNotificationRankingUpdate(RankingMap ranking) {
+                    handleNotificationUpdate(ranking);
+                }
 
-        private void handleNotificationUpdate(RankingMap ranking) {
-            if (!mNotificationListenerRegistered) {
-                return;
-            }
+                private void handleNotificationUpdate(RankingMap ranking) {
+                    if (!mNotificationListenerRegistered) {
+                        return;
+                    }
 
-            mRankingMap = ranking;
+                    mRankingMap = ranking;
 
-            List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
-            Collections.sort(notifications, mRankingComparator);
-            updateNotifications(notifications);
-        }
-    };
+                    List<StatusBarNotification> notifications = Arrays.asList(getActiveNotifications());
+                    Collections.sort(notifications, mRankingComparator);
+                    updateNotifications(notifications);
+                }
+            };
 
     private void postScreenOff() {
         mHandler.removeCallbacksAndMessages(null);

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2016 The CyanogenMod Project
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,16 +57,16 @@ public class DotcaseView extends FlipFlapView {
     private boolean mRinging;
     private boolean mProximityNear;
 
-    private GestureDetector mDetector;
+    private final GestureDetector mDetector;
 
-    private int mOffsetX;
-    private int mOffsetY;
-    private int mDotRatioX;
-    private int mDotRatioY;
+    private final int mOffsetX;
+    private final int mOffsetY;
+    private final int mDotRatioX;
+    private final int mDotRatioY;
 
     // 1920x1080 = 48 x 27 dots @ 40 pixels per dot
 
-    private class timeObject {
+    private static class timeObject {
         String timeString;
         int hour;
         int min;
@@ -221,11 +221,11 @@ public class DotcaseView extends FlipFlapView {
         }
 
         timeObj.timeString = (timeObj.hour < 10
-                                   ? " " + Integer.toString(timeObj.hour)
-                                   : Integer.toString(timeObj.hour))
-                           + (timeObj.min < 10
-                                   ? "0" + Integer.toString(timeObj.min)
-                                   : Integer.toString(timeObj.min));
+                ? " " + Integer.toString(timeObj.hour)
+                : Integer.toString(timeObj.hour))
+                + (timeObj.min < 10
+                ? "0" + Integer.toString(timeObj.min)
+                : Integer.toString(timeObj.min));
         return timeObj;
     }
 
@@ -348,7 +348,7 @@ public class DotcaseView extends FlipFlapView {
 
     private void drawBattery(Canvas canvas) {
         Intent batteryIntent = mContext.getApplicationContext().registerReceiver(null,
-                    new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int rawlevel = batteryIntent.getIntExtra("level", -1);
         double scale = batteryIntent.getIntExtra("scale", -1);
         int plugged = batteryIntent.getIntExtra("plugged", -1);
@@ -415,10 +415,10 @@ public class DotcaseView extends FlipFlapView {
 
     private void dotcaseDrawPixel(int x, int y, Paint paint, Canvas canvas) {
         canvas.drawRoundRect((x * mDotRatioX + 3 + mOffsetX),
-                            (y * mDotRatioY + 3 + mOffsetY),
-                            ((x + 1) * mDotRatioX - 3 + mOffsetX),
-                            ((y + 1) * mDotRatioY - 3 + mOffsetY),
-                            mDotRatioX / 2, mDotRatioY / 2, paint);
+                (y * mDotRatioY + 3 + mOffsetY),
+                ((x + 1) * mDotRatioX - 3 + mOffsetX),
+                ((y + 1) * mDotRatioY - 3 + mOffsetY),
+                mDotRatioX / 2, mDotRatioY / 2, paint);
     }
 
     private void dotcaseDrawRect(int left, int top, int right,
@@ -442,7 +442,7 @@ public class DotcaseView extends FlipFlapView {
 
     private void drawName(Canvas canvas) {
         int x = 0, y = 2;
-        int nameOffset = mNameOffset < 0 ? 0 : mNameOffset;
+        int nameOffset = Math.max(mNameOffset, 0);
         String correctedName = "";
 
         // We can fit 7 characters, and the last two are spaces
@@ -492,27 +492,27 @@ public class DotcaseView extends FlipFlapView {
 
     private final GestureDetector.SimpleOnGestureListener mGestureListener =
             new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if (Math.abs(distanceY) < 60) {
-                // Did not meet the threshold for a scroll
-                return true;
-            }
+                @Override
+                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                    if (Math.abs(distanceY) < 60) {
+                        // Did not meet the threshold for a scroll
+                        return true;
+                    }
 
-            if (supportsCallActions() && mRinging) {
-                if (distanceY < 60) {
-                    endCall();
-                } else if (distanceY > 60) {
-                    acceptRingingCall();
+                    if (supportsCallActions() && mRinging) {
+                        if (distanceY < 60) {
+                            endCall();
+                        } else if (distanceY > 60) {
+                            acceptRingingCall();
+                        }
+                    } else if (supportsAlarmActions() && mAlarmActive) {
+                        if (distanceY < 60) {
+                            dismissAlarm();
+                        } else if (distanceY > 60) {
+                            snoozeAlarm();
+                        }
+                    }
+                    return true;
                 }
-            } else if (supportsAlarmActions() && mAlarmActive) {
-                if (distanceY < 60) {
-                    dismissAlarm();
-                } else if (distanceY > 60) {
-                    snoozeAlarm();
-                }
-            }
-            return true;
-        }
-    };
+            };
 }

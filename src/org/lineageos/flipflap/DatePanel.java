@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,6 @@ public class DatePanel extends LinearLayout {
 
     private final Context mContext;
 
-    private TextClock mDateView;
-
     public DatePanel(Context context) {
         this(context, null);
     }
@@ -53,14 +51,13 @@ public class DatePanel extends LinearLayout {
     public void onFinishInflate() {
         super.onFinishInflate();
         final CharSequence dateFormat = getDateFormat(mContext);
-        mDateView = (TextClock) findViewById(R.id.date_regular);
-        mDateView.setFormat12Hour(dateFormat);
-        mDateView.setFormat24Hour(dateFormat);
+        TextClock dateView = findViewById(R.id.date_regular);
+        dateView.setFormat12Hour(dateFormat);
+        dateView.setFormat24Hour(dateFormat);
     }
 
     private static CharSequence getDateFormat(Context context) {
         final String dateFormat = context.getString(R.string.abbrev_wday_month_day_no_year);
         return DateFormat.getBestDateTimePattern(Locale.getDefault(), dateFormat);
     }
-
 }

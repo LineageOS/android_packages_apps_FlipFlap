@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,18 +30,18 @@ import java.util.List;
 public class IceviewView extends FlipFlapView {
     private static final String TAG = "IceviewView";
 
-    private ClockPanel mClockPanel;
-    private LinearLayout mNotificationsView;
+    private final ClockPanel mClockPanel;
+    private final LinearLayout mNotificationsView;
 
     public IceviewView(Context context) {
         super(context);
 
         inflate(context, R.layout.iceview_view, this);
 
-        mClockPanel = (ClockPanel) findViewById(R.id.clock_panel);
+        mClockPanel = findViewById(R.id.clock_panel);
         mClockPanel.bringToFront();
 
-        mNotificationsView = (LinearLayout) findViewById(R.id.iceview_notifications);
+        mNotificationsView = findViewById(R.id.iceview_notifications);
     }
 
     @Override
@@ -83,9 +83,6 @@ public class IceviewView extends FlipFlapView {
     }
 
     private boolean shouldShowNotification(StatusBarNotification sbn) {
-        if (FlipFlapUtils.OUR_PACKAGE_NAME.equals(sbn.getPackageName())) {
-             return false;
-        }
-        return true;
+        return !FlipFlapUtils.OUR_PACKAGE_NAME.equals(sbn.getPackageName());
     }
 }

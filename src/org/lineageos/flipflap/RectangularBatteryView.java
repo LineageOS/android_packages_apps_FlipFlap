@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ public class RectangularBatteryView extends View {
 
     private final Context mContext;
     private final Resources mResources;
-    private Paint mPaint;
+    private final Paint mPaint;
     private Rect mRect;
 
     private boolean mBatteryStateReceiverRegistered;
@@ -51,13 +51,13 @@ public class RectangularBatteryView extends View {
                     status == BatteryManager.BATTERY_STATUS_FULL;
 
             if (!FlipFlapUtils.showBatteryStatus(mContext)) {
-                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+                mPaint.setColor(mResources.getColor(R.color.full_bat_bg, context.getTheme()));
             } else if (isCharging) {
-                mPaint.setColor(mResources.getColor(R.color.charge_bat_bg));
+                mPaint.setColor(mResources.getColor(R.color.charge_bat_bg, context.getTheme()));
             } else if (level >= 15) {
-                mPaint.setColor(mResources.getColor(R.color.full_bat_bg));
+                mPaint.setColor(mResources.getColor(R.color.full_bat_bg, context.getTheme()));
             } else {
-                mPaint.setColor(mResources.getColor(R.color.low_bat_bg));
+                mPaint.setColor(mResources.getColor(R.color.low_bat_bg, context.getTheme()));
             }
             postInvalidate();
         }

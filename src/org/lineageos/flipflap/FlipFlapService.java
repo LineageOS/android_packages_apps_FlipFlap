@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (c) 2017-2021 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 package org.lineageos.flipflap;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +36,8 @@ import android.view.WindowManager;
 public class FlipFlapService extends Service {
     private static final String TAG = "FlipFlap";
 
+    private static final String ONGOING_CHANNEL_ID = "FlipFlap_Ongoing";
+
     private Context mContext;
     private FlipFlapView mCoverView;
     private WindowManager mWm;
@@ -44,13 +48,13 @@ public class FlipFlapService extends Service {
 
         Log.d(TAG, "Creating cover view");
 
-        mWm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        mWm = getSystemService(WindowManager.class);
         mContext = new ContextThemeWrapper(this, R.style.FlipFlapTheme);
 
-        final Notification notification = new Notification.Builder(this)
+        createNotificationChannel(this);
+        final Notification notification = new Notification.Builder(this, ONGOING_CHANNEL_ID)
                 .setContentTitle(getString(R.string.notification_title))
                 .setSmallIcon(R.drawable.ic_notification)
-                .setPriority(Notification.PRIORITY_MIN)
                 .setOngoing(true)
                 .setShowWhen(false)
                 .setLocalOnly(true)
@@ -103,5 +107,13 @@ public class FlipFlapService extends Service {
 
         // Not possible because of the check, above, matching on the valid covers
         return null;
+    }
+
+    private void createNotificationChannel(Context context) {
+        NotificationManager nm = context.getSystemService(NotificationManager.class);
+        NotificationChannel channel = new NotificationChannel(
+                ONGOING_CHANNEL_ID, context.getString(R.string.notification_title),
+                NotificationManager.IMPORTANCE_HIGH);
+        nm.createNotificationChannel(channel);
     }
 }
