@@ -20,9 +20,11 @@
 <resources>
     <string name="notification_title">ตรวจพบฝาครอบอัจฉริยะ</string>
     <string name="alarm_label">นาฬิกาปลุก</string>
+    <!-- String matching the lock screen format for displaying the date. -->
     <string name="answer_call">รับสาย</string>
     <string name="ignore_call">ไม่รับสาย</string>
     <string name="end_call">วางสาย</string>
+    <!-- Strings for the Settings -->
     <string name="settings_name">อุปกรณ์ฝาพับ</string>
     <string name="settings_summary">ควบคุมพฤติกรรมของอุปกรณ์เสริม</string>
     <string name="category_behaviour">พฤติกรรม</string>

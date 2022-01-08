@@ -21,10 +21,12 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Mhothaich sinn do chòmhdachadh tapaidh</string>
     <string name="alarm_label">CAISMEACHD</string>
+    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">FREAGAIR</string>
     <string name="ignore_call">LEIG SEACHAD</string>
     <string name="end_call">CUIR CRÌOCH AIR A’ GHAIRM</string>
+    <!-- Strings for the Settings -->
     <string name="settings_name">Còmhdachadh tapaidh</string>
     <string name="settings_summary">Stiùir giùlan nan co-innealan agad</string>
     <string name="category_behaviour">Giùlan</string>

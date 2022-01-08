@@ -21,10 +21,12 @@
     <string name="app_name">FlipFlap</string>
     <string name="notification_title">Tûke hoes detektearre</string>
     <string name="alarm_label">ALARM</string>
+    <!-- String matching the lock screen format for displaying the date. -->
     <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
     <string name="answer_call">ANTWURDZJE</string>
     <string name="ignore_call">NEGEARJE</string>
     <string name="end_call">PETEAR BEËINIGJE</string>
+    <!-- Strings for the Settings -->
     <string name="settings_name">Smart cover</string>
     <string name="settings_summary">Behear it gedrach fan jo aksessoare</string>
     <string name="category_behaviour">Gedrach</string>

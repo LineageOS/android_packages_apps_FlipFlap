@@ -18,6 +18,8 @@
 
 -->
 <resources>
+    <!-- String matching the lock screen format for displaying the date. -->
+    <!-- Strings for the Settings -->
     <string name="settings_name">ಜಾಣ ಹೊದಿಕೆ</string>
     <string name="settings_summary">ನಿಮ್ಮ ಉಪಸಾಧನದ ವರ್ತನೆ ನಿಯಂತ್ರಿಸು</string>
 </resources>
