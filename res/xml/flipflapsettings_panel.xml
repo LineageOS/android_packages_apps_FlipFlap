@@ -35,13 +35,15 @@
             android:key="pass_to_security_view"
             android:defaultValue="false"
             android:title="@string/pass_to_security_view_title"
-            android:summary="@string/pass_to_security_view_summary" />
+            android:summary="@string/pass_to_security_view_summary"
+            android:dependency="flipflap_enable" />
 
         <SwitchPreference
             android:key="use_high_touch_sensitivity"
             android:defaultValue="false"
             android:title="@string/use_high_touch_sensitivity_title"
-            android:summary="@string/use_high_touch_sensitivity_summary" />
+            android:summary="@string/use_high_touch_sensitivity_summary"
+            android:dependency="flipflap_enable" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -52,7 +54,8 @@
             android:key="battery_indication"
             android:defaultValue="true"
             android:title="@string/switch_charging_status_title"
-            android:summary="@string/switch_charging_status_summary" />
+            android:summary="@string/switch_charging_status_summary"
+            android:dependency="flipflap_enable" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -64,7 +67,8 @@
             android:summary=""
             android:entries="@array/timeout_entries"
             android:entryValues="@array/timeout_values"
-            android:defaultValue="5" />
+            android:defaultValue="5"
+            android:dependency="flipflap_enable" />
 
         <ListPreference
             android:key="timeout_unplugged"
@@ -72,7 +76,8 @@
             android:summary=""
             android:entries="@array/timeout_entries"
             android:entryValues="@array/timeout_values"
-            android:defaultValue="5" />
+            android:defaultValue="5"
+            android:dependency="flipflap_enable" />
 
     </PreferenceCategory>
 

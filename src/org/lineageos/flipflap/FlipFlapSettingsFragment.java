@@ -75,7 +75,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
             behaviourCategory.removePreference(touchSensitivityPref);
         }
 
-        updateEnableStates(isEventReceiverEnabled());
+        mSwitchBar.setChecked(isEventReceiverEnabled());
     }
 
     @Override
@@ -105,23 +105,13 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
         getContext().getPackageManager().setComponentEnabledSetting(cn, state,
                 PackageManager.DONT_KILL_APP);
 
-        updateEnableStates(isChecked);
+        mSwitchBar.setChecked(isChecked);
     }
 
     private void setupTimeoutPreference(String key) {
         ListPreference list = (ListPreference) findPreference(key);
         list.setOnPreferenceChangeListener(this);
         setTimeoutSummary(list, FlipFlapUtils.getTimeout(getActivity(), key));
-    }
-
-    private void updateEnableStates(boolean masterSwitchEnabled) {
-        PreferenceScreen ps = getPreferenceScreen();
-        int count = ps.getPreferenceCount();
-        for (int i = 1; i < count; i++) {
-            ps.getPreference(i).setEnabled(masterSwitchEnabled);
-        }
-
-        mSwitchBar.setChecked(masterSwitchEnabled);
     }
 
     private boolean isEventReceiverEnabled() {
