@@ -24,23 +24,24 @@ android_app {
 
     srcs: ["src/**/*.java"],
 
-    certificate: "platform",
-    privileged: true,
-
     platform_apis: true,
+    certificate: "platform",
+    system_ext_specific: true,
+    privileged: true,
 
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
 
-    required: ["privapp_whitelist_org.lineageos.flipflap.xml"],
-
+    required: [
+        "privapp_whitelist_org.lineageos.flipflap"
+    ],
 }
 
 prebuilt_etc {
-    name: "privapp_whitelist_org.lineageos.flipflap.xml",
-
-    src: "privapp_whitelist_org.lineageos.flipflap.xml",
+    name: "privapp_whitelist_org.lineageos.flipflap",
+    system_ext_specific: true,
     sub_dir: "permissions",
-
+    src: "privapp_whitelist_org.lineageos.flipflap.xml",
+    filename_from_src: true,
 }
