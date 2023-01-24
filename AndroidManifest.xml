@@ -15,10 +15,13 @@
 
     <supports-screens android:anyDensity="true" />
 
+<<<<<<< PATCH SET (92a615 FlipFlap: Remove minSdkVersion/targetSdkVersion)
+=======
     <uses-sdk
         android:minSdkVersion="27"
         android:targetSdkVersion="33" />
 
+>>>>>>> BASE      (a3654f FlipFlap: Move to /system_ext)
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
