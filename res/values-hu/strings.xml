@@ -26,6 +26,7 @@
     <string name="ignore_call">FIGYELMEN KÍVÜL HAGY</string>
     <string name="end_call">HÍVÁS BEFEJEZÉSE</string>
     <string name="settings_name">Okostok</string>
+    <string name="settings_enable">Az Okostok-vezérlés engedélyezése</string>
     <string name="settings_summary">Vezérelje a kiegészítők viselkedését</string>
     <string name="category_behaviour">Viselkedés</string>
     <string name="pass_to_security_view_title">Közvetlen jelszó megadás megjelenítése</string>

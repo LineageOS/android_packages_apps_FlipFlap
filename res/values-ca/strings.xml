@@ -26,6 +26,7 @@
     <string name="ignore_call">IGNORA</string>
     <string name="end_call">PENJA LA TRUCADA</string>
     <string name="settings_name">Tapa intel·ligent</string>
+    <string name="settings_enable">Activa el control intel·ligent de la portada</string>
     <string name="settings_summary">Controla el comportament del teu accessori</string>
     <string name="category_behaviour">Comportament</string>
     <string name="pass_to_security_view_title">Vés directament a l\'entrada de contrasenya</string>
