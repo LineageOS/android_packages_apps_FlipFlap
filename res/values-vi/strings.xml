@@ -26,6 +26,7 @@
     <string name="ignore_call">BỎ QUA</string>
     <string name="end_call">KẾT THÚC CUỘC GỌI</string>
     <string name="settings_name">Vỏ bảo vệ thông minh</string>
+    <string name="settings_enable">Bật điều khiển ốp lưng thông minh</string>
     <string name="settings_summary">Kiểm soát hành vi phụ kiện của bạn</string>
     <string name="category_behaviour">Hành vi</string>
     <string name="pass_to_security_view_title">Lập tức chuyển đến mục nhập mật khẩu</string>
