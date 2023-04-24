@@ -26,6 +26,7 @@
     <string name="ignore_call">IGNORER</string>
     <string name="end_call">RACCROCHER</string>
     <string name="settings_name">Verrouillage intelligent</string>
+    <string name="settings_enable">Activer le contrôle de la couverture intelligente</string>
     <string name="settings_summary">Contrôler le comportement des accessoires</string>
     <string name="category_behaviour">Comportement</string>
     <string name="pass_to_security_view_title">Passer directement à la saisie du mot de passe</string>

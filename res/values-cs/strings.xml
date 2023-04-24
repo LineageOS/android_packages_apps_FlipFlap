@@ -26,6 +26,7 @@
     <string name="ignore_call">IGNOROVAT</string>
     <string name="end_call">UKONČIT HOVOR</string>
     <string name="settings_name">Chytré pouzdro</string>
+    <string name="settings_enable">Povolit ovládání chytrého krytu</string>
     <string name="settings_summary">Ovládání chování příslušenství</string>
     <string name="category_behaviour">Chování</string>
     <string name="pass_to_security_view_title">Přímo zobrazit zadání hesla</string>

@@ -26,6 +26,7 @@
     <string name="ignore_call">ANWYBYDDU</string>
     <string name="end_call">GORFFEN GALWAD</string>
     <string name="settings_name">Gorchudd clyfar</string>
+    <string name="settings_enable">Galluogi rheolaeth clawr clyfar</string>
     <string name="settings_summary">Rheola ymddygiad dy ategolyn</string>
     <string name="category_behaviour">Ymddygiad</string>
     <string name="pass_to_security_view_title">Mynd yn syth i gyflwyno\'r cyfrinair</string>
