@@ -18,6 +18,8 @@
 
 -->
 <resources>
+    <string name="app_name">FlipFlap</string>
+    <string name="notification_title">Smart Cover upptäckt</string>
     <string name="alarm_label">ALARM</string>
     <string name="abbrev_wday_month_day_no_year">EEE, MMMM d</string>
     <string name="answer_call">SVARA</string>
@@ -26,11 +28,19 @@
     <string name="settings_name">Smartskal</string>
     <string name="settings_summary">Styr hur ditt smartskal beter sig</string>
     <string name="category_behaviour">Beteende</string>
+    <string name="pass_to_security_view_title">Gå direkt till lösenordsinmatning</string>
+    <string name="pass_to_security_view_summary">Öppnande av fodralet visar låsskärmen direkt</string>
+    <string name="use_high_touch_sensitivity_title">Hög tryckkänslighet</string>
+    <string name="use_high_touch_sensitivity_summary">Öka tryckkänsligheten när fodralet är stängt</string>
     <string name="category_design">Design</string>
     <string name="switch_charging_status_title">Visa laddningsstatus</string>
+    <string name="switch_charging_status_summary">Ändra färg beroende på den aktuella batterinivån</string>
     <string name="category_timeouts">Timeouts</string>
     <string name="timeout_plugged_title">Under laddning</string>
     <string name="timeout_unplugged_title">Urkopplad</string>
+    <string name="timeout_summary">Visa omslagsappen i %s efter stängning av locket</string>
+    <string name="timeout_summary_never">Omslagsappen kommer alltid vara på efter stängning av locket</string>
+    <string name="timeout_summary_immediately">Skärmen kommer stängas av när du stänger fodralet</string>
     <string name="timeout_entry_immediately">Omedelbart</string>
     <string name="timeout_entry_5s">5 sekunder</string>
     <string name="timeout_entry_10s">10 sekunder</string>

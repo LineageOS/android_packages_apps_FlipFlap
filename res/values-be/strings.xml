@@ -18,9 +18,16 @@
 
 -->
 <resources>
+    <string name="app_name">FlipFlap</string>
+    <string name="alarm_label">БУДЗІЛЬНІК</string>
+    <string name="abbrev_wday_month_day_no_year">EEE, d MMMM</string>
+    <string name="answer_call">АДКАЗАЦЬ</string>
+    <string name="ignore_call">ІГНАРАВАЦЬ</string>
     <string name="end_call">ЗАВЯРШЫЦЬ ВЫКЛІК</string>
     <string name="settings_summary">Налада паводзін аксесуара</string>
+    <string name="category_behaviour">Паводзіны</string>
     <string name="pass_to_security_view_title">Адразу прапаноўваць увод паролю</string>
+    <string name="use_high_touch_sensitivity_title">Высокая адчувальнасць дотыку</string>
     <string name="use_high_touch_sensitivity_summary">Павялічыць адчувальнасць дотыку пры зачыненні вечка</string>
     <string name="category_design">Дызайн</string>
     <string name="timeout_summary">Паказваць праграму чахла для %s пасля закрыцця вечка</string>
@@ -30,4 +37,5 @@
     <string name="timeout_entry_30s">30 секунд</string>
     <string name="timeout_entry_1min">1 хвіліна</string>
     <string name="timeout_entry_5min">5 хвілін</string>
+    <string name="timeout_entry_never">Ніколі</string>
 </resources>
