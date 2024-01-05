@@ -17,7 +17,7 @@
 
     <uses-sdk
         android:minSdkVersion="27"
-        android:targetSdkVersion="29" />
+        android:targetSdkVersion="33" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubSettingsBase">
 
-        <receiver android:name=".EventReceiver">
+        <receiver
+            android:name=".EventReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="lineageos.intent.action.LID_STATE_CHANGED" />
             </intent-filter>
@@ -39,7 +41,8 @@
         <activity
             android:name=".FlipFlapSettingsActivity"
             android:label="@string/settings_name"
-            android:enabled="false">
+            android:enabled="false"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
