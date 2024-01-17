@@ -31,7 +31,7 @@ import android.widget.CompoundButton;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -39,7 +39,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.lineageos.flipflap.R;
 
-public class FlipFlapSettingsFragment extends PreferenceFragment
+public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
     public final String TAG = "FlipFlapSettings";
@@ -53,7 +53,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        addPreferencesFromResource(R.xml.flipflapsettings_panel);
+        setPreferencesFromResource(R.xml.flipflapsettings_panel, rootKey);
 
         mSwitchBar = (MainSwitchPreference) findPreference(KEY_ENABLE);
         mSwitchBar.addOnSwitchChangeListener(this);
