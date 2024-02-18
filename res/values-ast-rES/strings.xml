@@ -29,6 +29,7 @@
     <string name="settings_enable">Activar el control de la carcaxa intelixente</string>
     <string name="settings_summary">Controla\'l comportamientu del accesoriu</string>
     <string name="category_behaviour">Comportamientu</string>
+    <string name="pass_to_security_view_title">Dir direutamente a la introducción de contraseñes</string>
     <string name="pass_to_security_view_summary">Al abrir la carcaxa, amuésase direutamente la pantalla de bloquéu</string>
     <string name="use_high_touch_sensitivity_title">Sensibilidá alta al tactu</string>
     <string name="use_high_touch_sensitivity_summary">Aumenta la sensibilidá al táctu mentanto la carcaxa ta zarrada</string>
