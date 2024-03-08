@@ -33,7 +33,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -70,7 +70,7 @@ public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
         if (!FlipFlapUtils.getHighTouchSensitivitySupported(getContext())) {
             PreferenceCategory behaviourCategory =
                     getPreferenceScreen().findPreference(KEY_BEHAVIOUR_CATEGORY);
-            SwitchPreference touchSensitivityPref = findPreference(KEY_TOUCH_SENSITIVITY);
+            SwitchPreferenceCompat touchSensitivityPref = findPreference(KEY_TOUCH_SENSITIVITY);
             behaviourCategory.removePreference(touchSensitivityPref);
         }
 

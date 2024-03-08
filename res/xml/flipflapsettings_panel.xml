@@ -31,14 +31,14 @@
         android:title="@string/category_behaviour"
         android:key="category_behaviour">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="pass_to_security_view"
             android:defaultValue="false"
             android:title="@string/pass_to_security_view_title"
             android:summary="@string/pass_to_security_view_summary"
             android:dependency="flipflap_enable" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="use_high_touch_sensitivity"
             android:defaultValue="false"
             android:title="@string/use_high_touch_sensitivity_title"
@@ -50,7 +50,7 @@
         android:title="@string/category_design"
         android:key="category_design">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="battery_indication"
             android:defaultValue="true"
             android:title="@string/switch_charging_status_title"
