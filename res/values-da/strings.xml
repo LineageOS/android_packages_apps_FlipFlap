@@ -27,6 +27,7 @@
     <string name="end_call">AFSLUT OPKALD</string>
     <string name="settings_name">Smart cover</string>
     <string name="settings_enable">Aktiver smart cover kontrol</string>
+    <string name="settings_summary">Kontrollér dit tilbehørs opførsel</string>
     <string name="category_behaviour">Adfærd</string>
     <string name="pass_to_security_view_title">Gå direkte til indtastning af adgangskode</string>
     <string name="pass_to_security_view_summary">Åbning af coveret viser skærmlåsen direkte</string>
