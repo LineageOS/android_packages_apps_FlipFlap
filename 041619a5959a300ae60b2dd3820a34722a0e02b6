@@ -16,6 +16,23 @@
       "message": "I haven’t tested this, but in theory it should work, I’ll say more, I don’t know which application I sent my contribution to. Comment written via Google Translate",
       "revId": "041619a5959a300ae60b2dd3820a34722a0e02b6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264d8d81_8482d500",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-04-07T19:23:51Z",
+      "side": 1,
+      "message": "useless",
+      "revId": "041619a5959a300ae60b2dd3820a34722a0e02b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
