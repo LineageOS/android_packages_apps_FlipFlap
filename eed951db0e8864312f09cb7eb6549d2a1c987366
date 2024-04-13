@@ -34,6 +34,24 @@
       "parentUuid": "18920b0c_f5a1e8ad",
       "revId": "eed951db0e8864312f09cb7eb6549d2a1c987366",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c24cd2b_951c9f7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32139
+      },
+      "writtenOn": "2024-04-13T13:07:00Z",
+      "side": 1,
+      "message": "Right now, definitely yes, I checked it on another application, it will just be an icon from the system",
+      "parentUuid": "5e7a4f77_0dc96d1b",
+      "revId": "eed951db0e8864312f09cb7eb6549d2a1c987366",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
