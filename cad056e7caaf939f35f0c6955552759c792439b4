@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d083e5_902efbdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25276
+      },
+      "writtenOn": "2024-05-09T11:07:04Z",
+      "side": 1,
+      "message": "Previously, FlipFlapService and all Broadcastreceivers were crashing when closing the screen cover, so closing had no effect anymore. This makes it work again",
+      "revId": "cad056e7caaf939f35f0c6955552759c792439b4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
