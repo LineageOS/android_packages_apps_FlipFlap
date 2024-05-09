@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
 
     <supports-screens android:anyDensity="true" />
 
@@ -32,7 +34,8 @@
 
         <service
             android:name=".FlipFlapService"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="systemExempted" />
 
         <activity
             android:name=".FlipFlapSettingsActivity"

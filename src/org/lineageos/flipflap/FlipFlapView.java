@@ -48,6 +48,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -177,7 +179,7 @@ public class FlipFlapView extends FrameLayout {
         filter.addAction(FlipFlapUtils.ACTION_ALARM_DONE);
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         filter.addAction(Intent.ACTION_SCREEN_ON);
-        getContext().registerReceiver(mReceiver, filter);
+        getContext().registerReceiver(mReceiver, filter, ContextCompat.RECEIVER_EXPORTED);
 
         if (supportsNotifications()) {
             try {

@@ -30,6 +30,8 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.Locale;
 
 public class NextAlarmPanel extends LinearLayout {
@@ -56,7 +58,7 @@ public class NextAlarmPanel extends LinearLayout {
         super.onAttachedToWindow();
         if (!mReceiverRegistered) {
             IntentFilter filter = new IntentFilter(AlarmManager.ACTION_NEXT_ALARM_CLOCK_CHANGED);
-            mContext.registerReceiver(mReceiver, filter);
+            mContext.registerReceiver(mReceiver, filter, ContextCompat.RECEIVER_EXPORTED);
             mReceiverRegistered = true;
             refreshAlarmStatus();
         }
