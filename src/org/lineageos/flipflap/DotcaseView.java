@@ -40,6 +40,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+
 import java.text.Normalizer;
 
 public class DotcaseView extends FlipFlapView {
@@ -348,7 +350,8 @@ public class DotcaseView extends FlipFlapView {
 
     private void drawBattery(Canvas canvas) {
         Intent batteryIntent = mContext.getApplicationContext().registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED),
+                ContextCompat.RECEIVER_EXPORTED);
         int rawlevel = batteryIntent.getIntExtra("level", -1);
         double scale = batteryIntent.getIntExtra("scale", -1);
         int plugged = batteryIntent.getIntExtra("plugged", -1);
