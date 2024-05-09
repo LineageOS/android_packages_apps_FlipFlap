@@ -20,6 +20,8 @@
 
 package org.lineageos.flipflap;
 
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -32,6 +34,8 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.core.app.ServiceCompat;
 
 public class FlipFlapService extends Service {
     private static final String TAG = "FlipFlap";
@@ -61,7 +65,13 @@ public class FlipFlapService extends Service {
                 .setOngoing(true)
                 .setLocalOnly(true)
                 .build();
-        startForeground(1, notification);
+
+        ServiceCompat.startForeground(
+                this,
+                1,
+                notification,
+                FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED
+        );
     }
 
     @Override

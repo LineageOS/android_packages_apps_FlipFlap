@@ -33,6 +33,8 @@ import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
+
 public class RectangularBatteryView extends View {
     private static final String TAG = "RectangularBatteryView";
 
@@ -87,7 +89,8 @@ public class RectangularBatteryView extends View {
         super.onAttachedToWindow();
         if (!mBatteryStateReceiverRegistered) {
             mContext.registerReceiver(mBatteryStateReceiver,
-                    new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                    new IntentFilter(Intent.ACTION_BATTERY_CHANGED),
+                    ContextCompat.RECEIVER_EXPORTED);
             mBatteryStateReceiverRegistered = true;
         }
     }
