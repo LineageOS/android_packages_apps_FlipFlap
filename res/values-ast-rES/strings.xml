@@ -39,7 +39,7 @@
     <string name="category_timeouts">Tiempos d\'espera</string>
     <string name="timeout_plugged_title">Mentanto se carga</string>
     <string name="timeout_summary">Amuesa l\'aplicación de la carcaxa demientres %s darréu de zarrar la tapa</string>
-    <string name="timeout_summary_never">Dempués de zarrar la tapa, l\'aplicación de la carcaxa va tar activada siempres</string>
+    <string name="timeout_summary_never">Dempués de zarrar la tapa, l\'aplicación de la carcaxa va tar activada siempre</string>
     <string name="timeout_summary_immediately">La pantalla va apagase al zarrar la carcaxa</string>
     <string name="timeout_entry_immediately">Darréu</string>
     <string name="timeout_entry_5s">5 segundos</string>

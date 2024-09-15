@@ -26,6 +26,8 @@
     <string name="ignore_call">IGNORAR</string>
     <string name="end_call">TERMINAR LLAMADA</string>
     <string name="settings_name">Funda inteligente</string>
+    <string name="settings_enable">Activar el control inteligente de la tapa</string>
+    <string name="settings_summary">Controla el comportamiento de tus accesorios</string>
     <string name="category_behaviour">Comportamiento</string>
     <string name="pass_to_security_view_title">Introducir directamente la contraseña</string>
     <string name="pass_to_security_view_summary">Mostrar la pantalla de bloqueo al retirar la cubierta</string>
