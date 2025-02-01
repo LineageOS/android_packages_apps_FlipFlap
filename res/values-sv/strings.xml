@@ -26,6 +26,7 @@
     <string name="ignore_call">IGNORERA</string>
     <string name="end_call">AVSLUTA SAMTAL</string>
     <string name="settings_name">Smartskal</string>
+    <string name="settings_enable">Aktivera smart omslagskontroll</string>
     <string name="settings_summary">Styr hur ditt smartskal beter sig</string>
     <string name="category_behaviour">Beteende</string>
     <string name="pass_to_security_view_title">Gå direkt till lösenordsinmatning</string>
