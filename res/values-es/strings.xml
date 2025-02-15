@@ -39,8 +39,8 @@
     <string name="category_timeouts">Tiempos de espera</string>
     <string name="timeout_plugged_title">Mientras se carga</string>
     <string name="timeout_unplugged_title">Desconectado</string>
-    <string name="timeout_summary">Mostrar la aplicación de portada en %s después de cerrar la tapa</string>
-    <string name="timeout_summary_never">Después de cerrar la tapa, la aplicación de portada siempre estará encendida</string>
+    <string name="timeout_summary">Mostrar la aplicación de portada durante %s después de cerrar la tapa</string>
+    <string name="timeout_summary_never">Después de cerrar la tapa, la aplicación de portada siempre estará activa</string>
     <string name="timeout_summary_immediately">La pantalla se apagará al cerrar la tapa</string>
     <string name="timeout_entry_immediately">Inmediatamente</string>
     <string name="timeout_entry_5s">5 segundos</string>
