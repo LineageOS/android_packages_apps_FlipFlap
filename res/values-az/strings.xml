@@ -35,9 +35,9 @@
     <string name="use_high_touch_sensitivity_summary">Örtük bağlı olanda toxunuş həssaslığını artır</string>
     <string name="category_design">Dizayn</string>
     <string name="switch_charging_status_title">Doldurma statusunu göstər</string>
-    <string name="switch_charging_status_summary">Batereyanın enerjisindən asılı olaraq rəngi dəyiş</string>
+    <string name="switch_charging_status_summary">Batareya hazırkı dolma səviyyəsinə görə rəngi dəyişdir</string>
     <string name="category_timeouts">Bitmə vaxtı</string>
-    <string name="timeout_plugged_title">Enerji yığarkən</string>
+    <string name="timeout_plugged_title">Doldurularkən</string>
     <string name="timeout_unplugged_title">Cərəyan mənbəyindən ayrılanda</string>
     <string name="timeout_summary">Qapağı bağladıqdan sonra örtük tətbiqini %s ərzində görüntülə</string>
     <string name="timeout_summary_never">Qapağı bağladıqdan sonra, örtük tətbiqi həmişə açıq qalsın</string>

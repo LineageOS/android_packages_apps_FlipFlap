@@ -26,6 +26,7 @@
     <string name="ignore_call">ИГНОРИРАЙ</string>
     <string name="end_call">ПРЕКРАТИ РАЗГОВОРА</string>
     <string name="settings_name">Интелигентно покритие</string>
+    <string name="settings_enable">Разреши контрол на смарт калъфче</string>
     <string name="settings_summary">Контролирайте поведението на вашите аксесоари</string>
     <string name="category_behaviour">Поведение</string>
     <string name="pass_to_security_view_title">Директно към въвеждане на парола</string>
