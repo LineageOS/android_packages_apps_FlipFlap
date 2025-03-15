@@ -34,7 +34,7 @@
     <string name="use_high_touch_sensitivity_title">Wysoka czułość dotyku</string>
     <string name="use_high_touch_sensitivity_summary">Zwiększa czułość dotyku, gdy etui jest zamknięte</string>
     <string name="category_design">Kompozycja</string>
-    <string name="switch_charging_status_title">Pokaż stan ładowania</string>
+    <string name="switch_charging_status_title">Pokazuj stan ładowania</string>
     <string name="switch_charging_status_summary">Zmienia kolor w zależności od aktualnego stanu naładowania baterii</string>
     <string name="category_timeouts">Limity czasu</string>
     <string name="timeout_plugged_title">Podczas ładowania</string>
