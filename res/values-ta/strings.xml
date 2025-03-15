@@ -18,6 +18,9 @@
 
 -->
 <resources>
+    <string name="timeout_entry_5s">5 நொடி</string>
+    <string name="timeout_entry_10s">10 நொடி</string>
+    <string name="timeout_entry_30s">30 நொடி</string>
     <string name="timeout_entry_1min">1 நுணுத்தம்</string>
     <string name="timeout_entry_5min">5 நுணுத்தம்</string>
 </resources>
