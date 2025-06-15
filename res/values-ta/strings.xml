@@ -18,6 +18,10 @@
 
 -->
 <resources>
+    <string name="notification_title">நுண்ணறி உறை கண்டறியப்பட்டது</string>
+    <string name="settings_name">நுண்ணறி உறை</string>
+    <string name="settings_enable">நுண்ணறி உறைக் கட்டுப்பாட்டை இயக்குக</string>
+    <string name="settings_summary">உமது துணைக்கருவி நடத்தையைக் கட்டுப்படுத்துக</string>
     <string name="timeout_entry_5s">5 நொடி</string>
     <string name="timeout_entry_10s">10 நொடி</string>
     <string name="timeout_entry_30s">30 நொடி</string>
