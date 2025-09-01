@@ -26,10 +26,11 @@
     <string name="ignore_call">התעלם</string>
     <string name="end_call">סיים שיחה</string>
     <string name="settings_name">כיסוי חכם</string>
-    <string name="settings_summary">שלוט בהתנהגות האביזרים שלך</string>
+    <string name="settings_enable">הפעלת בקר כיסוי חכם</string>
+    <string name="settings_summary">שליטה בהתנהגות האביזרים שלך</string>
     <string name="category_behaviour">התנהגות</string>
     <string name="pass_to_security_view_title">עבור ישירות אל הזנת הסיסמה</string>
-    <string name="pass_to_security_view_summary">פתיחת הכיסוי תראה ישירות את מסך הנעילה</string>
+    <string name="pass_to_security_view_summary">פתיחת הכיסוי תציג מידיית את מסך הנעילה</string>
     <string name="use_high_touch_sensitivity_title">רגישות גבוהה למגע</string>
     <string name="use_high_touch_sensitivity_summary">מגדיל את הרגישות למגע כאשר הכיסוי סגור</string>
     <string name="category_design">עיצוב</string>
