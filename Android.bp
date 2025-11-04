@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2021 The LineageOS Project
+// Copyright (C) 2021-2025 The LineageOS Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,20 +28,9 @@ android_app {
     certificate: "platform",
     system_ext_specific: true,
     privileged: true,
+    privapp_allowlist: "org.lineageos.flipflap.xml",
 
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
-
-    required: [
-        "privapp_whitelist_org.lineageos.flipflap"
-    ],
-}
-
-prebuilt_etc {
-    name: "privapp_whitelist_org.lineageos.flipflap",
-    system_ext_specific: true,
-    sub_dir: "permissions",
-    src: "privapp_whitelist_org.lineageos.flipflap.xml",
-    filename_from_src: true,
 }
