@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 The LineageOS Project
+ * Copyright (C) 2017-2025 The LineageOS Project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
-import android.widget.CompoundButton;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -40,7 +38,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 import org.lineageos.flipflap.R;
 
 public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
-        implements Preference.OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
+        implements Preference.OnPreferenceChangeListener {
 
     public final String TAG = "FlipFlapSettings";
 
@@ -49,14 +47,12 @@ public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
     private final String KEY_DESIGN_CATEGORY = "category_design";
     private final String KEY_TOUCH_SENSITIVITY = "use_high_touch_sensitivity";
 
-    private MainSwitchPreference mSwitchBar;
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.flipflapsettings_panel, rootKey);
 
-        mSwitchBar = (MainSwitchPreference) findPreference(KEY_ENABLE);
-        mSwitchBar.addOnSwitchChangeListener(this);
+        MainSwitchPreference switchBar = findPreference(KEY_ENABLE);
+        switchBar.setOnPreferenceChangeListener(this);
 
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_PLUGGED);
         setupTimeoutPreference(FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED);
@@ -74,19 +70,18 @@ public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
             behaviourCategory.removePreference(touchSensitivityPref);
         }
 
-        mSwitchBar.setChecked(isEventReceiverEnabled());
+        switchBar.setChecked(isEventReceiverEnabled());
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String value = (String) newValue;
-        String key = preference.getKey();
-        Log.d(TAG, "Preference changed: " + key + ": " + value);
-
-        switch (key) {
+        switch (preference.getKey()) {
             case FlipFlapUtils.KEY_TIMEOUT_PLUGGED:
             case FlipFlapUtils.KEY_TIMEOUT_UNPLUGGED:
-                setTimeoutSummary(preference, Integer.parseInt(value));
+                setTimeoutSummary(preference, Integer.parseInt((String) newValue));
+                return true;
+            case KEY_ENABLE:
+                setComponentEnabled(getActivity(), EventReceiver.class, (Boolean) newValue);
                 return true;
 
             default:
@@ -95,16 +90,13 @@ public class FlipFlapSettingsFragment extends PreferenceFragmentCompat
         }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        ComponentName cn = new ComponentName(getContext(), EventReceiver.class);
-        int state = isChecked
+    private void setComponentEnabled(Context context, String component, boolean enabled) {
+        ComponentName name = new ComponentName(context, component);
+        int state = enabled
                 ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-        getContext().getPackageManager().setComponentEnabledSetting(cn, state,
+        context.getPackageManager().setComponentEnabledSetting(name, state,
                 PackageManager.DONT_KILL_APP);
-
-        mSwitchBar.setChecked(isChecked);
     }
 
     private void setupTimeoutPreference(String key) {
