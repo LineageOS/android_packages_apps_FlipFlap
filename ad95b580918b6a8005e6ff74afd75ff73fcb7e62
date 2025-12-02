@@ -16,6 +16,24 @@
       "message": "TODO: move to lineage-23.1 branch.",
       "revId": "ad95b580918b6a8005e6ff74afd75ff73fcb7e62",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "637945ef_ce03897d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-12-02T20:53:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85d612a8_c0210325",
+      "revId": "ad95b580918b6a8005e6ff74afd75ff73fcb7e62",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
