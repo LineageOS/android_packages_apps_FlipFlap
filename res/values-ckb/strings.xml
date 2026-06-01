@@ -39,8 +39,8 @@
     <string name="category_timeouts">ماوەی بەسەرچوون</string>
     <string name="timeout_plugged_title">لە کاتی بارگاویکردنەوەدا</string>
     <string name="timeout_unplugged_title">بەبێ بارگاویکەرەوە</string>
-    <string name="timeout_summary">ئەپی بەرگەکە بۆ ماوەی %s پیشان بدە دوای داخستنی سەرپۆشەکە</string>
-    <string name="timeout_summary_never">دوای داخستنی سەرپۆشەکە، ئەپی بەرگەکە هەمیشە بە داگیرساوی دەمێنێتەوە</string>
+    <string name="timeout_summary">بەرنامەی بەرگەکە بۆ ماوەی %s پیشان بدە دوای داخستنی سەرپۆشەکە</string>
+    <string name="timeout_summary_never">دوای داخستنی سەرپۆشەکە، بەرنامەی بەرگەکە هەمیشە بە داگیرساوی دەمێنێتەوە</string>
     <string name="timeout_summary_immediately">ڕوونماکە دەکوژێتەوە کاتێک بەرگەکە دادەخرێت</string>
     <string name="timeout_entry_immediately">ڕاستەوخۆ</string>
     <string name="timeout_entry_5s">٥ چرکە</string>
