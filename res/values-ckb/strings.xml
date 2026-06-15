@@ -43,10 +43,10 @@
     <string name="timeout_summary_never">دوای داخستنی سەرپۆشەکە، بەرنامەی بەرگەکە هەمیشە بە داگیرساوی دەمێنێتەوە</string>
     <string name="timeout_summary_immediately">ڕوونماکە دەکوژێتەوە کاتێک بەرگەکە دادەخرێت</string>
     <string name="timeout_entry_immediately">ڕاستەوخۆ</string>
-    <string name="timeout_entry_5s">٥ چرکە</string>
-    <string name="timeout_entry_10s">١٠ چرکە</string>
-    <string name="timeout_entry_30s">٣٠ چرکە</string>
-    <string name="timeout_entry_1min">١ خولەک</string>
-    <string name="timeout_entry_5min">٥ خولەک</string>
+    <string name="timeout_entry_5s">5 چرکە</string>
+    <string name="timeout_entry_10s">10 چرکە</string>
+    <string name="timeout_entry_30s">30 چرکە</string>
+    <string name="timeout_entry_1min">1 خولەک</string>
+    <string name="timeout_entry_5min">5 خولەک</string>
     <string name="timeout_entry_never">هەرگیز</string>
 </resources>
