@@ -29,7 +29,7 @@
     <string name="settings_enable">کۆنتڕۆڵی بەرگی زیرەک چالاک بکە</string>
     <string name="settings_summary">کۆنتڕۆڵی هەڵسوکەوتی کەلوپەلە زیادەکانت بکە</string>
     <string name="category_behaviour">هەڵسوکەوت</string>
-    <string name="pass_to_security_view_title">ڕاستەوخۆ بڕۆ بۆ نووسینی وشەی تێپەڕ</string>
+    <string name="pass_to_security_view_title">ڕاستەوخۆ بڕۆ بۆ نووسینی تێپەڕەوشە</string>
     <string name="pass_to_security_view_summary">کردنەوەی بەرگەکە ڕاستەوخۆ قوفڵی ڕوونما پیشان دەدات</string>
     <string name="use_high_touch_sensitivity_title">هەستیاریی بەرزی دەستلێدان</string>
     <string name="use_high_touch_sensitivity_summary">هەستیاریی دەستلێدان زیاد بکە کاتێک بەرگەکە داخراوە</string>
