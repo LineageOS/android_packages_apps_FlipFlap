@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Copyright (c) 2017 The LineageOS Project
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ Also add information on how to contact you by electronic and paper mail.
+
+-->
+<resources>
+    <string name="notification_title">已偵測到 Smart Cover</string>
+    <string name="alarm_label">鬧鐘</string>
+    <string name="answer_call">接聽</string>
+    <string name="ignore_call">忽略</string>
+    <string name="category_behaviour">行為</string>
+    <string name="category_design">設計</string>
+    <string name="category_timeouts">逾時</string>
+    <string name="timeout_summary">合上保護套後，顯示保護套應用程式 %s 秒</string>
+    <string name="timeout_summary_immediately">合上保護套時關閉螢幕</string>
+    <string name="timeout_entry_immediately">立即</string>
+    <string name="timeout_entry_5s">5 秒</string>
+    <string name="timeout_entry_10s">10 秒</string>
+    <string name="timeout_entry_30s">30 秒</string>
+    <string name="timeout_entry_1min">1 分鐘</string>
+    <string name="timeout_entry_5min">5 分鐘</string>
+    <string name="timeout_entry_never">永不</string>
+</resources>
